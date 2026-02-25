@@ -1,6 +1,8 @@
+import Button from "../../../components/ui/Button";
+
 export default function Hero() {
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center pt-(--spacing-nav-height) overflow-hidden bg-zetech-dark">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-zetech-dark">
 
       <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-150 h-150 bg-zetech-primary/20 blur-[120px] rounded-full z-10 animate-soft-glow" />
 
@@ -17,9 +19,7 @@ export default function Hero() {
           Zetech menciptakan solusi digital yang cepat, aman, dan inovatif untuk masa depan bisnis Anda.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
-          <button className="bg-zetech-primary hover:bg-blue-700 text-white px-8 py-3 rounded-full font-bold transition-all shadow-lg shadow-blue-600/20">
-            Lihat Project
-          </button>
+          <Button text="Start Your Project"/>
         </div>
       </div>
     </section>
