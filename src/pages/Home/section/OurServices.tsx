@@ -3,7 +3,7 @@ import webImage from "../../../assets/web-development.png";
 import mobileImage from "../../../assets/mobile-development.png";
 export default function OurServices() {
   return (
-    <section className="py-28 bg-gradient-to-br from-[#020049] to-[#020049] text-white">
+    <section className="py-28 bg-linear-to-br from-[#020049] to-[#020049] text-white">
       <div className="container mx-auto px-6">
 
         {/* HEADER */}
@@ -34,7 +34,7 @@ export default function OurServices() {
             <img
               src={webImage}
               alt="Website Development"
-              className="w-full h-[260px] object-cover"
+              className="w-full h-65 object-cover"
             />
           </div>
 
@@ -51,10 +51,9 @@ export default function OurServices() {
             <img
               src={mobileImage}
               alt="Mobile App Development"
-              className="w-full h-[260px] object-cover"
+              className="w-full h-65 object-cover"
             />
           </div>
-
         </div>
 
         {/* BUTTON */}
@@ -62,7 +61,7 @@ export default function OurServices() {
                         px-8 py-3 rounded-full 
                         font-medium 
                         hover:scale-105 transition">
-          <Button text="Consult now" />
+          <Button classAdd="hover:bg-blue-500" text="Consult now" />
         </div>
       </div>
     </section>
