@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { NAV_LINKS } from '../../constants/navigation';
+import aboutImage from "../../assets/logo.svg";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -17,9 +18,19 @@ const Navbar = () => {
       }`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
         {/* Logo Zetech */}
+        
+        <div className="flex items-center gap-3">
+        {/* Logo Zetech */}
+        <img
+          src={aboutImage}
+          alt="Zetech Logo"
+          className="w-12 h-12 object-contain"
+        />
+
         <div className="text-2xl font-bold text-[#001534]">
           ZE<span className="text-blue-600">TECH</span>
         </div>
+      </div>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex gap-8">

@@ -11,11 +11,11 @@ const HomePage = () => {
                 <Hero />
             </section>
 
-            <section id="about" className="py-20">
+            <section id="about">
                 <About />
             </section>
 
-            <section id="services" className="py-20 bg-slate-50/50">
+            <section id="services">
                 <OurServices />
             </section>
 
