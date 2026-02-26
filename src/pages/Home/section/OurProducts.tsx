@@ -7,8 +7,8 @@ export default function OurProducts() {
   return (
     <div className="container mx-auto px-20">
       <div className="mb-10">
-        <h2 className="uppercase text-3xl font-bold mb-2">Our Product</h2>
-        <p className="text-gray-400 text-xl">
+        <h2 className="text-slate-900 uppercase text-3xl font-bold mb-2">Our Product</h2>
+        <p className="text-slate-600 text-xl">
           Zectech menciptakan website yang cepat dan ramah SEO, dirancang untuk
           menarik pengunjung, membangun kepercayaan, dan mengonversi pelanggan
           tanpa biaya setara agensi.
@@ -24,7 +24,7 @@ export default function OurProducts() {
           ))}
         </div>
       ) : (
-        <div className="text-center py-20 text-gray-500">
+        <div className="text-center py-20">
           Produk "{query}" tidak ditemukan
         </div>
       )}
