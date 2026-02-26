@@ -5,15 +5,15 @@ interface SearchBarProps {
 
 export default function SearchBar({ value, onChange }: SearchBarProps) {
   return (
-    <div className="relative max-w-2xl mx-auto mb-12">
+    <div className="relative max-w-5xl mx-auto mb-12">
       <input
         type="text"
         placeholder="Search templates...."
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full px-6 py-4 bg-white/5 border-white/10 rounded-full text-white focus:outline-none focus:border-zetech-primary transition-all"
+        className="w-full px-6 py-4 shadow-lg shadow-blue-500/10 border-black/5 rounded-full text-black focus:outline-none focus:border-zetech-primary transition-all"
       />
-      <div className="absolute right-6 top-1/2 -translate-y-1/2 text-gray-400">
+      <div className="absolute right-6 top-1/2 -translate-y-1/2 text-gray-700">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
