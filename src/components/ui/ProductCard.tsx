@@ -26,7 +26,7 @@ export default function ProductCard({
           </svg>
         </div>
         <div>
-          <h3 className="text-xl font-bold text-white leading-tight">
+          <h3 className="text-xl font-bold text-black leading-tight">
             {title}
           </h3>
           <span className="text-xs font-semibold text-zetech-primary uppercase tracking-wider">
@@ -34,7 +34,7 @@ export default function ProductCard({
           </span>
         </div>
       </div>
-      <p>{description}</p>
+      <p className="text-slate-600">{description}</p>
       <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-white/5">
         <img
           src={image}
