@@ -34,7 +34,7 @@ export default function ProductCard({
           </span>
         </div>
       </div>
-      <p className="text-slate-600">{description}</p>
+      <p className="text-slate-600 mb-5">{description}</p>
       <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-white/5">
         <img
           src={image}
