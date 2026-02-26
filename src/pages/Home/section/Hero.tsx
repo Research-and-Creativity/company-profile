@@ -2,7 +2,7 @@ import Button from "../../../components/ui/Button";
 
 export default function Hero() {
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-zetech-dark">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#001534]">
 
       <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-150 h-150 bg-zetech-primary/20 blur-[120px] rounded-full z-10 animate-soft-glow" />
 
