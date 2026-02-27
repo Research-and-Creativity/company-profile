@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import type { Product } from "../../types/product";
 
 export default function ProductCard({
@@ -7,7 +8,14 @@ export default function ProductCard({
   image,
 }: Product) {
   return (
-    <div className="glass-effect rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1.25 hover:shadow-2xl hover:shadow-blue-500/10">
+    <motion.div
+      variants={{
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0 },
+      }}
+      whileHover={{ y: -10 }} // Efek kartu terangkat
+      className="glass-effect rounded-2xl p-6 transition-shadow duration-300 hover:shadow-2xl hover:shadow-blue-500/10"
+    >
       <div className="flex items-start gap-3 mb-4">
         <div className="bg-zetech-primary/20 p-2 rounded-lg text-zetech-primary">
           <svg
@@ -34,14 +42,17 @@ export default function ProductCard({
           </span>
         </div>
       </div>
-      <p className="text-slate-600 mb-5">{description}</p>
+      <p className="text-slate-600 mb-5 line-clamp-2">{description}</p>
+
       <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-white/5">
-        <img
+        <motion.img
+          whileHover={{ scale: 1.1 }}
+          transition={{ duration: 0.5 }}
           src={image}
           alt={title}
-          className="w-full h-full object-cover hover-scale-105 transition-transform duration-500"
+          className="w-full h-full object-cover"
         />
       </div>
-    </div>
+    </motion.div>
   );
 }
