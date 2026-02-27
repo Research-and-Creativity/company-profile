@@ -60,8 +60,8 @@ export default function OurServices() {
         <div className="flex justify-start lg:justify-center mt-16
                         px-8 py-3 rounded-full 
                         font-medium 
-                        hover:scale-105 transition">
-          <Button classAdd="hover:bg-blue-500" text="Consult now" />
+                         transition">
+          <Button classAdd="hover:scale-105 hover:bg-blue-500" text="Consult now" />
         </div>
       </div>
     </section>

@@ -2,8 +2,10 @@ import Button from "../../../components/ui/Button";
 
 export default function Hero() {
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#001534]">
-
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#001534]"
+    >
       <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-150 h-150 bg-zetech-primary/20 blur-[120px] rounded-full z-10 animate-soft-glow" />
 
       <div className="absolute bottom-[10%] left-[-5%] w-100 h-100 bg-blue-600/10 blur-[100px] rounded-full z-10" />
@@ -16,10 +18,11 @@ export default function Hero() {
           <span className="text-zetech-primary">Digital Technology</span>
         </h1>
         <p className="text-gray-400 max-w-2xl mx-auto mb-10 text-lg">
-          Zetech menciptakan solusi digital yang cepat, aman, dan inovatif untuk masa depan bisnis Anda.
+          Zetech menciptakan solusi digital yang cepat, aman, dan inovatif untuk
+          masa depan bisnis Anda.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
-          <Button text="Start Your Project"/>
+          <Button classAdd="hover:scale-105" text="Start Your Project" />
         </div>
       </div>
     </section>
