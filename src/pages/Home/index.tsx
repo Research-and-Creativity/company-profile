@@ -23,7 +23,7 @@ const HomePage = () => {
                 <OurProducts />
             </section>
 
-            <section id="contact" className="py-16 bg-[#020049] text-white">
+            <section id="contact" className="bg-[#020049] text-white">
                 <Contact />
             </section>
         </div>

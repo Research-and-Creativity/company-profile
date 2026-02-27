@@ -29,7 +29,10 @@ export default function About() {
             className="hidden lg:inline-block
                             py-3 rounded-full"
           >
-            <Button text="More About Us" />
+            <Button
+              classAdd="hover:scale-105"
+              text="More About Us"
+            />
           </div>
         </div>
 
