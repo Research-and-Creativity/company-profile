@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 interface SearchBarProps {
   value: string;
   onChange: (val: string) => void;
@@ -5,13 +7,17 @@ interface SearchBarProps {
 
 export default function SearchBar({ value, onChange }: SearchBarProps) {
   return (
-    <div className="relative max-w-5xl mx-auto mb-12">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      className="relative max-w-5xl mx-auto mb-12"
+    >
       <input
         type="text"
         placeholder="Search templates...."
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full px-6 py-4 shadow-lg shadow-blue-500/10 border-black/5 rounded-full text-black focus:outline-none focus:border-zetech-primary transition-all"
+        className="w-full px-6 py-4 shadow-lg shadow-blue-500/10 border border-black/5 rounded-full text-black focus:outline-none focus:ring-2 focus:ring-zetech-primary/50 transition-all"
       />
       <div className="absolute right-6 top-1/2 -translate-y-1/2 text-gray-700">
         <svg
@@ -29,6 +35,6 @@ export default function SearchBar({ value, onChange }: SearchBarProps) {
           <path d="m21 21-4.3-4.3" />
         </svg>
       </div>
-    </div>
+    </motion.div>
   );
 }
