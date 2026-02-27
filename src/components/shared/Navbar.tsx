@@ -23,7 +23,6 @@ const Navbar = () => {
         {/* Logo Zetech */}
         <a href="/">
           <div className="flex items-center gap-3">
-            {/* Logo Zetech */}
             <img
               src={aboutImage}
               alt="Zetech Logo"
