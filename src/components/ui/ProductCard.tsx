@@ -13,7 +13,7 @@ export default function ProductCard({
         hidden: { opacity: 0, y: 20 },
         visible: { opacity: 1, y: 0 },
       }}
-      whileHover={{ y: -10 }} // Efek kartu terangkat
+      whileHover={{ y: -10 }}
       className="glass-effect rounded-2xl p-6 transition-shadow duration-300 hover:shadow-2xl hover:shadow-blue-500/10"
     >
       <div className="flex items-start gap-3 mb-4">

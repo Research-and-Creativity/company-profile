@@ -1,13 +1,15 @@
 import type { Product } from "../types/product";
+import digitalInvitation from "../assets/digital-invitation.png";
 
 export const Products: Product[] = [
   {
     id: 1,
-    title: "Undangan Digital - Rustic Brown",
-    category: "Undangan Digital",
+    title: "Digital Invitation - Zetech Product",
+    category: "Digital Invitation",
     description:
       "Layanan pembuatan undangan digital modern dan responsif untuk berbagai acara.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1630&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image: digitalInvitation,
+    link: "https://zecth-invitation.vercel.app/",
   },
   {
     id: 2,
@@ -15,7 +17,8 @@ export const Products: Product[] = [
     category: "Undangan Digital",
     description:
       "Layanan pembuatan undangan digital modern dan responsif untuk berbagai acara.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1630&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image:
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1630&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     id: 3,
@@ -23,7 +26,8 @@ export const Products: Product[] = [
     category: "Website Development",
     description:
       "Layanan pembuatan website profesional untuk membangun kepercayaan pelanggan.",
-    image: "https://images.unsplash.com/photo-1519222970733-f546218fa6d7?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image:
+      "https://images.unsplash.com/photo-1519222970733-f546218fa6d7?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     id: 4,
@@ -31,7 +35,8 @@ export const Products: Product[] = [
     category: "Undangan Digital",
     description:
       "Layanan pembuatan undangan digital modern dan responsif untuk berbagai acara.",
-    image: "https://images.unsplash.com/photo-1558174685-430919a96c8d?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image:
+      "https://images.unsplash.com/photo-1558174685-430919a96c8d?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     id: 5,
@@ -39,6 +44,7 @@ export const Products: Product[] = [
     category: "Undangan Digital",
     description:
       "Layanan pembuatan undangan digital modern dan responsif untuk berbagai acara.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
 ];
