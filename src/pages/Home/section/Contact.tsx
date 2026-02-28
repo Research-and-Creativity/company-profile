@@ -33,14 +33,14 @@ export default function Contact() {
           >
             <motion.h2
               variants={itemVariants}
-              className="text-5xl font-bold text-white mb-6 tracking-tight"
+              className="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight"
             >
               CONTACT US
             </motion.h2>
 
             <motion.p
               variants={itemVariants}
-              className="text-gray-300 text-lg mb-8 leading-relaxed max-w-md"
+              className="text-gray-300 md:text-lg mb-8 leading-relaxed max-w-md"
             >
               Jangan ragu untuk menghubungi kami. Kami siap melayani dan
               membantu Anda dengan sepenuh hati.
@@ -53,10 +53,10 @@ export default function Contact() {
               <p className="text-gray-400 text-sm font-bold uppercase tracking-widest mb-1">
                 Collaboration
               </p>
-              <p className="text-gray-300 text-lg">
+              <p className="text-gray-300 md:text-lg">
                 Feel free to reach out for collaborations, or consultation.
               </p>
-              <p className="text-gray-300 text-lg">Send us an email at</p>
+              <p className="text-gray-300 md:text-lg">Send us an email at</p>
               <a
                 href="mailto:hmse-pwt.telkomuniversity.ac.id"
                 className="text-[#17a1e1] font-medium hover:underline cursor-pointer transition-all"
@@ -72,11 +72,11 @@ export default function Contact() {
               <p className="text-gray-400 text-sm font-bold uppercase tracking-widest mb-1">
                 Quick Response
               </p>
-              <p className="text-gray-300 text-lg">Prefer a quick response?</p>
-              <p className="text-gray-300 text-lg">
+              <p className="text-gray-300 md:text-lg">Prefer a quick response?</p>
+              <p className="text-gray-300 md:text-lg">
                 Send us a message via WhatsApp
               </p>
-              <a href="https://wa.me/6285385782684" target="_blank" className="font-bold text-lg block mt-1">
+              <a href="https://wa.me/6285385782684" target="_blank" className="font-bold md:text-lg block mt-1">
                 +62 853-8578-2684
               </a>
             </motion.div>
