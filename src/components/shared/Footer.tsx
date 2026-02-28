@@ -47,7 +47,7 @@ export default function Footer() {
               </div>
             </motion.a>
 
-            <motion.p variants={itemVariants} className="text-gray-400 text-lg leading-relaxed mb-8 mt-4">
+            <motion.p variants={itemVariants} className="text-gray-400 md:text-lg leading-relaxed mb-8 mt-4">
               Pembuatan Aplikasi profesional yang berada di bawah organisasi
               HMSE Telkom University untuk mendukung pertumbuhan bisnis Anda.
             </motion.p>
