@@ -1,13 +1,19 @@
 interface ButtonProps {
   text: string;
   classAdd?: string;
+  href?: string;
 }
 
-export default function Button({ text, classAdd = "" }: ButtonProps) {
+export default function Button({
+  text,
+  classAdd = "",
+  href = "#",
+}: ButtonProps) {
   return (
-    <button
+    <a
+      href={href}
       className={`
-        relative group overflow-hidden py-3 px-8 cursor-pointer text-white 
+        inline-block relative group overflow-hidden py-3 px-8 cursor-pointer text-white 
         bg-linear-to-r from-[#040850] to-[#218ABB] 
         rounded-full font-bold transition-all shadow-lg shadow-blue-600/20
         ${classAdd}
@@ -19,8 +25,7 @@ export default function Button({ text, classAdd = "" }: ButtonProps) {
           group-hover:w-full -z-10 right-0
         "
       />
-
       <span className="relative z-10">{text}</span>
-    </button>
+    </a>
   );
 }
