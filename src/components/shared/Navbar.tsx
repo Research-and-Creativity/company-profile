@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { NAV_LINKS } from "../../constants/navigation";
-import aboutImage from "../../assets/logo.svg";
+import Logo from "../../assets/logo.svg";
+import LogoWhite from "../../assets/logo_white.svg";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -39,13 +40,14 @@ const Navbar = () => {
         <a href="#hero" className="hover:opacity-80 transition-opacity">
           <div className="flex items-center gap-3">
             <img
-              src={aboutImage}
+              src={isScrolled ? Logo : LogoWhite}
               alt="Zetech Logo"
               className={`object-contain transition-all ${isScrolled ? "w-10 h-10" : "w-12 h-12"}`}
             />
-            <div className="text-2xl font-bold text-[#001534]">
-              ZE<span className="text-blue-600">TECH</span>
-            </div>
+            {isScrolled ? (<div className="text-2xl font-bold text-[#001534]">
+              ZE<span className="text-blue-900">TECH</span>
+            </div>) : (<div className="text-white text-2xl font-bold">ZETECH</div>)}
+            
           </div>
         </a>
 
@@ -56,14 +58,14 @@ const Navbar = () => {
               href={link.href}
               className={`font-medium transition-all duration-300 relative group
                 ${activeSection === link.href ? "text-blue-600" : "text-[#001534]"}
-                ${isScrolled ? "text-base" : "text-lg"}
+                ${isScrolled ? "text-base text-black" : "text-lg text-white"}
                 hover:text-blue-600
               `}
             >
               {link.label}
               <span
-                className={`absolute -bottom-1 left-0 h-0.5 bg-blue-600 transition-all duration-300 
-                ${activeSection === link.href ? "w-full" : "w-0 group-hover:w-full"}`}
+                className={`absolute -bottom-1 left-0 h-0.5 transition-all duration-300 
+                ${activeSection === link.href ? "w-full" : "w-0 group-hover:w-full"} ${isScrolled ? "bg-blue-600" :"bg-white"}`}
               />
             </a>
           ))}
