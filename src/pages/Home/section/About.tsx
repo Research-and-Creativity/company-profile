@@ -66,7 +66,7 @@ export default function About() {
             <Button
               classAdd="hover:scale-105 px-10 py-4"
               text="Explore More"
-              href="#products"
+              href="/about"
             />
           </div>
         </motion.div>
