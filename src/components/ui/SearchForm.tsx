@@ -3,26 +3,28 @@ import { motion } from "framer-motion";
 interface SearchBarProps {
   value: string;
   onChange: (val: string) => void;
+  noAnim?: boolean;
 }
 
-export default function SearchBar({ value, onChange }: SearchBarProps) {
+export default function SearchBar({ value, onChange, noAnim = false }: SearchBarProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.97, y: 12 }}
+      initial={noAnim ? { opacity: 0 } : { opacity: 0, scale: 0.97, y: 12 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: noAnim ? 0.4 : 0.6, ease: [0.22, 1, 0.36, 1] }}
       className="relative max-w-5xl mx-auto mb-12"
     >
-      {/* Glow behind input */}
-      <motion.div
-        animate={{ opacity: [0.2, 0.45, 0.2] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        style={{
-          position: "absolute", inset: -2, borderRadius: 100,
-          background: "linear-gradient(90deg, rgba(33,138,187,0.15), rgba(4,8,80,0.06), rgba(33,138,187,0.1))",
-          filter: "blur(10px)",
-        }}
-      />
+      {!noAnim && (
+        <motion.div
+          animate={{ opacity: [0.2, 0.45, 0.2] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          style={{
+            position: "absolute", inset: -2, borderRadius: 100,
+            background: "linear-gradient(90deg, rgba(33,138,187,0.15), rgba(4,8,80,0.06), rgba(33,138,187,0.1))",
+            filter: "blur(10px)",
+          }}
+        />
+      )}
 
       <div style={{ position: "relative" }}>
         <input
@@ -35,21 +37,27 @@ export default function SearchBar({ value, onChange }: SearchBarProps) {
             padding: "16px 52px 16px 22px",
             borderRadius: 100,
             border: "1.5px solid rgba(33,138,187,0.18)",
-            background: "rgba(255,255,255,0.9)",
-            backdropFilter: "blur(12px)",
+            background: noAnim ? "white" : "rgba(255,255,255,0.9)",
+            backdropFilter: noAnim ? "none" : "blur(12px)",
             color: "#040850",
             fontSize: "0.95rem",
             outline: "none",
-            boxShadow: "0 4px 20px rgba(4,8,80,0.07), 0 1px 4px rgba(33,138,187,0.06)",
+            boxShadow: noAnim
+              ? "0 2px 10px rgba(4,8,80,0.06)"
+              : "0 4px 20px rgba(4,8,80,0.07), 0 1px 4px rgba(33,138,187,0.06)",
             transition: "border-color 0.25s, box-shadow 0.25s",
           }}
           onFocus={e => {
             e.currentTarget.style.borderColor = "rgba(33,138,187,0.5)";
-            e.currentTarget.style.boxShadow = "0 0 0 4px rgba(33,138,187,0.08), 0 4px 20px rgba(4,8,80,0.08)";
+            e.currentTarget.style.boxShadow = noAnim
+              ? "0 0 0 3px rgba(33,138,187,0.1)"
+              : "0 0 0 4px rgba(33,138,187,0.08), 0 4px 20px rgba(4,8,80,0.08)";
           }}
           onBlur={e => {
             e.currentTarget.style.borderColor = "rgba(33,138,187,0.18)";
-            e.currentTarget.style.boxShadow = "0 4px 20px rgba(4,8,80,0.07), 0 1px 4px rgba(33,138,187,0.06)";
+            e.currentTarget.style.boxShadow = noAnim
+              ? "0 2px 10px rgba(4,8,80,0.06)"
+              : "0 4px 20px rgba(4,8,80,0.07), 0 1px 4px rgba(33,138,187,0.06)";
           }}
         />
 

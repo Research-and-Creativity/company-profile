@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Teams } from "../../constants/teams";
 import { MisiItem } from "../../components/about/MisiItem";
 import { RevealHeading } from "../../components/ui/RevealHeading";
@@ -14,12 +14,21 @@ import { TeamHeadingBlock } from "../../components/about/TeamHeadingBlock";
 import { AnimatedTeamCard } from "../../components/teams/AnimatedTeamCard";
 import { MISI_ITEMS, VISI } from "../../constants/visiMisi";
 
+function useIsMobile() {
+    if (typeof window === "undefined") return false;
+    return window.innerWidth < 768;
+}
 
 export default function IndexAbout() {
+    const isMobile = useIsMobile();
+    const prefersReduced = useReducedMotion();
+    const noAnim = isMobile || !!prefersReduced;
+
     return (
         <div className="flex flex-col w-full">
 
             <section className="relative overflow-hidden py-28 lg:py-40" style={{ background: "#020c1b" }}>
+
                 <div className="absolute inset-0 pointer-events-none select-none">
                     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
                         <defs>
@@ -31,18 +40,28 @@ export default function IndexAbout() {
                     </svg>
                 </div>
 
-                <motion.div className="absolute pointer-events-none"
-                    animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.85, 0.5] }}
-                    transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-                    style={{ left: "-15%", top: "10%", width: 700, height: 700, borderRadius: "50%", background: "radial-gradient(circle, rgba(33,138,187,0.14) 0%, transparent 65%)", filter: "blur(60px)" }}
-                />
-                <motion.div className="absolute pointer-events-none"
-                    animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.7, 0.4] }}
-                    transition={{ duration: 16, repeat: Infinity, ease: "easeInOut", delay: 5 }}
-                    style={{ right: "-10%", bottom: "5%", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(4,8,80,0.7) 0%, transparent 70%)", filter: "blur(80px)" }}
-                />
+                {!noAnim && (
+                    <>
+                        <motion.div className="absolute pointer-events-none"
+                            animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.85, 0.5] }}
+                            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+                            style={{ left: "-15%", top: "10%", width: 700, height: 700, borderRadius: "50%", background: "radial-gradient(circle, rgba(33,138,187,0.14) 0%, transparent 65%)", filter: "blur(60px)" }}
+                        />
+                        <motion.div className="absolute pointer-events-none"
+                            animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.7, 0.4] }}
+                            transition={{ duration: 16, repeat: Infinity, ease: "easeInOut", delay: 5 }}
+                            style={{ right: "-10%", bottom: "5%", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(4,8,80,0.7) 0%, transparent 70%)", filter: "blur(80px)" }}
+                        />
+                    </>
+                )}
 
-                {[
+                {noAnim && (
+                    <div className="absolute pointer-events-none"
+                        style={{ left: "-15%", top: "10%", width: 350, height: 350, borderRadius: "50%", background: "radial-gradient(circle, rgba(33,138,187,0.06) 0%, transparent 65%)" }}
+                    />
+                )}
+
+                {!noAnim && [
                     { x: "12%", y: "25%", size: 3, delay: 0, dur: 5.2 },
                     { x: "85%", y: "18%", size: 4, delay: 1.2, dur: 6.5 },
                     { x: "75%", y: "60%", size: 2, delay: 0.7, dur: 5.8 },
@@ -67,13 +86,6 @@ export default function IndexAbout() {
                         <RevealLine delay={0.35} />
                     </div>
                     <AboutBodyText />
-                    {/* <div className="flex items-center gap-10 mb-20">
-                        <StatItem n={150} suffix="+" label="Projects" delay={0} />
-                        <StatDivider delay={0.1} />
-                        <StatItem n={8} suffix="yr" label="Experience" delay={0.15} />
-                        <StatDivider delay={0.25} />
-                        <StatItem n={99} suffix="%" label="Satisfaction" delay={0.3} />
-                    </div> */}
 
                     <div className="grid lg:grid-cols-2 gap-6">
                         <GlassCard index={0}
@@ -89,7 +101,7 @@ export default function IndexAbout() {
                             </IconBadge>
                             <h3 style={{ fontSize: "1.45rem", fontWeight: 800, color: "white", letterSpacing: "-0.025em", marginBottom: 14 }}>Visi</h3>
                             <p style={{ color: "rgba(175,210,235,0.72)", lineHeight: 1.85, fontSize: "0.95rem" }}>
-                               {VISI}
+                                {VISI}
                             </p>
                         </GlassCard>
 
@@ -120,7 +132,7 @@ export default function IndexAbout() {
 
             <section className="relative overflow-hidden py-28 lg:py-40" style={{ background: "#f0f4f8" }}>
 
-                <div className="absolute inset-0 pointer-events-none select-none" style={{ opacity: 0.7 }}>
+                <div className="absolute inset-0 pointer-events-none select-none" style={{ opacity: noAnim ? 0.3 : 0.7 }}>
                     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
@@ -131,8 +143,12 @@ export default function IndexAbout() {
                     </svg>
                 </div>
 
-                <ParallaxBlob style={{ right: "3%", top: "0%" }} color="rgba(33,138,187,0.09)" />
-                <ParallaxBlob style={{ left: "-5%", bottom: "5%" }} color="rgba(4,8,80,0.04)" />
+                {!noAnim && (
+                    <>
+                        <ParallaxBlob style={{ right: "3%", top: "0%" }} color="rgba(33,138,187,0.09)" />
+                        <ParallaxBlob style={{ left: "-5%", bottom: "5%" }} color="rgba(4,8,80,0.04)" />
+                    </>
+                )}
 
                 <div className="absolute pointer-events-none" style={{
                     right: "8%", top: "15%",
@@ -154,7 +170,12 @@ export default function IndexAbout() {
 
                     <div className="flex flex-wrap justify-center gap-0 gap-y-10">
                         {Teams.map((team, i) => (
-                            <AnimatedTeamCard key={team.id} team={team} index={i} />
+                            <AnimatedTeamCard
+                                key={team.id}
+                                team={team}
+                                index={i}
+                                {...(noAnim ? { noAnim: true } : {})}
+                            />
                         ))}
                     </div>
                 </div>
