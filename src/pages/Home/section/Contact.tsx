@@ -23,6 +23,16 @@ const itemVariants: Variants = {
 export default function Contact() {
   return (
     <section id="contact" className="py-24 overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none select-none">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="ct-grid" width="72" height="72" patternUnits="userSpaceOnUse">
+              <path d="M 72 0 L 0 0 0 72" fill="none" stroke="rgba(33,138,187,0.05)" strokeWidth="1" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#ct-grid)" />
+        </svg>
+      </div>
       <div className="container mx-auto px-6 md:px-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           <motion.div
@@ -31,12 +41,50 @@ export default function Contact() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
           >
+            {/* Section label */}
+            <motion.div variants={itemVariants} className="flex items-center gap-3 mb-5">
+              <motion.div
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
+                style={{
+                  transformOrigin: "left", height: 1, width: 36,
+                  background: "linear-gradient(90deg, #218ABB, transparent)",
+                }}
+              />
+              <span style={{ color: "#218ABB", fontSize: "10.5px", fontWeight: 700, letterSpacing: "0.26em", textTransform: "uppercase" }}>
+                Get In Touch
+              </span>
+            </motion.div>
+
+            {/* Heading */}
             <motion.h2
               variants={itemVariants}
-              className="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight"
+              className="font-bold mb-3 tracking-tight"
+              style={{
+                fontSize: "clamp(2.2rem, 4.5vw, 3.5rem)",
+                fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 1.05,
+                color: "white",
+              }}
             >
-              CONTACT US
+              Contact{" "}
+              <span style={{ color: "#218ABB", textShadow: "0 0 50px rgba(33,138,187,0.55)" }}>
+                Us
+              </span>
             </motion.h2>
+
+            {/* Underline */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.5 }}
+              style={{
+                transformOrigin: "left", height: 1, width: 72, marginBottom: 24,
+                background: "linear-gradient(90deg, #218ABB, rgba(33,138,187,0.1))",
+              }}
+            />
 
             <motion.p
               variants={itemVariants}

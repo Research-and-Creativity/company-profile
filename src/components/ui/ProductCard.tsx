@@ -1,57 +1,111 @@
-import { motion } from "framer-motion";
+import { motion, type TargetAndTransition } from "framer-motion";
 import type { Product } from "../../types/product";
 
-export default function ProductCard({
-  title,
-  category,
-  description,
-  image,
-}: Product) {
+export default function ProductCard({ title, category, description, image }: Product) {
   return (
     <motion.div
       variants={{
         hidden: { opacity: 0, y: 20 },
         visible: { opacity: 1, y: 0 },
       }}
-      whileHover={{ y: -10 }}
-      className="glass-effect rounded-2xl p-6 transition-shadow duration-300 hover:shadow-2xl hover:shadow-blue-500/10"
+      whileHover={{ y: -8 } as TargetAndTransition}
+      transition={{ type: "spring", stiffness: 260, damping: 22 }}
+      className="group relative h-full"
+      style={{
+        borderRadius: 20,
+        background: "white",
+        border: "1.5px solid rgba(33,138,187,0.1)",
+        boxShadow: "0 4px 24px rgba(4,8,80,0.07), 0 1px 4px rgba(4,8,80,0.04)",
+        overflow: "hidden",
+        transition: "border-color 0.3s, box-shadow 0.3s",
+      }}
+      onMouseEnter={e => {
+        e.currentTarget.style.borderColor = "rgba(33,138,187,0.35)";
+        e.currentTarget.style.boxShadow = "0 16px 48px rgba(4,8,80,0.12), 0 0 0 1px rgba(33,138,187,0.1)";
+      }}
+      onMouseLeave={e => {
+        e.currentTarget.style.borderColor = "rgba(33,138,187,0.1)";
+        e.currentTarget.style.boxShadow = "0 4px 24px rgba(4,8,80,0.07), 0 1px 4px rgba(4,8,80,0.04)";
+      }}
     >
-      <div className="flex items-start gap-3 mb-4">
-        <div className="bg-zetech-primary/20 p-2 rounded-lg text-zetech-primary">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <rect width="20" height="16" x="2" y="4" rx="2" />
-            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-          </svg>
-        </div>
-        <div>
-          <h3 className="text-xl font-bold text-black leading-tight">
-            {title}
-          </h3>
-          <span className="text-xs font-semibold text-zetech-primary uppercase tracking-wider">
-            {category}
-          </span>
-        </div>
-      </div>
-      <p className="text-slate-600 mb-5 line-clamp-2">{description}</p>
+      {/* Shimmer top */}
+      <div style={{
+        position: "absolute", top: 0, left: 0, right: 0, height: 1,
+        background: "linear-gradient(90deg, transparent 10%, rgba(33,138,187,0.3) 50%, transparent 90%)",
+      }} />
 
-      <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-white/5">
-        <motion.img
-          whileHover={{ scale: 1.1 }}
-          transition={{ duration: 0.5 }}
-          src={image}
-          alt={title}
-          className="w-full h-full object-cover"
-        />
+      {/* Hover glow bloom */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileHover={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
+        style={{
+          position: "absolute", inset: -2, borderRadius: 22, zIndex: 0,
+          background: "linear-gradient(135deg, rgba(33,138,187,0.12), rgba(4,8,80,0.04))",
+          filter: "blur(10px)",
+        }}
+      />
+
+      <div className="p-6 relative z-10">
+        {/* Header row */}
+        <div className="flex items-start gap-3 mb-4">
+          {/* Icon badge */}
+          <div style={{
+            width: 42, height: 42, borderRadius: 12, flexShrink: 0,
+            border: "1px solid rgba(33,138,187,0.25)",
+            background: "rgba(33,138,187,0.08)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#218ABB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect width="20" height="16" x="2" y="4" rx="2" />
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+            </svg>
+          </div>
+
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <h3 className="text-xl font-bold leading-tight" style={{ color: "#040850", fontWeight: 800, letterSpacing: "-0.02em" }}>
+              {title}
+            </h3>
+            {/* Category badge */}
+            <span style={{
+              display: "inline-block", marginTop: 4,
+              padding: "2px 9px", borderRadius: 100,
+              border: "1px solid rgba(33,138,187,0.25)",
+              background: "rgba(33,138,187,0.07)",
+              fontSize: "9px", fontWeight: 700,
+              color: "#218ABB", letterSpacing: "0.14em", textTransform: "uppercase",
+            }}>
+              {category}
+            </span>
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div style={{
+          height: 1, marginBottom: 14,
+          background: "linear-gradient(90deg, rgba(33,138,187,0.15), transparent)",
+        }} />
+
+        <p className="mb-5 line-clamp-2" style={{ color: "rgba(50,70,100,0.65)", lineHeight: 1.75, fontSize: "0.92rem" }}>
+          {description}
+        </p>
+
+        {/* Image */}
+        <div className="relative aspect-video w-full overflow-hidden" style={{ borderRadius: 12, border: "1px solid rgba(33,138,187,0.08)" }}>
+          <motion.img
+            whileHover={{ scale: 1.07 }}
+            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            src={image}
+            alt={title}
+            className="w-full h-full object-cover"
+          />
+          {/* Subtle gradient on image */}
+          <div style={{
+            position: "absolute", inset: 0,
+            background: "linear-gradient(to top, rgba(4,8,80,0.06) 0%, transparent 60%)",
+            pointerEvents: "none",
+          }} />
+        </div>
       </div>
     </motion.div>
   );
