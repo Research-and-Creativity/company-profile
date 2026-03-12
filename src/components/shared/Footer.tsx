@@ -69,7 +69,7 @@ export default function Footer() {
               href="https://wa.me/6285385782684"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-green-500 transition-all hover:scale-125"
+              className="text-gray-400 hover:text-white transition-all hover:scale-125"
             >
               <BsWhatsapp size={35} />
             </a>
@@ -77,7 +77,7 @@ export default function Footer() {
               href="https://www.linkedin.com/company/hmse-tup/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-blue-500 transition-all hover:scale-125"
+              className="text-gray-400 hover:text-white transition-all hover:scale-125"
             >
               <CiLinkedin size={40} />
             </a>
@@ -85,7 +85,7 @@ export default function Footer() {
               href="https://www.instagram.com/hmse_telkompurwokerto/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-pink-500 transition-all hover:scale-125"
+              className="text-gray-400 hover:text-white transition-all hover:scale-125"
             >
               <CiInstagram size={40} />
             </a>

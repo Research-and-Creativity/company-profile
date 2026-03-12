@@ -4,6 +4,7 @@ export interface TeamsType {
   role: string;
   image: string;
   socials: {
+    instagram?: string;
     linkedin?: string;
     github?: string;
   };

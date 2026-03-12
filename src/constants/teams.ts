@@ -7,8 +7,9 @@ export const Teams: TeamsType[] = [
     role: "Chief Executive Officer",
     image: "/team/yanto.png",
     socials: {
-      linkedin: "",
-      github: "",
+      instagram: "https://www.instagram.com/harch.6/",
+      linkedin: "https://www.linkedin.com/in/haryanto-azmi-b8b508308/",
+      github: "https://github.com/Hebi-byte",
     },
   },
   {
@@ -17,8 +18,9 @@ export const Teams: TeamsType[] = [
     role: "Chief Executive Officer",
     image: "/team/gus.png",
     socials: {
-      linkedin: "",
-      github: "",
+      instagram: "https://www.instagram.com/raissan_31/",
+      linkedin: "https://www.linkedin.com/in/geusanedurais/",
+      github: "https://github.com/Geusan31",
     },
   },
   {
@@ -27,8 +29,9 @@ export const Teams: TeamsType[] = [
     role: "Chief Executive Officer",
     image: "/team/farel.png",
     socials: {
-      linkedin: "",
-      github: "",
+      instagram: "https://www.instagram.com/farelghazalii/",
+      linkedin: "https://www.linkedin.com/in/farelghazalii/",
+      github: "https://github.com/GithubFarelAlghazali",
     },
   },
   {
@@ -37,8 +40,9 @@ export const Teams: TeamsType[] = [
     role: "Chief Executive Officer",
     image: "/team/lung.png",
     socials: {
-      linkedin: "",
-      github: "",
+      instagram: "https://www.instagram.com/ullttraaa/",
+      linkedin: "https://www.linkedin.com/in/ulung-putra-sadewo-/",
+      github: "https://github.com/iiTzSweettyy",
     },
   },
   {
@@ -47,8 +51,9 @@ export const Teams: TeamsType[] = [
     role: "Chief Executive Officer",
     image: "/team/put.png",
     socials: {
+      instagram: "",
       linkedin: "",
-      github: "",
+      github: "https://github.com/Putr7",
     },
   },
 ];

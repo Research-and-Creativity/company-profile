@@ -37,7 +37,7 @@ const Navbar = () => {
       }`}
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
-        <a href="#hero" className="hover:opacity-80 transition-opacity">
+        <a href="/" className="hover:opacity-80 transition-opacity">
           <div className="flex items-center gap-3">
             <img
               src={isScrolled ? Logo : LogoWhite}
@@ -58,8 +58,8 @@ const Navbar = () => {
               href={link.href}
               className={`font-medium transition-all duration-300 relative group
                 ${activeSection === link.href ? "text-blue-600" : "text-[#001534]"}
-                ${isScrolled ? "text-base text-black" : "text-lg text-white"}
-                hover:text-blue-600
+                ${isScrolled ? "text-base text-black hover:text-blue-600" : "text-lg text-white"}
+                
               `}
             >
               {link.label}

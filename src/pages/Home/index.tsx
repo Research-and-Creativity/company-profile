@@ -19,7 +19,7 @@ const HomePage = () => {
                 <OurServices />
             </section>
 
-            <section id="products" className="py-20 bg-slate-50">
+            <section id="products" className="py-20 bg-[#f0f5fa]">
                 <OurProducts />
             </section>
 
