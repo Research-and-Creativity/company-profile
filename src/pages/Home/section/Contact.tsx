@@ -79,6 +79,7 @@ export default function Contact() {
         setStatus({ loading: false, message: "Pesan berhasil terkirim!", error: false });
         setFormData({ name: "", email: "", message: "" });
       } else {
+        console.log("Response error:", data);
         throw new Error(data.message || "Gagal mengirim pesan.");
       }
       console.log(data);
