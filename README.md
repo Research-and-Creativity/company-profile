@@ -1,73 +1,66 @@
-# React + TypeScript + Vite
+# 🚀 Zetech (Zetra Tech) - Digital Identity of Kabinet Zenith
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![React](https://img.shields.io/badge/React-18.x-blue?style=for-the-badge&logo=react)](https://react.dev/) [![Vite](https://img.shields.io/badge/Vite-6.x-purple?style=for-the-badge&logo=vite)](https://vitejs.dev/) [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.X-blue?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/) [![Framer Motion](https://img.shields.io/badge/Framer_Motion-11-purple?style=for-the-badge&logo=framer)](https://www.framer.com/motion/)
 
-Currently, two official plugins are available:
+**Zetech**, kependekan dari **Zetra Tech**, adalah platform *company profile* resmi yang dikembangkan di bawah naungan **Kabinet Zenith HMSE (Himpunan Mahasiswa Software Engineering) Telkom University Purwokerto**. Proyek ini dirancang sebagai wajah digital untuk menampilkan profesionalisme dan inovasi teknologi dari mahasiswa RPL.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🏛️ Background & Vision
+Sesuai dengan semangat **Kabinet Zenith**, nama **Zetra Tech** melambangkan integrasi antara visi yang mencapai puncak (Zenith) dengan eksekusi teknologi yang presisi. Website ini bukan sekadar profil, melainkan bukti nyata kapabilitas teknis tim *Software Engineering* Telkom University Purwokerto.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* **Zetra** - Representasi dari identitas Zenith yang tangguh.
+* **Tech** - Fokus utama pada pengembangan perangkat lunak yang solutif.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## ✨ Fitur Utama (Highlight Features)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 1. **Ultra-Fast Performance**
+Dibangun di atas **Vite**, memastikan *development experience* yang instan dan waktu muat (*load time*) yang sangat cepat bagi pengguna.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 2. **Zetra Visual Experience**
+Animasi yang kompleks namun halus menggunakan **Framer Motion**, memberikan kesan interaktif pada setiap transisi halaman dan elemen UI.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### 3. **Responsive Design**
+Optimalisasi tampilan di berbagai ukuran layar menggunakan **Tailwind CSS** untuk fleksibilitas desain yang modern.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 4. **Component-Based Architecture**
+Struktur kode yang rapi dan modular, memudahkan integrasi fitur baru oleh tim pengembang Kabinet Zenith.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🛠️ Tech Stack
+
+| Layer | Technology | Description |
+| :--- | :--- | :--- |
+| **Tooling** | **Vite** | Build tool generasi berikutnya yang sangat cepat. |
+| **Library** | **React.js** | Library utama untuk membangun antarmuka pengguna. |
+| **Styling** | **Tailwind CSS** | Framework CSS untuk styling yang cepat dan konsisten. |
+| **Animation** | **Framer Motion** | Engine utama untuk semua interaksi animasi Zetech. |
+| **Icons** | **React Icons** | Koleksi ikon minimalis dan modern. |
+
+---
+
+## 📁 Project Structure
+
+```text
+zetech/
+├── public/                # Static assets (Logos, Icons, etc.)
+├── src/
+│   ├── assets/            # Project images and global media
+│   ├── components/        # Reusable UI components
+│   │   ├── about/         # About Reusable Component
+│   │   ├── shared/        # Navbar, Footer
+│   │   └── teams/         # Reusable UI Teams
+│   │   └── ui/            # Component UI
+│   ├── constanst/         # Data Constant
+│   ├── hooks/             # Custom React hooks
+│   ├── layouts/           # Layout page
+│   ├── pages/             # Main page views
+│   ├── routes/            # Routes App
+│   ├── types/             # Types every components
+│   ├── App.tsx            # Main application entry
+│   └── main.tsx           # Vite entry point
+├── .gitignore
+└── vite.config.ts
