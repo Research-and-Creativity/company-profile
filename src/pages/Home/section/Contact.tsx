@@ -1,5 +1,6 @@
-import { motion, type Variants } from "framer-motion";
+import { AnimatePresence, motion, type Variants } from "framer-motion";
 import Button from "../../../components/ui/Button";
+import { useState } from "react";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -21,6 +22,72 @@ const itemVariants: Variants = {
 };
 
 export default function Contact() {
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [errors, setErrors] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState<{ loading: boolean; message: string; error: boolean }>({
+    loading: false,
+    message: "",
+    error: false,
+  });
+
+  const validate = () => {
+    const newErrors = { name: "", email: "", message: "" };
+    let isValid = true;
+
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required.";
+      isValid = false;
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required.";
+      isValid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "Format email tidak valid";
+      isValid = false;
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = "Message is required.";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (errors[e.target.name as keyof typeof errors]) {
+      setErrors({ ...errors, [e.target.name]: "" });
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validate()) return;
+    setStatus({ loading: true, message: "Sending...", error: false });
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+
+      if (response.ok) {
+        setStatus({ loading: false, message: "Pesan berhasil terkirim!", error: false });
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        throw new Error(data.message || "Gagal mengirim pesan.");
+      }
+      console.log(data);
+    } catch (err) {
+      const errorMsg = err instanceof Error ? err.message : "Terjadi kesalahan sistem.";
+      setStatus({ loading: false, message: errorMsg, error: true });
+      console.error("Error:", errorMsg);
+    }
+  }
   return (
     <section id="contact" className="py-24 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none select-none">
@@ -41,7 +108,6 @@ export default function Contact() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
           >
-            {/* Section label */}
             <motion.div variants={itemVariants} className="flex items-center gap-3 mb-5">
               <motion.div
                 initial={{ scaleX: 0 }}
@@ -58,7 +124,6 @@ export default function Contact() {
               </span>
             </motion.div>
 
-            {/* Heading */}
             <motion.h2
               variants={itemVariants}
               className="font-bold mb-3 tracking-tight"
@@ -74,7 +139,6 @@ export default function Contact() {
               </span>
             </motion.h2>
 
-            {/* Underline */}
             <motion.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
@@ -131,6 +195,7 @@ export default function Contact() {
           </motion.div>
 
           <motion.form
+            onSubmit={handleSubmit}
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -143,8 +208,13 @@ export default function Contact() {
               </label>
               <input
                 type="text"
-                className="w-full bg-transparent border-b border-white/20 py-2 text-white focus:outline-none focus:border-zetech-primary transition-all peer"
+                className={`w-full bg-transparent border-b border-white/20 py-2 text-white focus:outline-none focus:border-zetech-primary transition-all peer ${errors.name ? "border-red-500" : "border-white/20 focus:border-zetech-primary"
+                  }`}
                 placeholder="Your full name"
+                required
+                value={formData.name}
+                onChange={handleChange}
+                name="name"
               />
               <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-zetech-primary transition-all duration-300 peer-focus:w-full" />
             </div>
@@ -155,8 +225,13 @@ export default function Contact() {
               </label>
               <input
                 type="email"
-                className="w-full bg-transparent border-b border-white/20 py-2 text-white focus:outline-none focus:border-zetech-primary transition-all peer"
+                className={`w-full bg-transparent border-b border-white/20 py-2 text-white focus:outline-none focus:border-zetech-primary transition-all peer ${errors.name ? "border-red-500" : "border-white/20 focus:border-zetech-primary"
+                  }`}
                 placeholder="yourname@email.com"
+                required
+                value={formData.email}
+                onChange={handleChange}
+                name="email"
               />
               <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-zetech-primary transition-all duration-300 peer-focus:w-full" />
             </div>
@@ -166,14 +241,35 @@ export default function Contact() {
                 Message:
               </label>
               <input
-                className="w-full bg-transparent border-b border-white/20 py-2 text-white focus:outline-none focus:border-zetech-primary transition-all peer resize-none"
+                className={`w-full bg-transparent border-b border-white/20 py-2 text-white focus:outline-none focus:border-zetech-primary transition-all peer resize-none ${errors.message ? "border-red-500" : "border-white/20 focus:border-zetech-primary"}`}
                 placeholder="Write your message here..."
+                required
+                value={formData.message}
+                onChange={handleChange}
+                name="message"
               />
               <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-zetech-primary transition-all duration-300 peer-focus:w-full" />
             </div>
+            <AnimatePresence>
+              {errors.name && (
+                <motion.span
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  className="text-red-500 text-xs mt-1 block absolute"
+                >
+                  {errors.name}
+                </motion.span>
+              )}
+            </AnimatePresence>
 
             <div className="pt-2">
-              <Button text="Submit Message" classAdd="hover:scale-105" />
+              <Button text={status.loading ? "Sending..." : "Submit Message"} type="submit" disabled={status.loading} />
+              {status.message && (
+                <p className={`mt-4 text-sm ${status.error ? "text-red-400" : "text-green-400"}`}>
+                  {status.message}
+                </p>
+              )}
             </div>
           </motion.form>
         </div>
