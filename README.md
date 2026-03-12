@@ -1,4 +1,4 @@
-# 🚀 Zetech (Zetra Tech) - Digital Identity of Kabinet Zenith
+# Zetech (Zetra Tech) - Digital Identity of Kabinet Zenith
 
 [![React](https://img.shields.io/badge/React-18.x-blue?style=for-the-badge&logo=react)](https://react.dev/) [![Vite](https://img.shields.io/badge/Vite-6.x-purple?style=for-the-badge&logo=vite)](https://vitejs.dev/) [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.X-blue?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/) [![Framer Motion](https://img.shields.io/badge/Framer_Motion-11-purple?style=for-the-badge&logo=framer)](https://www.framer.com/motion/)
 
