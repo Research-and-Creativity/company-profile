@@ -31,7 +31,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     await transporter.sendMail({
       from: `"Zetech Contact" <${process.env.GMAIL_USER}>`,
-      to: process.env.RECEIVER_EMAIL ?? "hmse-pwt.telkomuniversity.ac.id",
+      to: process.env.RECEIVER_EMAIL ?? "hmse-pwt@telkomuniversity.ac.id",
       replyTo: email,
       subject: `[Zetech] Pesan baru dari ${name}`,
       html: `
