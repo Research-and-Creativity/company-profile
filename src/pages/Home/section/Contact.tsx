@@ -68,7 +68,7 @@ export default function Contact() {
     if (!validate()) return;
     setStatus({ loading: true, message: "Sending...", error: false });
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch("/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
