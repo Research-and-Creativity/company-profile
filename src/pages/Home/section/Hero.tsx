@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "../../../components/ui/Button";
 import Particle from "../../../components/ui/Particle";
 import GridLines from "../../../components/ui/GridLine";
@@ -9,6 +9,14 @@ import { PARTICLES } from "../../../constants/praticle";
 
 export default function Hero() {
   const containerRef = useRef<HTMLElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -23,7 +31,7 @@ export default function Hero() {
 
   useEffect(() => {
     const el = containerRef.current;
-    if (!el) return;
+    if (!el || isMobile) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = el.getBoundingClientRect();
@@ -35,24 +43,24 @@ export default function Hero() {
 
     el.addEventListener("mousemove", handleMouseMove);
     return () => el.removeEventListener("mousemove", handleMouseMove);
-  }, [mouseX, mouseY]);
+  }, [mouseX, mouseY, isMobile]);
 
-  const orb1X = useTransform(smoothX, [-0.5, 0.5], [-60, 60]);
-  const orb1Y = useTransform(smoothY, [-0.5, 0.5], [-40, 40]);
-  const orb2X = useTransform(smoothX, [-0.5, 0.5], [40, -40]);
-  const orb2Y = useTransform(smoothY, [-0.5, 0.5], [30, -30]);
-  const orb3X = useTransform(smoothX, [-0.5, 0.5], [-80, 80]);
-  const orb3Y = useTransform(smoothY, [-0.5, 0.5], [-60, 60]);
+  const orb1X = useTransform(smoothX, [-0.5, 0.5], isMobile ? [0, 0] : [-60, 60]);
+  const orb1Y = useTransform(smoothY, [-0.5, 0.5], isMobile ? [0, 0] : [-40, 40]);
+  const orb2X = useTransform(smoothX, [-0.5, 0.5], isMobile ? [0, 0] : [40, -40]);
+  const orb2Y = useTransform(smoothY, [-0.5, 0.5], isMobile ? [0, 0] : [30, -30]);
+  const orb3X = useTransform(smoothX, [-0.5, 0.5], isMobile ? [0, 0] : [-80, 80]);
+  const orb3Y = useTransform(smoothY, [-0.5, 0.5], isMobile ? [0, 0] : [-60, 60]);
 
-  const tiltX = useTransform(fastY, [-0.5, 0.5], [4, -4]);
-  const tiltY = useTransform(fastX, [-0.5, 0.5], [-6, 6]);
+  const tiltX = useTransform(fastY, [-0.5, 0.5], isMobile ? [0, 0] : [4, -4]);
+  const tiltY = useTransform(fastX, [-0.5, 0.5], isMobile ? [0, 0] : [-6, 6]);
 
   // const badgeX  = useTransform(fastX, [-0.5, 0.5], [-10, 10]);
   // const badgeY  = useTransform(fastY, [-0.5, 0.5], [-8, 8]);
-  const title1X = useTransform(fastX, [-0.5, 0.5], [-6, 6]);
-  const title1Y = useTransform(fastY, [-0.5, 0.5], [-5, 5]);
-  const title2X = useTransform(fastX, [-0.5, 0.5], [-14, 14]);
-  const title2Y = useTransform(fastY, [-0.5, 0.5], [-10, 10]);
+  const title1X = useTransform(fastX, [-0.5, 0.5], isMobile ? [0, 0] : [-6, 6]);
+  const title1Y = useTransform(fastY, [-0.5, 0.5], isMobile ? [0, 0] : [-5, 5]);
+  const title2X = useTransform(fastX, [-0.5, 0.5], isMobile ? [0, 0] : [-14, 14]);
+  const title2Y = useTransform(fastY, [-0.5, 0.5], isMobile ? [0, 0] : [-10, 10]);
 
   return (
     <section
@@ -75,9 +83,11 @@ export default function Hero() {
         transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
       >
         <div style={{
-          width: 700, height: 700, borderRadius: "50%",
+          width: isMobile ? 380 : 700,
+          height: isMobile ? 380 : 700,
+          borderRadius: "50%",
           background: "radial-gradient(circle, rgba(33,138,187,0.35) 0%, transparent 70%)",
-          filter: "blur(80px)",
+          filter: `blur(${isMobile ? 40 : 80}px)`,
           transform: "translate(-50%, -50%)",
           position: "absolute", top: "50vh", left: "50vw",
         }} />
@@ -90,9 +100,11 @@ export default function Hero() {
         transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
       >
         <div style={{
-          width: 550, height: 550, borderRadius: "50%",
+          width: isMobile ? 280 : 550,
+          height: isMobile ? 280 : 550,
+          borderRadius: "50%",
           background: "radial-gradient(circle, rgba(20,80,160,0.4) 0%, transparent 70%)",
-          filter: "blur(100px)",
+          filter: `blur(${isMobile ? 50 : 100}px)`,
         }} />
       </motion.div>
 
@@ -103,9 +115,11 @@ export default function Hero() {
         transition={{ duration: 22, repeat: Infinity, ease: "easeInOut", delay: 5 }}
       >
         <div style={{
-          width: 600, height: 600, borderRadius: "50%",
+          width: isMobile ? 280 : 600,
+          height: isMobile ? 280 : 600,
+          borderRadius: "50%",
           background: "radial-gradient(circle, rgba(50,180,220,0.25) 0%, transparent 70%)",
-          filter: "blur(120px)",
+          filter: `blur(${isMobile ? 60 : 120}px)`,
         }} />
       </motion.div>
 
@@ -113,67 +127,39 @@ export default function Hero() {
         <Particle key={idx} {...p} />
       ))}
 
-      <motion.div
-        className="absolute pointer-events-none z-10"
-        style={{
-          width: 500, height: 500, borderRadius: "50%",
-          border: "1px solid rgba(33,138,187,0.12)",
-          top: "50%", left: "50%", transform: "translate(-50%, -50%)",
-        }}
-        animate={{ scale: [1, 1.05, 1], opacity: [0.3, 0.6, 0.3] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute pointer-events-none z-10"
-        style={{
-          width: 750, height: 750, borderRadius: "50%",
-          border: "1px solid rgba(33,138,187,0.06)",
-          top: "50%", left: "50%", transform: "translate(-50%, -50%)",
-        }}
-        animate={{ scale: [1, 1.03, 1], opacity: [0.2, 0.4, 0.2] }}
-        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-      />
+      {!isMobile && (
+        <>
+          <motion.div
+            className="absolute pointer-events-none z-10"
+            style={{
+              width: 500, height: 500, borderRadius: "50%",
+              border: "1px solid rgba(33,138,187,0.12)",
+              top: "50%", left: "50%", transform: "translate(-50%, -50%)",
+            }}
+            animate={{ scale: [1, 1.05, 1], opacity: [0.3, 0.6, 0.3] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
+            className="absolute pointer-events-none z-10"
+            style={{
+              width: 750, height: 750, borderRadius: "50%",
+              border: "1px solid rgba(33,138,187,0.06)",
+              top: "50%", left: "50%", transform: "translate(-50%, -50%)",
+            }}
+            animate={{ scale: [1, 1.03, 1], opacity: [0.2, 0.4, 0.2] }}
+            transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+          />
+        </>
+      )}
 
       <div className="container mx-auto px-6 text-center relative z-20 flex flex-col items-center">
-{/* 
-        <motion.div
-          style={{ x: badgeX, y: badgeY }}
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-8"
-        >
-          <div style={{
-            display: "inline-flex", alignItems: "center", gap: "8px",
-            padding: "6px 18px 6px 10px", borderRadius: "100px",
-            border: "1px solid rgba(33,138,187,0.35)",
-            background: "rgba(33,138,187,0.1)",
-            backdropFilter: "blur(12px)",
-            WebkitBackdropFilter: "blur(12px)",
-          }}>
-            <motion.div
-              animate={{ scale: [1, 1.5, 1], opacity: [0.8, 1, 0.8] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              style={{
-                width: 8, height: 8, borderRadius: "50%",
-                background: "#218ABB",
-                boxShadow: "0 0 10px rgba(33,138,187,0.9), 0 0 20px rgba(33,138,187,0.4)",
-              }}
-            />
-            <span style={{
-              color: "rgba(160,220,245,0.95)",
-              fontSize: "11px",
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
-              fontWeight: 600,
-            }}>
-              Next-Gen Tech Studio
-            </span>
-          </div>
-        </motion.div> */}
 
         <motion.div
-          style={{ x: title1X, y: title1Y, rotateX: tiltX, rotateY: tiltY, perspective: 1200 }}
+          style={{
+            x: title1X,
+            y: title1Y,
+            ...(isMobile ? {} : { rotateX: tiltX, rotateY: tiltY, perspective: 1200 }),
+          }}
         >
           <div style={{ overflow: "hidden" }}>
             {["Building", "Advanced"].map((word, i) => (
@@ -199,7 +185,11 @@ export default function Hero() {
         </motion.div>
 
         <motion.div
-          style={{ x: title2X, y: title2Y, rotateX: tiltX, rotateY: tiltY, perspective: 1200 }}
+          style={{
+            x: title2X,
+            y: title2Y,
+            ...(isMobile ? {} : { rotateX: tiltX, rotateY: tiltY, perspective: 1200 }),
+          }}
           className="mb-10"
         >
           <div style={{ overflow: "hidden" }}>
