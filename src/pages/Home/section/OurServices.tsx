@@ -21,7 +21,6 @@ const itemVariants: Variants = {
   },
 };
 
-// ─── Service card sub-component (hooks di sini, bukan di IIFE) ───────────────
 interface ServiceCardProps {
   delay: number;
   gradient: string;
@@ -71,7 +70,6 @@ function ServiceCard({
         background: `linear-gradient(90deg, transparent 5%, ${shimmerOpacity} 50%, transparent 95%)`,
       }} />
 
-      {/* Blob accent */}
       <div style={{
         position: "absolute",
         ...(blobPos === "top-right" ? { top: -20, right: -20 } : { bottom: -20, left: -20 }),
@@ -80,7 +78,6 @@ function ServiceCard({
         filter: "blur(22px)", pointerEvents: "none",
       }} />
 
-      {/* Text content */}
       <div className="p-8 relative z-10">
         <div className="flex items-center gap-2 mb-3">
           <div style={{
@@ -106,7 +103,6 @@ function ServiceCard({
         </p>
       </div>
 
-      {/* Image */}
       <div className="relative h-72 overflow-hidden">
         <motion.img
           whileHover={{ scale: 1.1 }}
@@ -135,14 +131,12 @@ function ServiceCard({
   );
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
 export default function OurServices() {
   return (
     <section
       className="relative py-28 text-white overflow-hidden"
       style={{ background: "#020049" }}
     >
-      {/* Grid background */}
       <div className="absolute inset-0 pointer-events-none select-none">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -154,7 +148,6 @@ export default function OurServices() {
         </svg>
       </div>
 
-      {/* Breathing orb left */}
       <motion.div
         className="absolute pointer-events-none"
         animate={{ scale: [1, 1.18, 1], opacity: [0.4, 0.75, 0.4] }}
@@ -166,7 +159,6 @@ export default function OurServices() {
           filter: "blur(70px)",
         }}
       />
-      {/* Orb right */}
       <motion.div
         className="absolute pointer-events-none"
         animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.55, 0.3] }}
@@ -179,7 +171,6 @@ export default function OurServices() {
         }}
       />
 
-      {/* Floating particles */}
       {([
         { x: "8%",  y: "15%", size: 3, delay: 0,   dur: 5.2 },
         { x: "88%", y: "10%", size: 2, delay: 1.2, dur: 6.5 },
@@ -196,13 +187,11 @@ export default function OurServices() {
         />
       ))}
 
-      {/* Top / bottom edge */}
       <div className="absolute top-0 inset-x-0 h-px pointer-events-none"
         style={{ background: "linear-gradient(90deg, transparent, rgba(33,138,187,0.35), transparent)" }} />
       <div className="absolute bottom-0 inset-x-0 h-px pointer-events-none"
         style={{ background: "linear-gradient(90deg, transparent, rgba(33,138,187,0.2), transparent)" }} />
 
-      {/* ── Content ── */}
       <motion.div
         className="container mx-auto px-6 md:px-20 relative z-10"
         variants={containerVariants}
@@ -210,7 +199,6 @@ export default function OurServices() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
       >
-        {/* Heading block */}
         <motion.div variants={itemVariants} className="mb-16 max-w-3xl">
           <div className="flex items-center gap-3 mb-4">
             <motion.div
@@ -253,7 +241,6 @@ export default function OurServices() {
           </p>
         </motion.div>
 
-        {/* Cards */}
         <div className="grid lg:grid-cols-2 gap-10">
           <ServiceCard
             delay={0.1}
@@ -293,7 +280,6 @@ export default function OurServices() {
           />
         </div>
 
-        {/* CTA */}
         <motion.div
           variants={itemVariants}
           className="flex justify-start lg:justify-center mt-20"

@@ -32,8 +32,6 @@ export default function OurProducts() {
     <div
       className="relative overflow-hidden"
     >
-      {/* ── Background decorations ── */}
-      {/* Dot grid */}
       <div className="absolute inset-0 pointer-events-none select-none" style={{ opacity: 0.55 }}>
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -45,7 +43,6 @@ export default function OurProducts() {
         </svg>
       </div>
 
-      {/* Ambient glow top-left */}
       <motion.div
         className="absolute pointer-events-none"
         animate={{ scale: [1, 1.12, 1], opacity: [0.45, 0.75, 0.45] }}
@@ -57,7 +54,6 @@ export default function OurProducts() {
           filter: "blur(70px)",
         }}
       />
-      {/* Ambient glow bottom-right */}
       <motion.div
         className="absolute pointer-events-none"
         animate={{ scale: [1, 1.08, 1], opacity: [0.35, 0.6, 0.35] }}
@@ -70,7 +66,6 @@ export default function OurProducts() {
         }}
       />
 
-      {/* Decorative circle outlines */}
       <div className="absolute pointer-events-none" style={{
         right: "4%", top: "8%",
         width: 280, height: 280, borderRadius: "50%",
@@ -82,16 +77,13 @@ export default function OurProducts() {
         border: "1px solid rgba(33,138,187,0.07)",
       }} />
 
-      {/* Top / bottom edge */}
       <div className="absolute top-0 inset-x-0 h-px pointer-events-none"
         style={{ background: "linear-gradient(90deg, transparent, rgba(33,138,187,0.2), transparent)" }} />
       <div className="absolute bottom-0 inset-x-0 h-px pointer-events-none"
         style={{ background: "linear-gradient(90deg, transparent, rgba(33,138,187,0.15), transparent)" }} />
 
-      {/* ── Main content (struktur sama) ── */}
       <div className="container mx-auto px-6 md:px-20 py-20 relative z-10">
 
-        {/* Heading block */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -99,7 +91,6 @@ export default function OurProducts() {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="mb-10"
         >
-          {/* Section label */}
           <div className="flex items-center gap-3 mb-4">
             <motion.div
               initial={{ scaleX: 0 }}
@@ -133,7 +124,6 @@ export default function OurProducts() {
             </span>
           </h2>
 
-          {/* Animated underline */}
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
@@ -151,10 +141,8 @@ export default function OurProducts() {
           </p>
         </motion.div>
 
-        {/* Search bar (struktur sama) */}
         <SearchBar value={query} onChange={setQuery} />
 
-        {/* Products grid + pagination (struktur sama) */}
         <AnimatePresence mode="wait">
           {currentItems.length > 0 ? (
             <motion.div

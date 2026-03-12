@@ -3,7 +3,6 @@ import { useRef } from "react";
 import Button from "../../../components/ui/Button";
 import aboutImage from "../../../assets/about-image.png";
 
-// ── Variants (struktur sama) ────────────────────────────────────────────────
 const contentVariants: Variants = {
   hidden: { opacity: 0, x: -50 },
   visible: {

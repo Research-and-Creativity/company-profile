@@ -11,7 +11,7 @@ export default function Pagination({ currentPage, totalPages, totalItems, onPage
   return (
     <div className="flex md:flex-row items-center justify-center md:justify-end mt-12 gap-4">
 
-      {/* Total items badge */}
+      {/* Total items */}
       <div style={{
         padding: "6px 14px", borderRadius: 100,
         border: "1px solid rgba(33,138,187,0.2)",
