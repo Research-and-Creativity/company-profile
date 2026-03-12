@@ -152,7 +152,7 @@ export default function About() {
               className="text-zetech-primary font-bold text-sm uppercase tracking-[0.3em] block"
               style={{ fontSize: "10.5px", letterSpacing: "0.26em" }}
             >
-              Who We Are
+              Who Are We
             </span>
           </div>
 
