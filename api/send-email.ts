@@ -38,6 +38,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       },
     });
 
+    const year = new Date().getFullYear();
+
     await transporter.sendMail({
       from: `"Zetech Contact" <${process.env.GMAIL_USER}>`,
       to: process.env.RECEIVER_EMAIL ?? "hmse@ittelkom-pwt.ac.id",
@@ -126,7 +128,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       <p style="color:#94a3b8;font-size:12px;margin:0 0 4px;">
         Dikirim otomatis via <a href="${process.env.SITE_URL ?? "https://zetech.vercel.app"}" style="color:#218ABB;text-decoration:none;font-weight:600;">zetech.vercel.app</a>
       </p>
-      <p style="color:#cbd5e1;font-size:11px;margin:0;">© 2024 Zetech · HMSE Telkom University Purwokerto</p>
+      <p style="color:#cbd5e1;font-size:11px;margin:0;">© ${year} Zetech · HMSE Telkom University Purwokerto</p>
     </td>
   </tr>
 
@@ -222,7 +224,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       <p style="color:#94a3b8;font-size:12px;margin:0 0 4px;">
         Salam hangat, <strong style="color:#64748b;">Tim Zetech</strong>
       </p>
-      <p style="color:#cbd5e1;font-size:11px;margin:0;">© 2024 Zetech · HMSE Telkom University Purwokerto</p>
+      <p style="color:#cbd5e1;font-size:11px;margin:0;">© ${year} Zetech · HMSE Telkom University Purwokerto</p>
     </td>
   </tr>
 
