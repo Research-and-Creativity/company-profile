@@ -171,10 +171,10 @@ export default function Contact() {
               </p>
               <p className="text-gray-300 md:text-lg">Send us an email at</p>
               <a
-                href="mailto:hmse-pwt.telkomuniversity.ac.id"
+                href="mailto:hmse-pwt@telkomuniversity.ac.id"
                 className="text-[#17a1e1] font-medium hover:underline cursor-pointer transition-all"
               >
-                hmse-pwt.telkomuniversity.ac.id
+                hmse-pwt@telkomuniversity.ac.id
               </a>
             </motion.div>
 
