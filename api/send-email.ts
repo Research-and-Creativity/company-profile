@@ -17,9 +17,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(400).json({ message: "Format email tidak valid." });
   }
 
-  // URL logo — logo.png harus ada di folder public/
-  // Setelah deploy, ganti SITE_URL di env vars dengan URL production
-  const LOGO_URL = `${process.env.SITE_URL ?? "https://zetech.vercel.app"}/logo.svg`;
+  const LOGO_URL = `${process.env.SITE_URL ?? "https://zetech.vercel.app"}/logo_white.svg`;
 
   const now = new Date().toLocaleDateString("id-ID", {
     weekday: "long",
@@ -40,7 +38,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       },
     });
 
-    // ── Email notifikasi ke HMSE ───────────────────────────────────────────
     await transporter.sendMail({
       from: `"Zetech Contact" <${process.env.GMAIL_USER}>`,
       to: process.env.RECEIVER_EMAIL ?? "hmse@ittelkom-pwt.ac.id",
@@ -140,7 +137,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 </html>`,
     });
 
-    // ── Auto-reply ke pengirim ─────────────────────────────────────────────
     await transporter.sendMail({
       from: `"Zetech" <${process.env.GMAIL_USER}>`,
       to: email,
