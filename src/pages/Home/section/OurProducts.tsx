@@ -3,6 +3,7 @@ import Pagination from "../../../components/ui/Pagination";
 import ProductCard from "../../../components/ui/ProductCard";
 import SearchBar from "../../../components/ui/SearchForm";
 import { useSearch } from "../../../hooks/useSearch";
+import { Link } from "react-router-dom";
 
 function useIsMobile() {
   if (typeof window === "undefined") return false;
@@ -159,10 +160,10 @@ export default function OurProducts() {
                     variants={noAnim ? itemVariantsMobile : itemVariants}
                   >
                     {product.link ? (
-                      <a href={product.link} target="_blank" rel="noopener noreferrer"
+                      <Link to={product.link} target="_blank" rel="noopener noreferrer"
                         className="block h-full transition-transform duration-300 hover:-translate-y-2">
                         <ProductCard {...product} noAnim={noAnim} />
-                      </a>
+                      </Link>
                     ) : (
                       <div className="h-full">
                         <ProductCard {...product} noAnim={noAnim} />

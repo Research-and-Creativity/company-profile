@@ -2,6 +2,7 @@ import { motion, type Variants } from "framer-motion";
 import aboutImage from "../../assets/logo_white.svg";
 import { CiLinkedin, CiInstagram } from "react-icons/ci";
 import { BsWhatsapp } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const footerContainerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -65,30 +66,30 @@ export default function Footer() {
           </div>
 
           <motion.div variants={itemVariants} className="flex items-center gap-6">
-            <a
-              href="https://wa.me/6285385782684"
+            <Link
+              to="https://wa.me/6285385782684"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-white transition-all hover:scale-125"
             >
               <BsWhatsapp size={35} />
-            </a>
-            <a
-              href="https://www.linkedin.com/company/hmse-tup/"
+            </Link>
+            <Link
+              to="https://www.linkedin.com/company/hmse-tup/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-white transition-all hover:scale-125"
             >
               <CiLinkedin size={40} />
-            </a>
-            <a
-              href="https://www.instagram.com/hmse_telkompurwokerto/"
+            </Link>
+            <Link
+              to="https://www.instagram.com/hmse_telkompurwokerto/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-white transition-all hover:scale-125"
             >
               <CiInstagram size={40} />
-            </a>
+            </Link>
           </motion.div>
         </motion.div>
       </div>

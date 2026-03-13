@@ -1,6 +1,7 @@
 import { AnimatePresence, motion, type Variants } from "framer-motion";
 import Button from "../../../components/ui/Button";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -170,12 +171,12 @@ export default function Contact() {
                 Feel free to reach out for collaborations, or consultation.
               </p>
               <p className="text-gray-300 md:text-lg">Send us an email at</p>
-              <a
-                href="mailto:hmse-pwt@telkomuniversity.ac.id"
+              <Link
+                to="mailto:hmse-pwt@telkomuniversity.ac.id"
                 className="text-[#17a1e1] font-medium hover:underline cursor-pointer transition-all"
               >
                 hmse-pwt@telkomuniversity.ac.id
-              </a>
+              </Link>
             </motion.div>
 
             <motion.div
@@ -189,9 +190,9 @@ export default function Contact() {
               <p className="text-gray-300 md:text-lg">
                 Send us a message via WhatsApp
               </p>
-              <a href="https://wa.me/6285385782684" target="_blank" className="font-bold md:text-lg block mt-1">
+              <Link to="https://wa.me/6285385782684" target="_blank" className="font-bold md:text-lg block mt-1">
                 +62 853-8578-2684
-              </a>
+              </Link>
             </motion.div>
           </motion.div>
 
