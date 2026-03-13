@@ -3,7 +3,9 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import { RouterProvider } from 'react-router-dom'
 import { router } from './routes/index.tsx'
+import { inject } from '@vercel/analytics'
 
+inject()
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <RouterProvider router={router} />
