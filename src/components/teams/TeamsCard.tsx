@@ -5,7 +5,7 @@ import { useRef } from "react";
 import type { TeamsType } from "../../types/teams";
 import { SocialBtn } from "../ui/SocialBtn";
 
-export default function TeamsCard({ name, role, image, socials }: TeamsType) {
+export default function TeamsCard({ name, role, image, socials, alt }: TeamsType) {
     const cardRef = useRef<HTMLDivElement>(null);
 
     const mouseX = useMotionValue(0);
@@ -87,7 +87,7 @@ export default function TeamsCard({ name, role, image, socials }: TeamsType) {
 
                         <motion.img
                             src={image}
-                            alt={name}
+                            alt={alt}
                             whileHover={{ scale: 1.06 }}
                             transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                             style={{

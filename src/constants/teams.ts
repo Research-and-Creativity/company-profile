@@ -6,6 +6,7 @@ export const Teams: TeamsType[] = [
     name: "Haryanto Wifakul Azmi",
     role: "Chief Executive Officer",
     image: "/team/yanto.png",
+    alt: "Tim Pengembang Zetra Tech HMSE Telkom University Purwokerto",
     socials: {
       instagram: "https://www.instagram.com/harch.6/",
       linkedin: "https://www.linkedin.com/in/haryanto-azmi-b8b508308/",
@@ -17,6 +18,7 @@ export const Teams: TeamsType[] = [
     name: "Geusan Edurais Aria Daffa",
     role: "Chief Executive Officer",
     image: "/team/gus.png",
+    alt: "Tim Pengembang Zetra Tech HMSE Telkom University Purwokerto",
     socials: {
       instagram: "https://www.instagram.com/raissan_31/",
       linkedin: "https://www.linkedin.com/in/geusanedurais/",
@@ -28,6 +30,7 @@ export const Teams: TeamsType[] = [
     name: "Muhammad Farel Alghazali",
     role: "Chief Executive Officer",
     image: "/team/farel.png",
+    alt: "Tim Pengembang Zetra Tech HMSE Telkom University Purwokerto",
     socials: {
       instagram: "https://www.instagram.com/farelghazalii/",
       linkedin: "https://www.linkedin.com/in/farelghazalii/",
@@ -39,6 +42,7 @@ export const Teams: TeamsType[] = [
     name: "Ulung Putra Sadewo",
     role: "Chief Executive Officer",
     image: "/team/lung.png",
+    alt: "Tim Pengembang Zetra Tech HMSE Telkom University Purwokerto",
     socials: {
       instagram: "https://www.instagram.com/ullttraaa/",
       linkedin: "https://www.linkedin.com/in/ulung-putra-sadewo-/",
@@ -50,6 +54,7 @@ export const Teams: TeamsType[] = [
     name: "Putra Anugrah Pamungkas",
     role: "Chief Executive Officer",
     image: "/team/put.png",
+    alt: "Tim Pengembang Zetra Tech HMSE Telkom University Purwokerto",
     socials: {
       instagram: "",
       linkedin: "",
