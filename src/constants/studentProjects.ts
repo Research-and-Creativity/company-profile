@@ -6,7 +6,7 @@ export const STUDENT_PROJECTS: StudentProject[] = [
     title: "Sistem Informasi Akademik",
     description:
       "Platform manajemen akademik mahasiswa dengan fitur absensi, nilai, dan jadwal kuliah secara real-time.",
-    thumbnail: "/projects/sia.png",
+    thumbnail: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1738&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     author: "Budi Santoso",
     year: 2024,
     techStack: ["React", "Laravel", "MySQL"],
@@ -20,7 +20,7 @@ export const STUDENT_PROJECTS: StudentProject[] = [
     title: "E-Commerce Batik Lokal",
     description:
       "Marketplace UMKM batik lokal Purwokerto dengan sistem pembayaran terintegrasi dan manajemen stok.",
-    thumbnail: "/projects/ecommerce.png",
+    thumbnail: "https://images.unsplash.com/photo-1484417894907-623942c8ee29?q=80&w=2532&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     author: "Siti Rahayu",
     year: 2024,
     techStack: ["Next.js", "Prisma", "PostgreSQL", "Midtrans"],
@@ -34,7 +34,7 @@ export const STUDENT_PROJECTS: StudentProject[] = [
     title: "Aplikasi Pemantau Gizi",
     description:
       "Aplikasi mobile untuk memantau asupan gizi harian dengan rekomendasi makanan berbasis AI.",
-    thumbnail: "/projects/gizi-app.png",
+    thumbnail: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     author: "Ahmad Fauzi",
     year: 2023,
     techStack: ["Flutter", "Firebase", "Python"],
