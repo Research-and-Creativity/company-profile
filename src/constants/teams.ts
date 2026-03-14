@@ -3,8 +3,32 @@ import type { TeamsType } from "../types/teams";
 export const Teams: TeamsType[] = [
   {
     id: 1,
-    name: "Haryanto Wifakul Azmi",
+    name: "Quratu Ayun Defaren",
     role: "Chief Executive Officer",
+    image: "/team/titu.png",
+    alt: "Tim Pengembang Zetra Tech HMSE Telkom University Purwokerto",
+    socials: {
+      instagram: "https://www.instagram.com/quratuayundefaren",
+      linkedin: "https://www.linkedin.com/in/quratu-ayun-defaren-170773327",
+      github: "https://github.com/Tituuu23",
+    },
+  },
+  {
+    id: 2,
+    name: "Muhammad Rasyid Ridho",
+    role: "Chief Operating Officer",
+    image: "/team/rasyid.png",
+    alt: "Tim Pengembang Zetra Tech HMSE Telkom University Purwokerto",
+    socials: {
+      instagram: "https://www.instagram.com/rasyidrdh05/",
+      linkedin: "https://www.linkedin.com/in/rasyidridho05/",
+      github: "https://github.com/rasyidridho05",
+    },
+  },
+  {
+    id: 3,
+    name: "Haryanto Wifakul Azmi",
+    role: "Designer Specialist",
     image: "/team/yanto.png",
     alt: "Tim Pengembang Zetra Tech HMSE Telkom University Purwokerto",
     socials: {
@@ -14,9 +38,9 @@ export const Teams: TeamsType[] = [
     },
   },
   {
-    id: 2,
+    id: 4,
     name: "Geusan Edurais Aria Daffa",
-    role: "Chief Executive Officer",
+    role: "Developer Specialist",
     image: "/team/gus.png",
     alt: "Tim Pengembang Zetra Tech HMSE Telkom University Purwokerto",
     socials: {
@@ -26,9 +50,9 @@ export const Teams: TeamsType[] = [
     },
   },
   {
-    id: 3,
+    id: 5,
     name: "Muhammad Farel Alghazali",
-    role: "Chief Executive Officer",
+    role: "Developer Specialist",
     image: "/team/farel.png",
     alt: "Tim Pengembang Zetra Tech HMSE Telkom University Purwokerto",
     socials: {
@@ -38,9 +62,9 @@ export const Teams: TeamsType[] = [
     },
   },
   {
-    id: 4,
+    id: 6,
     name: "Ulung Putra Sadewo",
-    role: "Chief Executive Officer",
+    role: "Developer Specialist",
     image: "/team/lung.png",
     alt: "Tim Pengembang Zetra Tech HMSE Telkom University Purwokerto",
     socials: {
@@ -50,14 +74,14 @@ export const Teams: TeamsType[] = [
     },
   },
   {
-    id: 5,
+    id: 7,
     name: "Putra Anugrah Pamungkas",
-    role: "Chief Executive Officer",
+    role: "System Analysst Specialist",
     image: "/team/put.png",
     alt: "Tim Pengembang Zetra Tech HMSE Telkom University Purwokerto",
     socials: {
-      instagram: "",
-      linkedin: "",
+      instagram: "https://www.instagram.com/siuyyyyuu",
+      linkedin: "https://www.linkedin.com/in/putra-pamungkas-315b9b312/",
       github: "https://github.com/Putr7",
     },
   },

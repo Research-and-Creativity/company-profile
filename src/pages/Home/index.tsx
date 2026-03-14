@@ -3,6 +3,7 @@ import Contact from "./section/Contact";
 import Hero from "./section/Hero";
 import OurProducts from "./section/OurProducts";
 import OurServices from "./section/OurServices";
+import StudentProjects from "./section/StudentProjects";
 
 const HomePage = () => {
     return (
@@ -19,6 +20,10 @@ const HomePage = () => {
                 <OurServices />
             </section>
 
+            <section id="projects">
+                <StudentProjects />
+            </section>
+            
             <section id="products" className="py-20 bg-[#f0f5fa]">
                 <OurProducts />
             </section>
