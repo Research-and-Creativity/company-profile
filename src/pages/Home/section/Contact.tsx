@@ -171,12 +171,20 @@ export default function Contact() {
                 Feel free to reach out for collaborations, or consultation.
               </p>
               <p className="text-gray-300 md:text-lg">Send us an email at</p>
-              <Link
-                to="mailto:hmse-pwt@telkomuniversity.ac.id"
-                className="text-[#17a1e1] font-medium hover:underline cursor-pointer transition-all"
-              >
-                hmse-pwt@telkomuniversity.ac.id
-              </Link>
+              <div className="flex flex-col">
+                <Link
+                  to="mailto:hmse-pwt@telkomuniversity.ac.id"
+                  className="text-[#17a1e1] font-medium hover:underline cursor-pointer transition-all"
+                >
+                  hmse-pwt@telkomuniversity.ac.id
+                </Link>
+                <Link
+                  to="mailto:hmse@ittelkom-pwt.ac.id"
+                  className="text-[#17a1e1] font-medium hover:underline cursor-pointer transition-all"
+                >
+                  hmse@ittelkom-pwt.ac.id
+                </Link>
+              </div>
             </motion.div>
 
             <motion.div
