@@ -76,7 +76,7 @@ export const Teams: TeamsType[] = [
   {
     id: 7,
     name: "Putra Anugrah Pamungkas",
-    role: "System Analysst Specialist",
+    role: "System Analyst Specialist",
     image: "/team/put.png",
     alt: "Tim Pengembang Zetra Tech HMSE Telkom University Purwokerto",
     socials: {
