@@ -54,7 +54,7 @@ zetech/
 │   │   ├── shared/        # Navbar, Footer
 │   │   └── teams/         # Reusable UI Teams
 │   │   └── ui/            # Component UI
-│   ├── constanst/         # Data Constant
+│   ├── constants/         # Data Constant
 │   ├── hooks/             # Custom React hooks
 │   ├── layouts/           # Layout page
 │   ├── pages/             # Main page views
