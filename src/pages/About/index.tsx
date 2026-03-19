@@ -25,6 +25,9 @@ export default function IndexAbout() {
     const prefersReduced = useReducedMotion();
     const noAnim = isMobile || !!prefersReduced;
 
+    const row1 = Teams.slice(0, 3);
+    const row2 = Teams.slice(3, 7);
+
     return (
         <>
             <Helmet>
@@ -69,7 +72,7 @@ export default function IndexAbout() {
                     )}
 
                     {!noAnim && [
-                        { x: "12%", y: "25%", size: 3, delay: 0, dur: 5.2 },
+                        { x: "12%", y: "25%", size: 3, delay: 0,   dur: 5.2 },
                         { x: "85%", y: "18%", size: 4, delay: 1.2, dur: 6.5 },
                         { x: "75%", y: "60%", size: 2, delay: 0.7, dur: 5.8 },
                         { x: "30%", y: "80%", size: 3, delay: 2.0, dur: 7.0 },
@@ -87,7 +90,7 @@ export default function IndexAbout() {
                         style={{ background: "linear-gradient(90deg, transparent, rgba(33,138,187,0.4), transparent)" }} />
 
                     <div className="container mx-auto px-6 md:px-16 xl:px-24 relative z-10">
-                        <SectionLabel text="Who We Are" />
+                        <SectionLabel text="Who Are We" />
                         <div className="mb-10 max-w-2xl">
                             <RevealHeading words={["About", "Us"]} accent="Us" dark />
                             <RevealLine delay={0.35} />
@@ -107,9 +110,7 @@ export default function IndexAbout() {
                                     </svg>
                                 </IconBadge>
                                 <h3 style={{ fontSize: "1.45rem", fontWeight: 800, color: "white", letterSpacing: "-0.025em", marginBottom: 14 }}>Visi</h3>
-                                <p style={{ color: "rgba(175,210,235,0.72)", lineHeight: 1.85, fontSize: "0.95rem" }}>
-                                    {VISI}
-                                </p>
+                                <p style={{ color: "rgba(175,210,235,0.72)", lineHeight: 1.85, fontSize: "0.95rem" }}>{VISI}</p>
                             </GlassCard>
 
                             <GlassCard index={1}
@@ -157,16 +158,8 @@ export default function IndexAbout() {
                         </>
                     )}
 
-                    <div className="absolute pointer-events-none" style={{
-                        right: "8%", top: "15%",
-                        width: 300, height: 300, borderRadius: "50%",
-                        border: "1px solid rgba(33,138,187,0.1)",
-                    }} />
-                    <div className="absolute pointer-events-none" style={{
-                        right: "11%", top: "12%",
-                        width: 200, height: 200, borderRadius: "50%",
-                        border: "1px solid rgba(33,138,187,0.08)",
-                    }} />
+                    <div className="absolute pointer-events-none" style={{ right: "8%", top: "15%", width: 300, height: 300, borderRadius: "50%", border: "1px solid rgba(33,138,187,0.1)" }} />
+                    <div className="absolute pointer-events-none" style={{ right: "11%", top: "12%", width: 200, height: 200, borderRadius: "50%", border: "1px solid rgba(33,138,187,0.08)" }} />
 
                     <div className="absolute top-0 inset-x-0 h-px pointer-events-none"
                         style={{ background: "linear-gradient(90deg, transparent, rgba(33,138,187,0.2), transparent)" }} />
@@ -175,13 +168,32 @@ export default function IndexAbout() {
                         <SectionLabel text="The People" />
                         <TeamHeadingBlock />
 
-                        <div className="flex flex-wrap justify-center gap-0 gap-y-10">
+                        <div className="hidden lg:flex flex-col gap-10">
+
+                            <div className="flex justify-center gap-8">
+                                {row1.map((team, i) => (
+                                    <div key={team.id} style={{ width: "30%", maxWidth: 260 }}>
+                                        <AnimatedTeamCard team={team} index={i} noAnim={noAnim} />
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="flex justify-center gap-8">
+                                {row2.map((team, i) => (
+                                    <div key={team.id} style={{ width: "22%", maxWidth: 260 }}>
+                                        <AnimatedTeamCard team={team} index={3 + i} noAnim={noAnim} />
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-8 justify-items-center">
                             {Teams.map((team, i) => (
                                 <AnimatedTeamCard
                                     key={team.id}
                                     team={team}
                                     index={i}
-                                    {...(noAnim ? { noAnim: true } : {})}
+                                    noAnim={noAnim}
                                 />
                             ))}
                         </div>
