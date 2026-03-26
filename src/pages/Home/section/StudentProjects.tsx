@@ -1,6 +1,5 @@
-// src/pages/Home/section/StudentProjects.tsx
 import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ProjectCard from "../../../components/ui/ProjectCard";
 import { FEATURED_PROJECTS } from "../../../constants/studentProjects";
@@ -12,17 +11,19 @@ function useIsMobile() {
 
 const CARDS_PER_PAGE = 4;
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+const AUTO_INTERVAL = 5000;
 
 export default function StudentProjects() {
   const isMobile = useIsMobile();
   const prefersReduced = useReducedMotion();
   const noAnim = isMobile || !!prefersReduced;
 
-  const [page, setPage] = useState(0);
-  const [direction, setDirection] = useState(1); // 1 = next, -1 = prev
-  const sectionRef = useRef<HTMLElement>(null);
+  const [page, setPage]           = useState(0);
+  const [direction, setDirection] = useState(1);
+  const sectionRef                = useRef<HTMLElement>(null);
+  const intervalRef               = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const totalPages = Math.ceil(FEATURED_PROJECTS.length / CARDS_PER_PAGE);
+  const totalPages   = Math.ceil(FEATURED_PROJECTS.length / CARDS_PER_PAGE);
   const visibleCards = FEATURED_PROJECTS.slice(
     page * CARDS_PER_PAGE,
     page * CARDS_PER_PAGE + CARDS_PER_PAGE
@@ -33,31 +34,51 @@ export default function StudentProjects() {
     setPage(next);
   };
 
-  // Variants untuk page slide transition
+  const startInterval = () => {
+    if (noAnim || totalPages <= 1) return;
+    intervalRef.current = setInterval(() => {
+      setPage(prev => {
+        const next = (prev + 1) % totalPages;
+        setDirection(1);
+        return next;
+      });
+    }, AUTO_INTERVAL);
+  };
+
+  const clearAutoInterval = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  };
+
+  useEffect(() => {
+    startInterval();
+    return () => clearAutoInterval();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [noAnim, totalPages]);
+
+  const handleMouseEnter = () => clearAutoInterval();
+  const handleMouseLeave = () => startInterval();
+
+  const handleManualNav = (next: number) => {
+    clearAutoInterval();
+    goToPage(next);
+    startInterval();
+  };
+
   const pageVariants = {
-    enter: (dir: number) => ({
-      opacity: 0,
-      x: noAnim ? 0 : dir * 60,
-    }),
+    enter: (dir: number) => ({ opacity: 0, x: noAnim ? 0 : dir * 60 }),
     center: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: noAnim ? 0.3 : 0.55,
-        ease: EASE,
-      },
+      opacity: 1, x: 0,
+      transition: { duration: noAnim ? 0.3 : 0.55, ease: EASE },
     },
     exit: (dir: number) => ({
-      opacity: 0,
-      x: noAnim ? 0 : dir * -60,
-      transition: {
-        duration: noAnim ? 0.2 : 0.35,
-        ease: EASE,
-      },
+      opacity: 0, x: noAnim ? 0 : dir * -60,
+      transition: { duration: noAnim ? 0.2 : 0.35, ease: EASE },
     }),
   };
 
-  // Stagger variants untuk cards di dalam page
   const gridVariants = {
     hidden: {},
     visible: {
@@ -69,19 +90,10 @@ export default function StudentProjects() {
   };
 
   const cardVariants = {
-    hidden: {
-      opacity: 0,
-      y: noAnim ? 0 : 28,
-      scale: noAnim ? 1 : 0.97,
-    },
+    hidden: { opacity: 0, y: noAnim ? 0 : 28, scale: noAnim ? 1 : 0.97 },
     visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: noAnim ? 0.3 : 0.6,
-        ease: EASE,
-      },
+      opacity: 1, y: 0, scale: 1,
+      transition: { duration: noAnim ? 0.3 : 0.6, ease: EASE },
     },
   };
 
@@ -90,16 +102,9 @@ export default function StudentProjects() {
       ref={sectionRef}
       className="relative overflow-hidden"
       style={{ background: "#eef3f8" }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
-      {/* Wave atas dari OurServices (#020049) */}
-      <div style={{ marginTop: -2 }}>
-        <svg viewBox="0 0 1440 72" preserveAspectRatio="none"
-          style={{ width: "100%", height: 72, display: "block" }}>
-          <path d="M0,0 C360,72 1080,0 1440,48 L1440,0 L0,0 Z" fill="#020049" />
-        </svg>
-      </div>
-
-      {/* Dot pattern */}
       <div className="absolute inset-0 pointer-events-none select-none" style={{ opacity: noAnim ? 0.3 : 0.5 }}>
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -111,7 +116,6 @@ export default function StudentProjects() {
         </svg>
       </div>
 
-      {/* Orbs — desktop only */}
       {!noAnim && (
         <>
           <motion.div className="absolute pointer-events-none"
@@ -132,9 +136,8 @@ export default function StudentProjects() {
         />
       )}
 
-      <div className="container mx-auto px-6 md:px-20 relative z-10 pt-10">
+      <div className="container mx-auto px-6 md:px-20 relative z-10 pt-14">
 
-        {/* ── Heading ── */}
         <motion.div
           initial={noAnim ? { opacity: 0 } : { opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -173,7 +176,7 @@ export default function StudentProjects() {
             </div>
 
             <Link to="/projects"
-              className="hidden sm:flex items-center gap-2 group"
+              className="hidden sm:flex items-center gap-2"
               style={{ color: "#218ABB", fontWeight: 700, fontSize: "0.875rem", textDecoration: "none", flexShrink: 0 }}
             >
               Lihat semua project
@@ -185,8 +188,7 @@ export default function StudentProjects() {
           </div>
         </motion.div>
 
-        {/* ── Cards dengan AnimatePresence untuk page transition ── */}
-        <div style={{ position: "relative", minHeight: 420, overflow: "hidden" }}>
+        <div style={{ position: "relative", overflow: "hidden" }}>
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={page}
@@ -197,19 +199,14 @@ export default function StudentProjects() {
               exit="exit"
               className="w-full"
             >
-              {/* Stagger wrapper */}
               <motion.div
                 variants={gridVariants}
                 initial="hidden"
                 animate="visible"
                 className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5"
               >
-                {visibleCards.map((project) => (
-                  <motion.div
-                    key={project.id}
-                    variants={cardVariants}
-                    style={{ width: "100%", minWidth: 0 }}
-                  >
+                {visibleCards.map(project => (
+                  <motion.div key={project.id} variants={cardVariants} style={{ width: "100%", minWidth: 0 }}>
                     <div style={{ width: "100%" }}>
                       <ProjectCard project={project} noAnim={noAnim} />
                     </div>
@@ -220,13 +217,11 @@ export default function StudentProjects() {
           </AnimatePresence>
         </div>
 
-        {/* ── Controls ── */}
         <div className="mt-8 flex items-center justify-between">
 
-          {/* Dots */}
           <div className="flex items-center gap-2">
             {Array.from({ length: totalPages }).map((_, i) => (
-              <button key={i} onClick={() => goToPage(i)}
+              <button key={i} onClick={() => handleManualNav(i)}
                 style={{
                   width: page === i ? 24 : 7, height: 7, borderRadius: 100,
                   background: page === i ? "#218ABB" : "rgba(33,138,187,0.25)",
@@ -237,10 +232,9 @@ export default function StudentProjects() {
             ))}
           </div>
 
-          {/* Arrows */}
           <div className="flex items-center gap-2">
             <button
-              onClick={() => goToPage(Math.max(0, page - 1))}
+              onClick={() => handleManualNav(Math.max(0, page - 1))}
               disabled={page === 0}
               style={{
                 width: 36, height: 36, borderRadius: "50%",
@@ -260,7 +254,7 @@ export default function StudentProjects() {
             </button>
 
             <button
-              onClick={() => goToPage(Math.min(totalPages - 1, page + 1))}
+              onClick={() => handleManualNav(Math.min(totalPages - 1, page + 1))}
               disabled={page === totalPages - 1}
               style={{
                 width: 36, height: 36, borderRadius: "50%",
@@ -281,7 +275,6 @@ export default function StudentProjects() {
           </div>
         </div>
 
-        {/* See all — mobile */}
         <div className="sm:hidden mt-6 mb-4">
           <Link to="/projects"
             style={{
@@ -296,10 +289,8 @@ export default function StudentProjects() {
             Lihat semua project →
           </Link>
         </div>
-
       </div>
 
-      {/* Wave bawah ke OurProducts (#f0f5fa) */}
       <div className="mt-12" style={{ marginBottom: -2 }}>
         <svg viewBox="0 0 1440 64" preserveAspectRatio="none"
           style={{ width: "100%", height: 64, display: "block" }}>
