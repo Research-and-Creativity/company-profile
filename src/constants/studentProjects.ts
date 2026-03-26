@@ -7,7 +7,7 @@ export const STUDENT_PROJECTS: StudentProject[] = [
     description:
       "Platform manajemen akademik mahasiswa dengan fitur absensi, nilai, dan jadwal kuliah secara real-time.",
     thumbnail: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1738&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    author: "Budi Santoso",
+    authors: ["Budi Santoso"],
     year: 2024,
     techStack: ["React", "Laravel", "MySQL"],
     demoUrl: "",
@@ -21,7 +21,7 @@ export const STUDENT_PROJECTS: StudentProject[] = [
     description:
       "Marketplace UMKM batik lokal Purwokerto dengan sistem pembayaran terintegrasi dan manajemen stok.",
     thumbnail: "https://images.unsplash.com/photo-1484417894907-623942c8ee29?q=80&w=2532&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    author: "Siti Rahayu",
+    authors: ["Siti Rahayu"],
     year: 2024,
     techStack: ["Next.js", "Prisma", "PostgreSQL", "Midtrans"],
     demoUrl: "",
@@ -35,7 +35,7 @@ export const STUDENT_PROJECTS: StudentProject[] = [
     description:
       "Aplikasi mobile untuk memantau asupan gizi harian dengan rekomendasi makanan berbasis AI.",
     thumbnail: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    author: "Ahmad Fauzi",
+    authors: ["Ahmad Fauzi"],
     year: 2023,
     techStack: ["Flutter", "Firebase", "Python"],
     demoUrl: "adap://gizi-app-demo.vercel.app",
@@ -49,7 +49,7 @@ export const STUDENT_PROJECTS: StudentProject[] = [
     description:
       "Dashboard monitoring sensor IoT kampus meliputi suhu, kelembaban, dan konsumsi energi gedung.",
     thumbnail: "/projects/iot-dashboard.png",
-    author: "Dewi Permatasari",
+    authors: ["Dewi Permatasari"],
     year: 2023,
     techStack: ["Vue.js", "Node.js", "MQTT", "InfluxDB"],
     demoUrl: "https://smartcampus-demo.vercel.app",
@@ -62,7 +62,7 @@ export const STUDENT_PROJECTS: StudentProject[] = [
     description:
       "Aplikasi booking lapangan olahraga dengan notifikasi real-time dan manajemen slot waktu.",
     thumbnail: "/projects/reservasi.png",
-    author: "Rizky Pratama",
+    authors: ["Rizky Pratama", "Lina Marlina"],
     year: 2024,
     techStack: ["React", "Express", "Socket.io", "MongoDB"],
     githubUrl: "https://github.com/example/reservasi",
@@ -75,7 +75,7 @@ export const STUDENT_PROJECTS: StudentProject[] = [
     description:
       "Redesain antarmuka aplikasi mobile bank daerah dengan pendekatan user-centered design.",
     thumbnail: "/projects/bank-redesign.png",
-    author: "Nisa Fitriani",
+    authors: ["Nisa Fitriani"],
     year: 2024,
     techStack: ["Figma", "Protopie"],
     demoUrl: "https://figma.com/proto/example",
