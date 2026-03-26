@@ -4,6 +4,7 @@ import Hero from "./section/Hero";
 import OurProducts from "./section/OurProducts";
 import OurServices from "./section/OurServices";
 import StudentProjects from "./section/StudentProjects";
+import TechStack from "./section/TechStack";
 
 const HomePage = () => {
     return (
@@ -20,14 +21,16 @@ const HomePage = () => {
                 <OurServices />
             </section>
 
+            <section id="products" className="pt-20 bg-[#f0f5fa]">
+                <OurProducts />
+            </section>
+
+            <TechStack />
+
             <section id="projects">
                 <StudentProjects />
             </section>
             
-            <section id="products" className="py-20 bg-[#f0f5fa]">
-                <OurProducts />
-            </section>
-
             <section id="contact" className="bg-[#020049] text-white">
                 <Contact />
             </section>

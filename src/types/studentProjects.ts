@@ -3,7 +3,7 @@ export interface StudentProject {
     title: string;
     description: string;
     thumbnail: string;
-    author: string;
+    authors: string[];
     year: number;
     techStack: string[];
     demoUrl?: string;
