@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://zetech.vercel.app/sitemap.xml
+
+Sitemap: https://zetech.id/sitemap.xml
