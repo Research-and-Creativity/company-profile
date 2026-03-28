@@ -1,11 +1,18 @@
 import type { TeamsType } from "../types/teams";
+import tituImage from "../assets/team/titu.webp";
+import rasyidImage from "../assets/team/rasyid.webp";
+import yantoImage from "../assets/team/yanto.webp";
+import gusImage from "../assets/team/gus.webp";
+import farelImage from "../assets/team/farel.webp";
+import lungImage from "../assets/team/lung.webp";
+import putImage from "../assets/team/put.webp";
 
 export const Teams: TeamsType[] = [
   {
     id: 1,
     name: "Quratu Ayun Defaren",
     role: "Chief Executive Officer",
-    image: "/team/titu.png",
+    image: tituImage,
     alt: "Tim Pengembang Zetra Tech HMSE Telkom University Purwokerto",
     socials: {
       instagram: "https://www.instagram.com/quratuayundefaren",
@@ -17,7 +24,7 @@ export const Teams: TeamsType[] = [
     id: 2,
     name: "Muhammad Rasyid Ridho",
     role: "Chief Operating Officer",
-    image: "/team/rasyid.png",
+    image: rasyidImage,
     alt: "Tim Pengembang Zetra Tech HMSE Telkom University Purwokerto",
     socials: {
       instagram: "https://www.instagram.com/rasyidrdh05/",
@@ -29,7 +36,7 @@ export const Teams: TeamsType[] = [
     id: 3,
     name: "Haryanto Wifakul Azmi",
     role: "Designer Specialist",
-    image: "/team/yanto.png",
+    image: yantoImage,
     alt: "Tim Pengembang Zetra Tech HMSE Telkom University Purwokerto",
     socials: {
       instagram: "https://www.instagram.com/harch.6/",
@@ -41,7 +48,7 @@ export const Teams: TeamsType[] = [
     id: 4,
     name: "Geusan Edurais Aria Daffa",
     role: "Developer Specialist",
-    image: "/team/gus.png",
+    image: gusImage,
     alt: "Tim Pengembang Zetra Tech HMSE Telkom University Purwokerto",
     socials: {
       instagram: "https://www.instagram.com/raissan_31/",
@@ -53,7 +60,7 @@ export const Teams: TeamsType[] = [
     id: 5,
     name: "Muhammad Farel Alghazali",
     role: "Developer Specialist",
-    image: "/team/farel.png",
+    image: farelImage,
     alt: "Tim Pengembang Zetra Tech HMSE Telkom University Purwokerto",
     socials: {
       instagram: "https://www.instagram.com/farelghazalii/",
@@ -65,7 +72,7 @@ export const Teams: TeamsType[] = [
     id: 6,
     name: "Ulung Putra Sadewo",
     role: "Developer Specialist",
-    image: "/team/lung.png",
+    image: lungImage,
     alt: "Tim Pengembang Zetra Tech HMSE Telkom University Purwokerto",
     socials: {
       instagram: "https://www.instagram.com/ullttraaa/",
@@ -77,7 +84,7 @@ export const Teams: TeamsType[] = [
     id: 7,
     name: "Putra Anugrah Pamungkas",
     role: "System Analyst Specialist",
-    image: "/team/put.png",
+    image: putImage,
     alt: "Tim Pengembang Zetra Tech HMSE Telkom University Purwokerto",
     socials: {
       instagram: "https://www.instagram.com/siuyyyyuu",

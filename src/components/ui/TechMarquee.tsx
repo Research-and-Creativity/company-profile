@@ -47,23 +47,33 @@ export function TechMarquee({
 }: TechMarqueeProps) {
   const prefersReduced = useReducedMotion();
   const [paused, setPaused] = useState(false);
-  const duration = (items.length * 120) / speed;
+  const duration = (items.length * 5) / (speed / 20);
 
   return (
     <>
       <style>{MARQUEE_STYLE}</style>
       <div
-        style={{ position: "relative", overflow: "hidden", width: "100%" }}
+        className="relative overflow-hidden w-full"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
         <div style={{
-          position: "absolute", left: 0, top: 0, bottom: 0, width: 900, zIndex: 2,
+          position: "absolute",
+          left: 0,
+          top: 0,
+          bottom: 0,
+          width: "15%",
+          zIndex: 2,
           background: `linear-gradient(90deg, ${bgColor} 0%, transparent 100%)`,
           pointerEvents: "none",
         }} />
         <div style={{
-          position: "absolute", right: 0, top: 0, bottom: 0, width: 900, zIndex: 2,
+          position: "absolute",
+          right: 0,
+          top: 0,
+          bottom: 0,
+          width: "15%",
+          zIndex: 2,
           background: `linear-gradient(-90deg, ${bgColor} 0%, transparent 100%)`,
           pointerEvents: "none",
         }} />
@@ -71,12 +81,13 @@ export function TechMarquee({
         <div
           className={prefersReduced ? "" : paused ? "marquee-pause" : "marquee-run"}
           style={{
-            display: "flex", alignItems: "center",
+            display: "flex",
+            alignItems: "center",
             width: "max-content",
             ["--mdur" as string]: `${duration}s`,
           }}
         >
-          {[...items, ...items].map((item, i) => (
+          {[...items, ...items, ...items, ...items].map((item, i) => (
             <TechLogo key={i} item={item} />
           ))}
         </div>

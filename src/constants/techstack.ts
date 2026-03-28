@@ -1,72 +1,89 @@
 import type { TechItem } from "../types/techMarquee";
+import ReactIcon from "../assets/icons/techstack/react-original.svg"
+import NextIcon from "../assets/icons/techstack/nextjs-original.svg"
+import FramerMotionIcon from "../assets/icons/techstack/framermotion-original.svg"
+import TypeScriptIcon from "../assets/icons/techstack/typescript-original.svg"
+import JavaScriptIcon from "../assets/icons/techstack/javascript-original.svg"
+import NodeIcon from "../assets/icons/techstack/nodejs-original.svg"
+import MySQLIcon from "../assets/icons/techstack/mysql-original.svg"
+import PostgreSQLIcon from "../assets/icons/techstack/postgresql-original.svg"
+import MongoDBIcon from "../assets/icons/techstack/mongodb-original.svg"
+import GitHubIcon from "../assets/icons/techstack/github-original.svg"
+import GitIcon from "../assets/icons/techstack/git-original.svg"
+import PostmanIcon from "../assets/icons/techstack/postman-original.svg"
+import PrismaIcon from "../assets/icons/techstack/prisma-original.svg"
+import FigmaIcon from "../assets/icons/techstack/figma-original.svg"
+import TailwindIcon from "../assets/icons/techstack/tailwindcss-original.svg"
+import ExpressIcon from "../assets/icons/techstack/express-original.svg"
+import VercelIcon from "../assets/icons/techstack/vercel-original.svg"
 
 export const TECH_ITEMS: TechItem[] = [
   {
     name: "React",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+    icon: ReactIcon,
   },
   {
     name: "Next.js",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+    icon: NextIcon,
   },
   {
     name: "Framer Motion",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/framermotion/framermotion-original.svg",
+    icon: FramerMotionIcon,
   },
   {
     name: "TypeScript",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+    icon: TypeScriptIcon,
   },
   {
     name: "JavaScript",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
+    icon: JavaScriptIcon,
   },
   {
     name: "Node.js",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+    icon: NodeIcon,
   },
   {
     name: "MySQL",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
+    icon: MySQLIcon,
   },
   {
     name: "PostgreSQL",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
+    icon: PostgreSQLIcon,
   },
   {
     name: "MongoDB",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+    icon: MongoDBIcon,
   },
   {
     name: "GitHub",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg",
+    icon: GitHubIcon,
   },
   {
     name: "Git",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+    icon: GitIcon,
   },
   {
     name: "Postman",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg",
+    icon: PostmanIcon,
   },
   {
     name: "Prisma",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg",
+    icon: PrismaIcon,
   },
   {
     name: "Figma",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
+    icon: FigmaIcon,
   },
   {
     name: "TailwindCSS",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+    icon: TailwindIcon,
   },
   {
     name: "ExpressJS",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg",
+    icon: ExpressIcon,
   },
   {
     name: "Vercel",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg",
+    icon: VercelIcon,
   },
 ];
