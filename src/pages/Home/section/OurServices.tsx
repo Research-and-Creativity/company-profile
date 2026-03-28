@@ -1,8 +1,8 @@
 import { motion, type Variants, type TargetAndTransition, useInView, useReducedMotion } from "framer-motion";
 import { useRef } from "react";
 import Button from "../../../components/ui/Button";
-import webImage from "../../../assets/web-development.png";
-import mobileImage from "../../../assets/mobile-development.png";
+import webImage from "../../../assets/web-development.webp";
+import mobileImage from "../../../assets/mobile-development.webp";
 
 function useIsMobile() {
   if (typeof window === "undefined") return false;
@@ -120,6 +120,7 @@ function ServiceCard({
           {...(!noAnim ? { whileHover: { scale: 1.1 } } : {})}
           transition={{ duration: 0.6 }}
           src={image}
+          loading="lazy"
           alt={imageAlt}
           className="w-full h-full object-cover transition-all"
           style={{ filter: "saturate(0.85) brightness(0.88)" }}

@@ -1,5 +1,5 @@
 import type { Product } from "../types/product";
-import digitalInvitation from "../assets/digital-invitation.png";
+import digitalInvitation from "../assets/digital-invitation.webp";
 
 export const Products: Product[] = [
   {

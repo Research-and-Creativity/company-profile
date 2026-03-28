@@ -31,15 +31,22 @@ export default function Hero() {
   const fastY = useSpring(mouseY, fastSpring);
 
   useEffect(() => {
+    if (isMobile) {
+      mouseX.set(0);
+      mouseY.set(0);
+      return;
+    }
+
     const el = containerRef.current;
-    if (!el || isMobile) return;
+    if (!el) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = el.getBoundingClientRect();
-      const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
-      const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
-      mouseX.set(x);
-      mouseY.set(y);
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      mouseX.set((e.clientX - centerX) / rect.width);
+      mouseY.set((e.clientY - centerY) / rect.height);
     };
 
     el.addEventListener("mousemove", handleMouseMove);
@@ -86,7 +93,7 @@ export default function Hero() {
         <motion.div
           style={{ x: orb1X, y: orb1Y }}
           className="absolute pointer-events-none z-10"
-          animate={{ scale: [1, 1.15, 0.95, 1], opacity: [0.25, 0.4, 0.2, 0.25] }}
+          animate={isMobile ? {} : { scale: [1, 1.15, 0.95, 1], opacity: [0.25, 0.4, 0.2, 0.25] }}
           transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
         >
           <div style={{
@@ -172,7 +179,7 @@ export default function Hero() {
               {["Building", "Advanced"].map((word, i) => (
                 <motion.span
                   key={word}
-                  initial={{ y: "110%", opacity: 0 }}
+                  initial={isMobile ? { opacity: 0 } : { y: "110%", opacity: 0 }}
                   animate={{ y: "0%", opacity: 1 }}
                   transition={{ duration: 0.9, delay: 0.45 + i * 0.13, ease: [0.16, 1, 0.3, 1] }}
                   style={{

@@ -1,7 +1,7 @@
 import { motion, type Variants, useMotionValue, useSpring, useTransform, useReducedMotion } from "framer-motion";
 import { useRef } from "react";
 import Button from "../../../components/ui/Button";
-import aboutImage from "../../../assets/about-image.png";
+import aboutImage from "../../../assets/about-image.webp";
 
 function useIsMobile() {
   return typeof window !== "undefined" && window.innerWidth < 768;
@@ -308,6 +308,7 @@ export default function About() {
 
                 <img
                   src={aboutImage}
+                  loading="lazy"
                   alt="About Zetech"
                   className="w-full h-auto object-contain relative z-10"
                   style={{
