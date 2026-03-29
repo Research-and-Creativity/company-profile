@@ -106,6 +106,7 @@ export default function Hero() {
             position: "absolute", top: "50vh", left: "50vw",
             contain: "strict",
             pointerEvents: "none",
+            aspectRatio: "1 / 1",
           }} />
         </m.div>
 
