@@ -70,6 +70,8 @@ export default function Hero() {
   const title2X = useTransform(fastX, [-0.5, 0.5], isMobile ? [0, 0] : [-14, 14]);
   const title2Y = useTransform(fastY, [-0.5, 0.5], isMobile ? [0, 0] : [-10, 10]);
 
+  const activeParticles = isMobile ? PARTICLES.slice(0, 10) : PARTICLES;
+
   return (
     <>
       <Helmet>
@@ -112,7 +114,7 @@ export default function Hero() {
         <m.div
           style={{ x: orb2X, y: orb2Y }}
           className="absolute bottom-0 left-0 pointer-events-none z-10"
-          animate={{ scale: [0.9, 1.2, 1, 0.9], rotate: [0, 60, 120, 180] }}
+          animate={isMobile ? {} : { scale: [1, 1.15, 0.95, 1], opacity: [0.25, 0.4, 0.2, 0.25] }}
           transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
         >
           <div style={{
@@ -129,7 +131,7 @@ export default function Hero() {
         <m.div
           style={{ x: orb3X, y: orb3Y }}
           className="absolute top-0 right-0 pointer-events-none z-10"
-          animate={{ scale: [1, 0.85, 1.1, 1], opacity: [0.15, 0.3, 0.1, 0.15] }}
+          animate={isMobile ? {} : { scale: [1, 1.15, 0.95, 1], opacity: [0.25, 0.4, 0.2, 0.25] }}
           transition={{ duration: 22, repeat: Infinity, ease: "easeInOut", delay: 5 }}
         >
           <div style={{
@@ -143,7 +145,7 @@ export default function Hero() {
           }} />
         </m.div>
 
-        {PARTICLES.map((p, idx) => (
+        {activeParticles.map((p, idx) => (
           <Particle key={idx} {...p} />
         ))}
 
@@ -218,7 +220,7 @@ export default function Hero() {
                   key={word}
                   initial={isMobile ? { opacity: 0, y: 0 } : { y: "110%", opacity: 0 }}
                   animate={{ y: "0%", opacity: 1 }}
-                  transition={{ duration: 0.5, delay: isMobile ? 0.05 : 0.7 + i * 0.13, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: isMobile ? 0.4 : 0.9, delay: isMobile ? 0.1 + i * 0.05 : 0.7 + i * 0.13, ease: [0.16, 1, 0.3, 1] }}
                   style={{
                     display: "inline-block",
                     marginRight: "0.25em",
