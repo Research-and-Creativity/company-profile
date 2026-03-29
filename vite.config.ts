@@ -6,7 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   build: {
-    assetsInlineLimit: 40960,
+    assetsInlineLimit: 4096,
     cssCodeSplit: false,
 
     rollupOptions: {

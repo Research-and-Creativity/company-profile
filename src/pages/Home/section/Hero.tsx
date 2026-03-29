@@ -105,6 +105,7 @@ export default function Hero() {
             transform: "translate(-50%, -50%)",
             position: "absolute", top: "50vh", left: "50vw",
             contain: "strict",
+            pointerEvents: "none",
           }} />
         </m.div>
 
@@ -121,6 +122,7 @@ export default function Hero() {
             background: "radial-gradient(circle, rgba(20,80,160,0.4) 0%, transparent 70%)",
             filter: `blur(${isMobile ? 50 : 100}px)`,
             contain: "strict",
+            pointerEvents: "none",
           }} />
         </m.div>
 
@@ -137,6 +139,7 @@ export default function Hero() {
             background: "radial-gradient(circle, rgba(50,180,220,0.25) 0%, transparent 70%)",
             filter: `blur(${isMobile ? 60 : 120}px)`,
             contain: "strict",
+            pointerEvents: "none",
           }} />
         </m.div>
 
