@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import type { StudentProject } from "../../types/studentProjects";
 
@@ -49,10 +49,10 @@ export default function ProjectCard({ project, noAnim = false }: ProjectCardProp
     <div style={{ width: "100%" }}>
 
       <Link to={`/projects/${project.id}`} style={{ textDecoration: "none", display: "block" }}>
-        <motion.div
+        <m.div
           whileHover={_noAnim ? undefined : { y: -4 }}
           transition={{ type: "spring", stiffness: 300, damping: 24 }}
-          className="relative overflow-hidden group"
+          className="relative overflow-hidden group aspect-video"
           style={{
             borderRadius: 12,
             aspectRatio: "4/3",
@@ -83,7 +83,7 @@ export default function ProjectCard({ project, noAnim = false }: ProjectCardProp
           />
 
           {!_noAnim && (
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               whileHover={{ opacity: 1 }}
               transition={{ duration: 0.25 }}
@@ -145,9 +145,9 @@ export default function ProjectCard({ project, noAnim = false }: ProjectCardProp
                   </a>
                 )}
               </div>
-            </motion.div>
+            </m.div>
           )}
-        </motion.div>
+        </m.div>
       </Link>
 
       <div style={{ marginTop: 10, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>

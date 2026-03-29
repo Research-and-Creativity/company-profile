@@ -1,5 +1,4 @@
-// src/pages/projects/IndexProjects.tsx
-import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
+import { m, useReducedMotion, AnimatePresence } from "framer-motion";
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import ProjectCard from "../../components/ui/ProjectCard";
@@ -33,8 +32,6 @@ export default function IndexProjects() {
     const prefersReduced = useReducedMotion();
     const noAnim = isMobile || !!prefersReduced;
 
-    // Gabung filter + page dalam 1 state object
-    // Sehingga reset page selalu terjadi bersamaan di event handler — tidak perlu useEffect/useRef
     const [filter, setFilter] = useState({
         query: "",
         activeCategory: "All" as string,
@@ -73,7 +70,6 @@ export default function IndexProjects() {
 
             <div className="min-h-screen" style={{ background: "#f0f4f8" }}>
 
-                {/* ── Header ── */}
                 <div className="relative overflow-hidden py-20" style={{ background: "#020c1b" }}>
                     <div className="absolute inset-0 pointer-events-none select-none">
                         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -86,7 +82,7 @@ export default function IndexProjects() {
                         </svg>
                     </div>
                     {!noAnim && (
-                        <motion.div className="absolute pointer-events-none"
+                        <m.div className="absolute pointer-events-none"
                             animate={{ scale: [1, 1.12, 1], opacity: [0.3, 0.6, 0.3] }}
                             transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
                             style={{ left: "-10%", top: "0%", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(33,138,187,0.12) 0%, transparent 65%)", filter: "blur(60px)" }}
@@ -94,7 +90,7 @@ export default function IndexProjects() {
                     )}
 
                     <div className="container mx-auto px-6 md:px-20 relative z-10">
-                        <motion.div
+                        <m.div
                             initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.5 }}
                             className="mb-8"
@@ -108,10 +104,10 @@ export default function IndexProjects() {
                                 </svg>
                                 Kembali ke beranda
                             </Link>
-                        </motion.div>
+                        </m.div>
 
                         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
-                            <motion.div
+                            <m.div
                                 initial={noAnim ? { opacity: 0 } : { opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number,number,number,number] }}
@@ -131,10 +127,10 @@ export default function IndexProjects() {
                                     Karya mahasiswa RPL Telkom University Purwokerto —{" "}
                                     <span style={{ color: "#218ABB", fontWeight: 700 }}>{STUDENT_PROJECTS.length} project</span> tersedia
                                 </p>
-                            </motion.div>
+                            </m.div>
 
                             {/* Category chips — kanan atas, desktop only */}
-                            {/* <motion.div
+                            {/* <m.div
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ duration: 0.5, delay: 0.2 }}
@@ -158,7 +154,7 @@ export default function IndexProjects() {
                                         {CATEGORY_LABELS[cat as keyof typeof CATEGORY_LABELS]}
                                     </button>
                                 ))}
-                            </motion.div> */}
+                            </m.div> */}
                         </div>
                     </div>
 
@@ -169,17 +165,14 @@ export default function IndexProjects() {
                     </div>
                 </div>
 
-                {/* ── Filter + Grid ── */}
                 <div className="container mx-auto px-6 md:px-20 py-12">
 
-                    {/* Search bar kiri + category chips kanan — satu baris */}
-                    <motion.div
+                    <m.div
                         initial={noAnim ? { opacity: 0 } : { opacity: 0, y: 16 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.15 }}
                         className="mb-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
                     >
-                        {/* Search — w-1/2 desktop, full mobile */}
                         <div className="relative w-full sm:w-1/2">
                             <input
                                 type="text"
@@ -211,7 +204,6 @@ export default function IndexProjects() {
                             </div>
                         </div>
 
-                        {/* Category chips — kanan, semua ukuran layar */}
                         <div className="flex flex-wrap gap-2 justify-end">
                             {CATEGORIES.map(cat => (
                                 <button key={cat} onClick={() => handleCategory(cat)}
@@ -231,12 +223,11 @@ export default function IndexProjects() {
                                 </button>
                             ))}
                         </div>
-                    </motion.div>
+                    </m.div>
 
-                    {/* ── Grid ── */}
                     <AnimatePresence mode="wait">
                         {pagedItems.length > 0 ? (
-                            <motion.div
+                            <m.div
                                 key={query + activeCategory + page}
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
@@ -245,7 +236,7 @@ export default function IndexProjects() {
                                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
                             >
                                 {pagedItems.map((project: StudentProject, i: number) => (
-                                    <motion.div
+                                    <m.div
                                         key={project.id}
                                         initial={noAnim ? { opacity: 0 } : { opacity: 0, y: 24 }}
                                         animate={{ opacity: 1, y: 0 }}
@@ -259,11 +250,11 @@ export default function IndexProjects() {
                                         <div style={{ width: "100%" }}>
                                             <ProjectCard project={project} noAnim={noAnim} />
                                         </div>
-                                    </motion.div>
+                                    </m.div>
                                 ))}
-                            </motion.div>
+                            </m.div>
                         ) : (
-                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-20">
+                            <m.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-20">
                                 <div style={{
                                     display: "inline-flex", flexDirection: "column", alignItems: "center", gap: 12,
                                     padding: "32px 48px", borderRadius: 20,
@@ -285,15 +276,13 @@ export default function IndexProjects() {
                                         Reset filter
                                     </button>
                                 </div>
-                            </motion.div>
+                            </m.div>
                         )}
                     </AnimatePresence>
 
-                    {/* ── Result count + Pagination — di bawah grid ── */}
                     {pagedItems.length > 0 && (
                         <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4">
 
-                            {/* Result count */}
                             <p style={{ color: "rgba(50,70,100,0.5)", fontSize: "0.85rem" }}>
                                 Menampilkan{" "}
                                 <span style={{ color: "#218ABB", fontWeight: 700 }}>
@@ -307,7 +296,6 @@ export default function IndexProjects() {
                                 )}
                             </p>
 
-                            {/* Pagination — hanya tampil kalau > 1 halaman */}
                             {totalPages > 1 && (
                                 <div className="flex items-center gap-2">
                                     <button

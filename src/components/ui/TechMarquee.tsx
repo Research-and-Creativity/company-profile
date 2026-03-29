@@ -28,8 +28,10 @@ function TechLogo({ item }: { item: TechItem }) {
       <img
         src={item.icon}
         alt={item.name}
+        width="32"
+        height="32"
         style={{
-          height: 32, width: "auto", objectFit: "contain",
+          height: 32, width: 32, objectFit: "contain", contain: "paint",
           filter: hovered ? "grayscale(0) brightness(1)" : "grayscale(1) brightness(0.4)",
           opacity: hovered ? 1 : 0.6,
           transform: hovered ? "scale(1.15)" : "scale(1)",

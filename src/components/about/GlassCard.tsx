@@ -1,4 +1,4 @@
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { useRef } from "react";
 
 export function GlassCard({ children, index, gradient, blobPos }: {
@@ -9,7 +9,7 @@ export function GlassCard({ children, index, gradient, blobPos }: {
     const ref = useRef<HTMLDivElement>(null);
     const inView = useInView(ref, { once: true, margin: "-50px" });
     return (
-        <motion.div ref={ref}
+        <m.div ref={ref}
             initial={{ opacity: 0, y: 64, scale: 0.95 }}
             animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
             transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1], delay: 0.1 + index * 0.2 }}
@@ -19,6 +19,6 @@ export function GlassCard({ children, index, gradient, blobPos }: {
             <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: "linear-gradient(90deg, transparent 5%, rgba(33,138,187,0.65) 50%, transparent 95%)" }} />
             <div style={{ position: "absolute", width: 180, height: 180, borderRadius: "50%", background: "radial-gradient(circle, rgba(33,138,187,0.18) 0%, transparent 70%)", filter: "blur(28px)", pointerEvents: "none", ...blobPos }} />
             {children}
-        </motion.div>
+        </m.div>
     );
 }

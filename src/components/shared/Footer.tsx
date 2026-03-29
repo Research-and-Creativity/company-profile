@@ -1,4 +1,4 @@
-import { motion, type Variants } from "framer-motion";
+import { m, type Variants } from "framer-motion";
 import aboutImage from "../../assets/logo_white.svg";
 import { CiLinkedin, CiInstagram } from "react-icons/ci";
 import { BsWhatsapp } from "react-icons/bs";
@@ -29,7 +29,7 @@ export default function Footer() {
   return (
     <footer className="bg-[#020049] py-16 border-t border-white/5 overflow-hidden">
       <div className="container mx-auto px-6 md:px-20">
-        <motion.div
+        <m.div
           variants={footerContainerVariants}
           initial="hidden"
           whileInView="visible"
@@ -37,7 +37,7 @@ export default function Footer() {
           className="flex flex-col md:flex-row justify-between items-start md:items-center gap-10"
         >
           <div className="max-w-xl">
-            <motion.a variants={itemVariants} href="/" className="inline-block">
+            <m.a variants={itemVariants} href="/" className="inline-block">
               <div className="flex items-center gap-3">
                 <img
                   src={aboutImage}
@@ -46,14 +46,14 @@ export default function Footer() {
                 />
                 <div className="text-5xl font-bold text-white tracking-tighter">ZETECH</div>
               </div>
-            </motion.a>
+            </m.a>
 
-            <motion.p variants={itemVariants} className="text-gray-400 md:text-lg leading-relaxed mb-8 mt-4">
+            <m.p variants={itemVariants} className="text-gray-400 md:text-lg leading-relaxed mb-8 mt-4">
               Pembuatan Aplikasi profesional yang berada di bawah organisasi
               HMSE Telkom University untuk mendukung pertumbuhan bisnis Anda.
-            </motion.p>
+            </m.p>
 
-            <motion.div variants={itemVariants} className="flex flex-wrap gap-3">
+            <m.div variants={itemVariants} className="flex flex-wrap gap-3">
               {categories.map((tag) => (
                 <span
                   key={tag}
@@ -62,10 +62,10 @@ export default function Footer() {
                   {tag}
                 </span>
               ))}
-            </motion.div>
+            </m.div>
           </div>
 
-          <motion.div variants={itemVariants} className="flex items-center gap-6">
+          <m.div variants={itemVariants} className="flex items-center gap-6">
             <Link
               to="https://wa.me/6285385782684"
               target="_blank"
@@ -90,8 +90,8 @@ export default function Footer() {
             >
               <CiInstagram size={40} />
             </Link>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       </div>
     </footer>
   );

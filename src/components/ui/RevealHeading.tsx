@@ -1,4 +1,4 @@
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { useRef } from "react";
 
 export function RevealHeading({ words, accent, dark = true }: { words: string[]; accent: string; dark?: boolean }) {
@@ -8,7 +8,7 @@ export function RevealHeading({ words, accent, dark = true }: { words: string[];
         <h2 ref={ref} style={{ fontSize: "clamp(2.6rem, 5.5vw, 4.5rem)", fontWeight: 900, lineHeight: 1.05, letterSpacing: "-0.04em", color: dark ? "white" : "#040850" }}>
             {words.map((word, i) => (
                 <span key={i} style={{ display: "inline-block", overflow: "hidden", marginRight: "0.22em" }}>
-                    <motion.span
+                    <m.span
                         initial={{ y: "108%", opacity: 0 }}
                         animate={inView ? { y: "0%", opacity: 1 } : {}}
                         transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1], delay: i * 0.14 }}
@@ -19,7 +19,7 @@ export function RevealHeading({ words, accent, dark = true }: { words: string[];
                         }}
                     >
                         {word}
-                    </motion.span>
+                    </m.span>
                 </span>
             ))}
         </h2>

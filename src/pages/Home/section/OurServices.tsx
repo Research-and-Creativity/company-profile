@@ -1,4 +1,4 @@
-import { motion, type Variants, type TargetAndTransition, useInView, useReducedMotion } from "framer-motion";
+import { m, type Variants, type TargetAndTransition, useInView, useReducedMotion } from "framer-motion";
 import { useRef } from "react";
 import Button from "../../../components/ui/Button";
 import webImage from "../../../assets/web-development.webp";
@@ -58,7 +58,7 @@ function ServiceCard({
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       initial={noAnim ? { opacity: 0 } : { opacity: 0, y: 64, scale: 0.94 }}
       animate={inView ? (noAnim ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }) : {}}
@@ -116,7 +116,7 @@ function ServiceCard({
       </div>
 
       <div className="relative h-72 overflow-hidden">
-        <motion.img
+        <m.img
           {...(!noAnim ? { whileHover: { scale: 1.1 } } : {})}
           transition={{ duration: 0.6 }}
           src={image}
@@ -129,7 +129,7 @@ function ServiceCard({
           style={{ background: "linear-gradient(to top, #020049 0%, rgba(2,0,73,0.35) 55%, transparent 100%)", opacity: 0.7 }}
         />
         {!noAnim && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             whileHover={{ opacity: 1 }}
             transition={{ duration: 0.35 }}
@@ -138,7 +138,7 @@ function ServiceCard({
           />
         )}
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -163,12 +163,12 @@ export default function OurServices() {
 
       {!noAnim && (
         <>
-          <motion.div className="absolute pointer-events-none"
+          <m.div className="absolute pointer-events-none"
             animate={{ scale: [1, 1.18, 1], opacity: [0.4, 0.75, 0.4] }}
             transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
             style={{ left: "-12%", top: "5%", width: 650, height: 650, borderRadius: "50%", background: "radial-gradient(circle, rgba(33,138,187,0.14) 0%, transparent 65%)", filter: "blur(70px)" }}
           />
-          <motion.div className="absolute pointer-events-none"
+          <m.div className="absolute pointer-events-none"
             animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.55, 0.3] }}
             transition={{ duration: 17, repeat: Infinity, ease: "easeInOut", delay: 5 }}
             style={{ right: "-8%", bottom: "-5%", width: 550, height: 550, borderRadius: "50%", background: "radial-gradient(circle, rgba(33,138,187,0.09) 0%, transparent 70%)", filter: "blur(80px)" }}
@@ -189,7 +189,7 @@ export default function OurServices() {
         { x: "12%", y: "80%", size: 2, delay: 2.0, dur: 7.0 },
         { x: "55%", y: "8%",  size: 2, delay: 3.0, dur: 6.1 },
       ] as const).map((p, i) => (
-        <motion.div key={i} className="absolute pointer-events-none rounded-full"
+        <m.div key={i} className="absolute pointer-events-none rounded-full"
           style={{ left: p.x, top: p.y, width: p.size, height: p.size, background: "#218ABB", boxShadow: "0 0 6px rgba(33,138,187,0.8)" }}
           animate={{ y: [0, -22, 0], opacity: [0.25, 0.75, 0.25] }}
           transition={{ duration: p.dur, repeat: Infinity, ease: "easeInOut", delay: p.delay }}
@@ -201,16 +201,16 @@ export default function OurServices() {
       <div className="absolute bottom-0 inset-x-0 h-px pointer-events-none"
         style={{ background: "linear-gradient(90deg, transparent, rgba(33,138,187,0.2), transparent)" }} />
 
-      <motion.div
+      <m.div
         className="container mx-auto px-6 md:px-20 relative z-10"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
       >
-        <motion.div variants={noAnim ? itemVariantsMobile : itemVariants} className="mb-16 max-w-3xl">
+        <m.div variants={noAnim ? itemVariantsMobile : itemVariants} className="mb-16 max-w-3xl">
           <div className="flex items-center gap-3 mb-4">
-            <motion.div
+            <m.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
@@ -230,7 +230,7 @@ export default function OurServices() {
             </span>
           </h2>
 
-          <motion.div
+          <m.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
@@ -243,7 +243,7 @@ export default function OurServices() {
             Anda di bidang digital. Kami siap membantu Anda dengan sepenuh hati,
             konsultasi dengan kami secara gratis sekarang!
           </p>
-        </motion.div>
+        </m.div>
 
         <div className="grid lg:grid-cols-2 gap-10">
           <ServiceCard delay={0.1}
@@ -266,10 +266,10 @@ export default function OurServices() {
           />
         </div>
 
-        <motion.div variants={noAnim ? itemVariantsMobile : itemVariants} className="flex justify-start lg:justify-center mt-20">
+        <m.div variants={noAnim ? itemVariantsMobile : itemVariants} className="flex justify-start lg:justify-center mt-20">
           <div className="relative group">
             {!noAnim && (
-              <motion.div
+              <m.div
                 animate={{ opacity: [0.25, 0.55, 0.25], scale: [1, 1.04, 1] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 className="absolute -inset-1 rounded-full blur"
@@ -278,8 +278,8 @@ export default function OurServices() {
             )}
             <Button classAdd="hover:scale-105 px-10 py-4" text="Consult now" href="#contact" />
           </div>
-        </motion.div>
-      </motion.div>
+        </m.div>
+      </m.div>
     </section>
   );
 }

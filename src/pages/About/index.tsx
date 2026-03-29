@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { Teams } from "../../constants/teams";
 import { MisiItem } from "../../components/about/MisiItem";
 import { RevealHeading } from "../../components/ui/RevealHeading";
@@ -52,12 +52,12 @@ export default function IndexAbout() {
 
                     {!noAnim && (
                         <>
-                            <motion.div className="absolute pointer-events-none"
+                            <m.div className="absolute pointer-events-none"
                                 animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.85, 0.5] }}
                                 transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
                                 style={{ left: "-15%", top: "10%", width: 700, height: 700, borderRadius: "50%", background: "radial-gradient(circle, rgba(33,138,187,0.14) 0%, transparent 65%)", filter: "blur(60px)" }}
                             />
-                            <motion.div className="absolute pointer-events-none"
+                            <m.div className="absolute pointer-events-none"
                                 animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.7, 0.4] }}
                                 transition={{ duration: 16, repeat: Infinity, ease: "easeInOut", delay: 5 }}
                                 style={{ right: "-10%", bottom: "5%", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(4,8,80,0.7) 0%, transparent 70%)", filter: "blur(80px)" }}
@@ -79,7 +79,7 @@ export default function IndexAbout() {
                         { x: "92%", y: "72%", size: 2, delay: 1.5, dur: 4.9 },
                         { x: "55%", y: "10%", size: 3, delay: 3.0, dur: 6.1 },
                     ].map((p, i) => (
-                        <motion.div key={i} className="absolute pointer-events-none rounded-full"
+                        <m.div key={i} className="absolute pointer-events-none rounded-full"
                             style={{ left: p.x, top: p.y, width: p.size, height: p.size, background: "#218ABB", boxShadow: "0 0 8px rgba(33,138,187,0.8)" }}
                             animate={{ y: [0, -28, 0], opacity: [0.3, 0.9, 0.3] }}
                             transition={{ duration: p.dur, repeat: Infinity, ease: "easeInOut", delay: p.delay }}

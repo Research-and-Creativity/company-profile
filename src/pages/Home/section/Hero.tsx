@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { m, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import Button from "../../../components/ui/Button";
 import Particle from "../../../components/ui/Particle";
@@ -90,7 +90,7 @@ export default function Hero() {
           style={{ background: "radial-gradient(ellipse at center, transparent 40%, #000d1f 100%)" }}
         />
 
-        <motion.div
+        <m.div
           style={{ x: orb1X, y: orb1Y }}
           className="absolute pointer-events-none z-10"
           animate={isMobile ? {} : { scale: [1, 1.15, 0.95, 1], opacity: [0.25, 0.4, 0.2, 0.25] }}
@@ -104,10 +104,11 @@ export default function Hero() {
             filter: `blur(${isMobile ? 40 : 80}px)`,
             transform: "translate(-50%, -50%)",
             position: "absolute", top: "50vh", left: "50vw",
+            contain: "strict",
           }} />
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           style={{ x: orb2X, y: orb2Y }}
           className="absolute bottom-0 left-0 pointer-events-none z-10"
           animate={{ scale: [0.9, 1.2, 1, 0.9], rotate: [0, 60, 120, 180] }}
@@ -119,10 +120,11 @@ export default function Hero() {
             borderRadius: "50%",
             background: "radial-gradient(circle, rgba(20,80,160,0.4) 0%, transparent 70%)",
             filter: `blur(${isMobile ? 50 : 100}px)`,
+            contain: "strict",
           }} />
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           style={{ x: orb3X, y: orb3Y }}
           className="absolute top-0 right-0 pointer-events-none z-10"
           animate={{ scale: [1, 0.85, 1.1, 1], opacity: [0.15, 0.3, 0.1, 0.15] }}
@@ -134,8 +136,9 @@ export default function Hero() {
             borderRadius: "50%",
             background: "radial-gradient(circle, rgba(50,180,220,0.25) 0%, transparent 70%)",
             filter: `blur(${isMobile ? 60 : 120}px)`,
+            contain: "strict",
           }} />
-        </motion.div>
+        </m.div>
 
         {PARTICLES.map((p, idx) => (
           <Particle key={idx} {...p} />
@@ -143,7 +146,7 @@ export default function Hero() {
 
         {!isMobile && (
           <>
-            <motion.div
+            <m.div
               className="absolute pointer-events-none z-10"
               style={{
                 width: 500, height: 500, borderRadius: "50%",
@@ -153,7 +156,7 @@ export default function Hero() {
               animate={{ scale: [1, 1.05, 1], opacity: [0.3, 0.6, 0.3] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             />
-            <motion.div
+            <m.div
               className="absolute pointer-events-none z-10"
               style={{
                 width: 750, height: 750, borderRadius: "50%",
@@ -168,7 +171,7 @@ export default function Hero() {
 
         <div className="container mx-auto px-6 text-center relative z-20 flex flex-col items-center">
 
-          <motion.div
+          <m.div
             style={{
               x: title1X,
               y: title1Y,
@@ -177,7 +180,7 @@ export default function Hero() {
           >
             <div style={{ overflow: "hidden" }}>
               {["Building", "Advanced"].map((word, i) => (
-                <motion.span
+                <m.span
                   key={word}
                   initial={isMobile ? { opacity: 0 } : { y: "110%", opacity: 0 }}
                   animate={{ y: "0%", opacity: 1 }}
@@ -193,12 +196,12 @@ export default function Hero() {
                   }}
                 >
                   {word}
-                </motion.span>
+                </m.span>
               ))}
             </div>
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             style={{
               x: title2X,
               y: title2Y,
@@ -208,11 +211,11 @@ export default function Hero() {
           >
             <div style={{ overflow: "hidden" }}>
               {["Digital", "Technology"].map((word, i) => (
-                <motion.span
+                <m.span
                   key={word}
-                  initial={{ y: "110%", opacity: 0 }}
+                  initial={isMobile ? { opacity: 0, y: 0 } : { y: "110%", opacity: 0 }}
                   animate={{ y: "0%", opacity: 1 }}
-                  transition={{ duration: 0.9, delay: 0.7 + i * 0.13, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.5, delay: isMobile ? 0.05 : 0.7 + i * 0.13, ease: [0.16, 1, 0.3, 1] }}
                   style={{
                     display: "inline-block",
                     marginRight: "0.25em",
@@ -224,12 +227,12 @@ export default function Hero() {
                   }}
                 >
                   {word}
-                </motion.span>
+                </m.span>
               ))}
             </div>
-          </motion.div>
+          </m.div>
 
-          {/* <motion.p
+          {/* <m.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 1.05, ease: "easeOut" }}
@@ -243,16 +246,16 @@ export default function Hero() {
           }}
         >
           We craft cutting-edge digital experiences that push the boundaries of what&apos;s possible.
-        </motion.p> */}
+        </m.p> */}
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 1.25, duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
             className="flex justify-center mb-16"
           >
             <div className="relative group">
-              <motion.div
+              <m.div
                 animate={{ opacity: [0.3, 0.65, 0.3], scale: [1, 1.06, 1] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 style={{
@@ -263,16 +266,16 @@ export default function Hero() {
               />
               <Button classAdd="hover:scale-105 relative" text="Start your project" href="#products" />
             </div>
-          </motion.div>
+          </m.div>
 
-          {/* <motion.div
+          {/* <m.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.5, duration: 0.8, ease: "easeOut" }}
           style={{ display: "flex", justifyContent: "center", gap: "4rem" }}
         >
           {STATS.map((stat) => (
-            <motion.div
+            <m.div
               key={stat.label}
               whileHover={{ scale: 1.08, y: -4 }}
               transition={{ type: "spring", stiffness: 320, damping: 18 }}
@@ -292,9 +295,9 @@ export default function Hero() {
               }}>
                 {stat.label}
               </div>
-            </motion.div>
+            </m.div>
           ))}
-        </motion.div> */}
+        </m.div> */}
         </div>
 
         <div
@@ -308,7 +311,7 @@ export default function Hero() {
             pointerEvents: "none",
           }}
         >
-          <motion.div
+          <m.div
             animate={{ y: [0, 12, 0], opacity: [0.3, 0.7, 0.3] }}
             transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
             style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}
@@ -321,13 +324,13 @@ export default function Hero() {
               border: "1.5px solid rgba(33,138,187,0.35)",
               display: "flex", justifyContent: "center", paddingTop: "6px",
             }}>
-              <motion.div
+              <m.div
                 animate={{ y: [0, 10, 0], opacity: [1, 0, 1] }}
                 transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
                 style={{ width: 4, height: 8, borderRadius: "2px", background: "rgba(33,138,187,0.8)" }}
               />
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </section>
     </>
