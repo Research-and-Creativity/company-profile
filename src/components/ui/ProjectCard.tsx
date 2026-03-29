@@ -48,7 +48,7 @@ export default function ProjectCard({ project, noAnim = false }: ProjectCardProp
   return (
     <div style={{ width: "100%" }}>
 
-      <Link to={`/projects/${project.id}`} style={{ textDecoration: "none", display: "block" }}>
+      <Link to={`/projects/${project.id}`} aria-label={`Lihat detail proyek ${project.title}`} style={{ textDecoration: "none", display: "block" }}>
         <m.div
           whileHover={_noAnim ? undefined : { y: -4 }}
           transition={{ type: "spring", stiffness: 300, damping: 24 }}

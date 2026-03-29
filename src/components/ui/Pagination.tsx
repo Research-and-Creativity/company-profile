@@ -58,7 +58,7 @@ export default function Pagination({ currentPage, totalPages, totalItems, onPage
           </svg>
         </button>
 
-        <div className="flex gap-1" role="list">
+        <div className="flex gap-1" role="group" aria-label="Pilih Halaman">
           {[...Array(totalPages)].map((_, i) => {
             const pageNum = i + 1;
             const isActive = currentPage === pageNum;
@@ -67,7 +67,7 @@ export default function Pagination({ currentPage, totalPages, totalItems, onPage
               <button
                 key={pageNum}
                 onClick={() => onPageChange(pageNum)}
-                aria-label={`Halaman ${pageNum}`}
+                aria-label={`Pindah ke slide ${pageNum}`}
                 aria-current={isActive ? "page" : undefined}
                 style={{
                   width: 44, height: 44,
