@@ -105,8 +105,8 @@ export default function Hero() {
             transform: "translate(-50%, -50%)",
             position: "absolute", top: "50vh", left: "50vw",
             contain: "strict",
-            pointerEvents: "none",
             aspectRatio: "1 / 1",
+            pointerEvents: "none",
           }} />
         </m.div>
 
@@ -124,6 +124,7 @@ export default function Hero() {
             filter: `blur(${isMobile ? 50 : 100}px)`,
             contain: "strict",
             pointerEvents: "none",
+            aspectRatio: "1 / 1",
           }} />
         </m.div>
 
@@ -141,6 +142,7 @@ export default function Hero() {
             filter: `blur(${isMobile ? 60 : 120}px)`,
             contain: "strict",
             pointerEvents: "none",
+            aspectRatio: "1 / 1",
           }} />
         </m.div>
 
