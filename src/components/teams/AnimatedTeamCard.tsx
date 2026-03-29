@@ -1,4 +1,4 @@
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { useRef } from "react";
 import type { Teams } from "../../constants/teams";
 import TeamsCard from "./TeamsCard";
@@ -14,7 +14,7 @@ export function AnimatedTeamCard({ team, index, noAnim = false }: AnimatedTeamCa
   const inView = useInView(ref, { once: true, margin: "-40px" });
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       initial={noAnim ? { opacity: 0 } : { opacity: 0, y: 56, scale: 0.93 }}
       animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
@@ -29,6 +29,6 @@ export function AnimatedTeamCard({ team, index, noAnim = false }: AnimatedTeamCa
       <div className="w-full" style={{ maxWidth: 260 }}>
         <TeamsCard {...team} />
       </div>
-    </motion.div>
+    </m.div>
   );
 }

@@ -1,4 +1,4 @@
-import { motion, type Variants, useMotionValue, useSpring, useTransform, useReducedMotion } from "framer-motion";
+import { m, type Variants, useMotionValue, useSpring, useTransform, useReducedMotion } from "framer-motion";
 import { useRef } from "react";
 import Button from "../../../components/ui/Button";
 import aboutImage from "../../../assets/about-image.webp";
@@ -87,7 +87,7 @@ export default function About() {
 
       {!noAnim && (
         <>
-          <motion.div
+          <m.div
             animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
             transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
             className="absolute pointer-events-none z-0"
@@ -98,7 +98,7 @@ export default function About() {
               filter: "blur(70px)",
             }}
           />
-          <motion.div
+          <m.div
             animate={{ scale: [1, 1.08, 1], opacity: [0.4, 0.7, 0.4] }}
             transition={{ duration: 14, repeat: Infinity, ease: "easeInOut", delay: 3 }}
             className="absolute pointer-events-none z-0"
@@ -130,7 +130,7 @@ export default function About() {
 
       <div className="container mx-auto px-6 md:px-20 flex flex-col lg:flex-row items-center gap-16 relative z-10">
 
-        <motion.div
+        <m.div
           className="flex-1"
           variants={noAnim ? contentVariantsMobile : contentVariants}
           initial="hidden"
@@ -138,7 +138,7 @@ export default function About() {
           viewport={{ once: true, margin: "-60px" }}
         >
           <div className="flex items-center gap-3 mb-4">
-            <motion.div
+            <m.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
@@ -173,7 +173,7 @@ export default function About() {
             </span>
           </h2>
 
-          <motion.div
+          <m.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
@@ -208,7 +208,7 @@ export default function About() {
           <div className="hidden lg:block">
             <div className="relative inline-block">
               {!noAnim && (
-                <motion.div
+                <m.div
                   animate={{ opacity: [0.2, 0.45, 0.2], scale: [1, 1.04, 1] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                   style={{
@@ -221,9 +221,9 @@ export default function About() {
               <Button classAdd="hover:scale-105 relative px-10 py-4" text="Explore More" href="/about" />
             </div>
           </div>
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           className="flex-1 relative"
           variants={noAnim ? imageVariantsMobile : imageVariants}
           initial="hidden"
@@ -260,7 +260,7 @@ export default function About() {
             onMouseLeave={() => { if (!noAnim) { mx.set(0); my.set(0); } }}
             style={{ perspective: noAnim ? "none" : 1000 }}
           >
-            <motion.div
+            <m.div
               style={{
                 rotateX: noAnim ? 0 : rotateX,
                 rotateY: noAnim ? 0 : rotateY,
@@ -268,7 +268,7 @@ export default function About() {
               }}
             >
               {!noAnim && (
-                <motion.div
+                <m.div
                   initial={{ opacity: 0 }}
                   whileHover={{ opacity: 1 }}
                   transition={{ duration: 0.3 }}
@@ -319,9 +319,9 @@ export default function About() {
                   onMouseLeave={e => { if (!noAnim) e.currentTarget.style.transform = "scale(1)"; }}
                 />
               </div>
-            </motion.div>
+            </m.div>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* CTA mobile */}
         <div className="flex justify-center lg:hidden mt-10">

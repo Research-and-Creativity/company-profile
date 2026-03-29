@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 interface SearchBarProps {
   value: string;
@@ -8,14 +8,14 @@ interface SearchBarProps {
 
 export default function SearchBar({ value, onChange, noAnim = false }: SearchBarProps) {
   return (
-    <motion.div
+    <m.div
       initial={noAnim ? { opacity: 0 } : { opacity: 0, scale: 0.97, y: 12 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ duration: noAnim ? 0.4 : 0.6, ease: [0.22, 1, 0.36, 1] }}
       className="relative max-w-5xl mx-auto mb-12"
     >
       {!noAnim && (
-        <motion.div
+        <m.div
           animate={{ opacity: [0.2, 0.45, 0.2] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
           style={{
@@ -76,6 +76,6 @@ export default function SearchBar({ value, onChange, noAnim = false }: SearchBar
           </svg>
         </div>
       </div>
-    </motion.div>
+    </m.div>
   );
 }

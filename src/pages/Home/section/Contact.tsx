@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, type Variants } from "framer-motion";
+import { AnimatePresence, m, type Variants } from "framer-motion";
 import Button from "../../../components/ui/Button";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -104,14 +104,14 @@ export default function Contact() {
       </div>
       <div className="container mx-auto px-6 md:px-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          <motion.div
+          <m.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
           >
-            <motion.div variants={itemVariants} className="flex items-center gap-3 mb-5">
-              <motion.div
+            <m.div variants={itemVariants} className="flex items-center gap-3 mb-5">
+              <m.div
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
                 viewport={{ once: true }}
@@ -124,9 +124,9 @@ export default function Contact() {
               <span style={{ color: "#218ABB", fontSize: "10.5px", fontWeight: 700, letterSpacing: "0.26em", textTransform: "uppercase" }}>
                 Get In Touch
               </span>
-            </motion.div>
+            </m.div>
 
-            <motion.h2
+            <m.h2
               variants={itemVariants}
               className="font-bold mb-3 tracking-tight"
               style={{
@@ -139,9 +139,9 @@ export default function Contact() {
               <span style={{ color: "#218ABB", textShadow: "0 0 50px rgba(33,138,187,0.55)" }}>
                 Us
               </span>
-            </motion.h2>
+            </m.h2>
 
-            <motion.div
+            <m.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
@@ -152,15 +152,15 @@ export default function Contact() {
               }}
             />
 
-            <motion.p
+            <m.p
               variants={itemVariants}
               className="text-gray-300 md:text-lg mb-8 leading-relaxed max-w-md"
             >
               Jangan ragu untuk menghubungi kami. Kami siap melayani dan
               membantu Anda dengan sepenuh hati.
-            </motion.p>
+            </m.p>
 
-            <motion.div
+            <m.div
               variants={itemVariants}
               className="mb-8 leading-relaxed max-w-md group"
             >
@@ -185,9 +185,9 @@ export default function Contact() {
                   hmse@ittelkom-pwt.ac.id
                 </Link>
               </div>
-            </motion.div>
+            </m.div>
 
-            <motion.div
+            <m.div
               variants={itemVariants}
               className="mb-8 leading-relaxed max-w-md"
             >
@@ -201,10 +201,10 @@ export default function Contact() {
               <Link to="https://wa.me/6285385782684" target="_blank" className="font-bold md:text-lg block mt-1">
                 +62 853-8578-2684
               </Link>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
 
-          <motion.form
+          <m.form
             onSubmit={handleSubmit}
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -262,14 +262,14 @@ export default function Contact() {
             </div>
             <AnimatePresence>
               {errors.name && (
-                <motion.span
+                <m.span
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
                   className="text-red-500 text-xs mt-1 block absolute"
                 >
                   {errors.name}
-                </motion.span>
+                </m.span>
               )}
             </AnimatePresence>
 
@@ -281,7 +281,7 @@ export default function Contact() {
                 </p>
               )}
             </div>
-          </motion.form>
+          </m.form>
         </div>
       </div>
     </section>

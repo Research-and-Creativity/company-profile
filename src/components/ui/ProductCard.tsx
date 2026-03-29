@@ -1,4 +1,4 @@
-import { motion, type TargetAndTransition } from "framer-motion";
+import { m, type TargetAndTransition } from "framer-motion";
 import type { Product } from "../../types/product";
 
 interface ProductCardProps extends Product {
@@ -7,7 +7,7 @@ interface ProductCardProps extends Product {
 
 export default function ProductCard({ title, category, description, image, noAnim = false }: ProductCardProps) {
   return (
-    <motion.div
+    <m.div
       variants={{
         hidden: { opacity: 0, y: noAnim ? 0 : 20 },
         visible: { opacity: 1, y: 0 },
@@ -40,7 +40,7 @@ export default function ProductCard({ title, category, description, image, noAni
       }} />
 
       {!noAnim && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0 }}
           whileHover={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
@@ -92,7 +92,7 @@ export default function ProductCard({ title, category, description, image, noAni
 
         <div className="relative aspect-video w-full overflow-hidden"
           style={{ borderRadius: 12, border: "1px solid rgba(33,138,187,0.08)" }}>
-          <motion.img
+          <m.img
             {...(!noAnim ? { whileHover: { scale: 1.07 } } : {})}
             transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
             src={image}
@@ -106,6 +106,6 @@ export default function ProductCard({ title, category, description, image, noAni
           }} />
         </div>
       </div>
-    </motion.div>
+    </m.div>
   );
 }

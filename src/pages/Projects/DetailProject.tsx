@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { STUDENT_PROJECTS } from "../../constants/studentProjects";
@@ -95,7 +95,7 @@ export default function DetailProject() {
           </div>
 
           {!noAnim && (
-            <motion.div className="absolute pointer-events-none"
+            <m.div className="absolute pointer-events-none"
               animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.55, 0.3] }}
               transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
               style={{ right: "-10%", top: "-20%", width: 600, height: 600, borderRadius: "50%", background: `radial-gradient(circle, ${catColor}20 0%, transparent 65%)`, filter: "blur(60px)" }}
@@ -103,7 +103,7 @@ export default function DetailProject() {
           )}
 
           <div className="container mx-auto px-6 md:px-20 relative z-10 pt-20 pb-6">
-            <motion.div
+            <m.div
               initial={{ opacity: 0, x: -16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
@@ -127,11 +127,11 @@ export default function DetailProject() {
               <span style={{ color: "rgba(160,200,230,0.4)", fontSize: "0.85rem", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: 200 }}>
                 {project.title}
               </span>
-            </motion.div>
+            </m.div>
           </div>
 
           <div className="container mx-auto px-6 md:px-20 pb-10"><div style={{ maxWidth: 1000, margin: "0 auto" }}>
-          <motion.div
+          <m.div
             initial={noAnim ? { opacity: 0 } : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: noAnim ? 0.4 : 0.8, ease: EASE }}
@@ -159,7 +159,7 @@ export default function DetailProject() {
                 {catLabel}
               </div>
             </div>
-          </motion.div>
+          </m.div>
           </div></div>
 
           <div style={{ marginTop: 40, marginBottom: -2 }}>
@@ -173,7 +173,7 @@ export default function DetailProject() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
 
             <div className="lg:col-span-2">
-              <motion.div
+              <m.div
                 initial={noAnim ? { opacity: 0 } : { opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: noAnim ? 0.4 : 0.7, ease: EASE, delay: 0.1 }}
@@ -202,10 +202,10 @@ export default function DetailProject() {
                     perancangan sistem, implementasi, hingga pengujian dan deployment.
                   </p>
                 </div>
-              </motion.div>
+              </m.div>
             </div>
 
-            <motion.div
+            <m.div
               initial={noAnim ? { opacity: 0 } : { opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: noAnim ? 0.4 : 0.7, ease: EASE, delay: noAnim ? 0.1 : 0.2 }}
@@ -338,11 +338,11 @@ export default function DetailProject() {
                   )}
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           </div>
 
           {related.length > 0 && (
-            <motion.div
+            <m.div
               initial={noAnim ? { opacity: 0 } : { opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: noAnim ? 0.4 : 0.7, ease: EASE, delay: noAnim ? 0.2 : 0.4 }}
@@ -366,14 +366,14 @@ export default function DetailProject() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {related.map((rel, i) => (
-                  <motion.div
+                  <m.div
                     key={rel.id}
                     initial={noAnim ? { opacity: 0 } : { opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, ease: EASE, delay: noAnim ? 0 : i * 0.08 }}
                   >
                     <Link to={`/projects/${rel.id}`} style={{ textDecoration: "none", display: "block" }}>
-                      <motion.div
+                      <m.div
                         whileHover={noAnim ? undefined : { y: -4 }}
                         transition={{ type: "spring", stiffness: 300, damping: 24 }}
                         style={{
@@ -408,12 +408,12 @@ export default function DetailProject() {
                             {rel.authors[0]}{rel.authors.length > 1 ? ` & ${rel.authors.length - 1} lainnya` : ""}
                           </p>
                         </div>
-                      </motion.div>
+                      </m.div>
                     </Link>
-                  </motion.div>
+                  </m.div>
                 ))}
               </div>
-            </motion.div>
+            </m.div>
           )}
         </div>
       </div>

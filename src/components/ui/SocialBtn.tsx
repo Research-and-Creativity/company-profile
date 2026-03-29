@@ -1,8 +1,9 @@
-import { motion } from "framer-motion";
+"use client";
+import { m } from "framer-motion";
 
 export function SocialBtn({ href, children }: { href: string; children: React.ReactNode }) {
     return (
-        <motion.a
+        <m.a 
             href={href}
             target="_blank"
             rel="noopener noreferrer"
@@ -16,21 +17,10 @@ export function SocialBtn({ href, children }: { href: string; children: React.Re
                 display: "flex", alignItems: "center", justifyContent: "center",
                 color: "#7ecfed", textDecoration: "none", flexShrink: 0,
                 transition: "background 0.2s, border-color 0.2s, box-shadow 0.2s",
-            }}
-            onMouseEnter={e => {
-                const el = e.currentTarget as HTMLElement;
-                el.style.background = "rgba(33,138,187,0.28)";
-                el.style.borderColor = "rgba(33,138,187,0.7)";
-                el.style.boxShadow = "0 4px 16px rgba(33,138,187,0.35)";
-            }}
-            onMouseLeave={e => {
-                const el = e.currentTarget as HTMLElement;
-                el.style.background = "rgba(33,138,187,0.15)";
-                el.style.borderColor = "rgba(33,138,187,0.4)";
-                el.style.boxShadow = "none";
+                contain: "layout paint", 
             }}
         >
             {children}
-        </motion.a>
+        </m.a>
     );
 }

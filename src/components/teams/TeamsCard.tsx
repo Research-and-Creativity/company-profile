@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { m, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useRef } from "react";
 import type { TeamsType } from "../../types/teams";
 import { SocialBtn } from "../ui/SocialBtn";
@@ -32,12 +32,12 @@ export default function TeamsCard({ name, role, image, socials, alt }: TeamsType
             onMouseLeave={() => { mouseX.set(0); mouseY.set(0); }}
             style={{ perspective: 900, width: "100%" }}
         >
-            <motion.div
+            <m.div
                 style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
                 whileHover={{ scale: 1.03, y: -8 }}
                 transition={{ type: "spring", stiffness: 240, damping: 24 }}
             >
-                <motion.div
+                <m.div
                     initial={{ opacity: 0 }}
                     whileHover={{ opacity: 1 }}
                     transition={{ duration: 0.35 }}
@@ -74,7 +74,7 @@ export default function TeamsCard({ name, role, image, socials, alt }: TeamsType
                             display: "flex", alignItems: "center", justifyContent: "center",
                             boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
                         }}>
-                            <motion.div
+                            <m.div
                                 animate={{ scale: [1, 1.5, 1], opacity: [0.6, 1, 0.6] }}
                                 transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
                                 style={{
@@ -85,7 +85,7 @@ export default function TeamsCard({ name, role, image, socials, alt }: TeamsType
                             />
                         </div>
 
-                        <motion.img
+                        <m.img
                             src={image}
                             alt={alt}
                             whileHover={{ scale: 1.06 }}
@@ -162,7 +162,7 @@ export default function TeamsCard({ name, role, image, socials, alt }: TeamsType
                         )}
                     </div>
                 </div>
-            </motion.div>
+            </m.div>
         </div>
     );
 }

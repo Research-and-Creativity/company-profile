@@ -1,4 +1,4 @@
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { useRef } from "react";
 import { useCounter } from "../../hooks/useCounter";
 
@@ -7,7 +7,7 @@ export function StatItem({ n, suffix, label, delay }: { n: number; suffix: strin
     const inView = useInView(ref, { once: true, margin: "-60px" });
     const count = useCounter(n, 1.6, inView);
     return (
-        <motion.div ref={ref}
+        <m.div ref={ref}
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay }}
@@ -19,6 +19,6 @@ export function StatItem({ n, suffix, label, delay }: { n: number; suffix: strin
             <div style={{ fontSize: "0.68rem", color: "rgba(150,200,230,0.5)", letterSpacing: "0.18em", textTransform: "uppercase", marginTop: 8, fontWeight: 600 }}>
                 {label}
             </div>
-        </motion.div>
+        </m.div>
     );
 }

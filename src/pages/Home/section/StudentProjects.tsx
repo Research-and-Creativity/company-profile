@@ -1,4 +1,4 @@
-import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
+import { m, useReducedMotion, AnimatePresence } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ProjectCard from "../../../components/ui/ProjectCard";
@@ -118,12 +118,12 @@ export default function StudentProjects() {
 
       {!noAnim && (
         <>
-          <motion.div className="absolute pointer-events-none"
+          <m.div className="absolute pointer-events-none"
             animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.7, 0.4] }}
             transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
             style={{ left: "-8%", top: "10%", width: 480, height: 480, borderRadius: "50%", background: "radial-gradient(circle, rgba(33,138,187,0.08) 0%, transparent 65%)", filter: "blur(60px)" }}
           />
-          <motion.div className="absolute pointer-events-none"
+          <m.div className="absolute pointer-events-none"
             animate={{ scale: [1, 1.08, 1], opacity: [0.3, 0.55, 0.3] }}
             transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 4 }}
             style={{ right: "-6%", bottom: "5%", width: 400, height: 400, borderRadius: "50%", background: "radial-gradient(circle, rgba(33,138,187,0.07) 0%, transparent 70%)", filter: "blur(60px)" }}
@@ -138,7 +138,7 @@ export default function StudentProjects() {
 
       <div className="container mx-auto px-6 md:px-20 relative z-10 pt-14">
 
-        <motion.div
+        <m.div
           initial={noAnim ? { opacity: 0 } : { opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
@@ -146,7 +146,7 @@ export default function StudentProjects() {
           className="mb-10"
         >
           <div className="flex items-center gap-3 mb-4">
-            <motion.div
+            <m.div
               initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }}
               transition={{ duration: noAnim ? 0.4 : 0.9, ease: EASE, delay: noAnim ? 0.15 : 0.35 }}
               style={{ transformOrigin: "left", height: 1, width: 36, background: "linear-gradient(90deg, #218ABB, transparent)" }}
@@ -165,7 +165,7 @@ export default function StudentProjects() {
                   Showcase
                 </span>
               </h2>
-              <motion.div
+              <m.div
                 initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }}
                 transition={{ duration: noAnim ? 0.4 : 1, ease: EASE, delay: noAnim ? 0.2 : 0.45 }}
                 style={{ transformOrigin: "left", height: 1, width: 72, marginBottom: 12, background: "linear-gradient(90deg, #218ABB, rgba(33,138,187,0.1))" }}
@@ -180,17 +180,17 @@ export default function StudentProjects() {
               style={{ color: "#218ABB", fontWeight: 700, fontSize: "0.875rem", textDecoration: "none", flexShrink: 0 }}
             >
               Lihat semua project
-              <motion.span
+              <m.span
                 animate={noAnim ? {} : { x: [0, 5, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-              >→</motion.span>
+              >→</m.span>
             </Link>
           </div>
-        </motion.div>
+        </m.div>
 
         <div style={{ position: "relative", overflow: "hidden" }}>
           <AnimatePresence mode="wait" custom={direction}>
-            <motion.div
+            <m.div
               key={page}
               custom={direction}
               variants={pageVariants}
@@ -199,21 +199,21 @@ export default function StudentProjects() {
               exit="exit"
               className="w-full"
             >
-              <motion.div
+              <m.div
                 variants={gridVariants}
                 initial="hidden"
                 animate="visible"
                 className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5"
               >
                 {visibleCards.map(project => (
-                  <motion.div key={project.id} variants={cardVariants} style={{ width: "100%", minWidth: 0 }}>
+                  <m.div key={project.id} variants={cardVariants} style={{ width: "100%", minWidth: 0 }}>
                     <div style={{ width: "100%" }}>
                       <ProjectCard project={project} noAnim={noAnim} />
                     </div>
-                  </motion.div>
+                  </m.div>
                 ))}
-              </motion.div>
-            </motion.div>
+              </m.div>
+            </m.div>
           </AnimatePresence>
         </div>
 

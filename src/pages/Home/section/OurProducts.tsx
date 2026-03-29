@@ -1,4 +1,4 @@
-import { motion, AnimatePresence, type Variants, useReducedMotion } from "framer-motion";
+import { m, AnimatePresence, type Variants, useReducedMotion } from "framer-motion";
 import Pagination from "../../../components/ui/Pagination";
 import ProductCard from "../../../components/ui/ProductCard";
 import SearchBar from "../../../components/ui/SearchForm";
@@ -70,12 +70,12 @@ export default function OurProducts() {
 
       {!noAnim && (
         <>
-          <motion.div className="absolute pointer-events-none"
+          <m.div className="absolute pointer-events-none"
             animate={{ scale: [1, 1.12, 1], opacity: [0.45, 0.75, 0.45] }}
             transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
             style={{ left: "-8%", top: "-5%", width: 520, height: 520, borderRadius: "50%", background: "radial-gradient(circle, rgba(33,138,187,0.1) 0%, transparent 70%)", filter: "blur(70px)" }}
           />
-          <motion.div className="absolute pointer-events-none"
+          <m.div className="absolute pointer-events-none"
             animate={{ scale: [1, 1.08, 1], opacity: [0.35, 0.6, 0.35] }}
             transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 4 }}
             style={{ right: "-6%", bottom: "-5%", width: 420, height: 420, borderRadius: "50%", background: "radial-gradient(circle, rgba(4,8,80,0.06) 0%, transparent 70%)", filter: "blur(60px)" }}
@@ -99,7 +99,7 @@ export default function OurProducts() {
 
       <div className="container mx-auto px-6 md:px-20 py-20 relative z-10">
 
-        <motion.div
+        <m.div
           initial={noAnim ? { opacity: 0 } : { opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -107,7 +107,7 @@ export default function OurProducts() {
           className="mb-10"
         >
           <div className="flex items-center gap-3 mb-4">
-            <motion.div
+            <m.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
@@ -127,7 +127,7 @@ export default function OurProducts() {
             </span>
           </h2>
 
-          <motion.div
+          <m.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
@@ -139,13 +139,13 @@ export default function OurProducts() {
             Zetech menciptakan website yang cepat dan ramah SEO, dirancang untuk
             menarik pengunjung dan membangun kepercayaan.
           </p>
-        </motion.div>
+        </m.div>
 
         <SearchBar value={query} onChange={setQuery} noAnim={noAnim} />
 
         <AnimatePresence mode="wait">
           {currentItems.length > 0 ? (
-            <motion.div
+            <m.div
               key={currentPage + query}
               initial="hidden"
               whileInView="visible"
@@ -155,7 +155,7 @@ export default function OurProducts() {
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {currentItems.map((product) => (
-                  <motion.div
+                  <m.div
                     key={product.id}
                     variants={noAnim ? itemVariantsMobile : itemVariants}
                   >
@@ -169,11 +169,11 @@ export default function OurProducts() {
                         <ProductCard {...product} noAnim={noAnim} />
                       </div>
                     )}
-                  </motion.div>
+                  </m.div>
                 ))}
               </div>
 
-              <motion.div
+              <m.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: noAnim ? 0.1 : 0.5 }}
@@ -184,10 +184,10 @@ export default function OurProducts() {
                   totalItems={totalItems}
                   onPageChange={setCurrentPage}
                 />
-              </motion.div>
-            </motion.div>
+              </m.div>
+            </m.div>
           ) : (
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               className="text-center py-20"
@@ -216,7 +216,7 @@ export default function OurProducts() {
                   tidak ditemukan
                 </p>
               </div>
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
       </div>
