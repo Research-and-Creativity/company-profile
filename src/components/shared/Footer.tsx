@@ -67,6 +67,7 @@ export default function Footer() {
 
           <m.div variants={itemVariants} className="flex items-center gap-6">
             <Link
+              aria-label={`Kunjungi WhatsApp HMSE`}
               to="https://wa.me/6285385782684"
               target="_blank"
               rel="noopener noreferrer"
@@ -75,6 +76,7 @@ export default function Footer() {
               <BsWhatsapp size={35} />
             </Link>
             <Link
+              aria-label={`Kunjungi LinkedIn HMSE`}
               to="https://www.linkedin.com/company/hmse-tup/"
               target="_blank"
               rel="noopener noreferrer"
@@ -83,6 +85,7 @@ export default function Footer() {
               <CiLinkedin size={40} />
             </Link>
             <Link
+              aria-label={`Kunjungi Instagram HMSE`}
               to="https://www.instagram.com/hmse_telkompurwokerto/"
               target="_blank"
               rel="noopener noreferrer"

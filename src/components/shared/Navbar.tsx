@@ -71,6 +71,7 @@ const Navbar = () => {
 
           <button
             className={`cursor-pointer md:hidden ${isScrolled ? "text-[#001534]" : "text-white"} p-2`}
+            aria-label="Buka Menu Navigasi"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
