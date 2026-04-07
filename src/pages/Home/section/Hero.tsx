@@ -1,74 +1,117 @@
 "use client";
 
-import { m, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { m, useReducedMotion } from "framer-motion";
+import { useEffect, useRef, useState, useCallback } from "react";
 import Button from "../../../components/ui/Button";
 import Particle from "../../../components/ui/Particle";
 import GridLines from "../../../components/ui/GridLine";
 import { PARTICLES } from "../../../constants/praticle";
 import { Helmet } from "react-helmet-async";
 
-export default function Hero() {
-  const containerRef = useRef<HTMLElement>(null);
+function useIsMobile() {
   const [isMobile, setIsMobile] = useState(false);
-
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
     check();
-    window.addEventListener("resize", check);
+    window.addEventListener("resize", check, { passive: true });
     return () => window.removeEventListener("resize", check);
   }, []);
+  return isMobile;
+}
 
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
+export default function Hero() {
+  const containerRef = useRef<HTMLElement>(null);
+  const isMobile = useIsMobile();
+  const prefersReduced = useReducedMotion();
+  const noAnim = isMobile || !!prefersReduced;
 
-  const springConfig = { stiffness: 60, damping: 20, mass: 1 };
-  const smoothX = useSpring(mouseX, springConfig);
-  const smoothY = useSpring(mouseY, springConfig);
+  const orbRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const titleRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const rafRef = useRef<number | null>(null);
+  const mouseNorm = useRef({ x: 0, y: 0 });
+  const smoothed = useRef({ x: 0, y: 0 });
+  const fast = useRef({ x: 0, y: 0 });
+  const isAnimating = useRef(false);
+  const animateOrbsRef = useRef<() => void>(() => { });
 
-  const fastSpring = { stiffness: 120, damping: 25, mass: 0.5 };
-  const fastX = useSpring(mouseX, fastSpring);
-  const fastY = useSpring(mouseY, fastSpring);
+  const animateOrbs = useCallback(() => {
+    const lerpFactor = 0.06;
+    const fastFactor = 0.12;
+
+    smoothed.current.x += (mouseNorm.current.x - smoothed.current.x) * lerpFactor;
+    smoothed.current.y += (mouseNorm.current.y - smoothed.current.y) * lerpFactor;
+    fast.current.x += (mouseNorm.current.x - fast.current.x) * fastFactor;
+    fast.current.y += (mouseNorm.current.y - fast.current.y) * fastFactor;
+
+    const s = smoothed.current;
+    const f = fast.current;
+
+    // Orb 1
+    orbRefs.current[0]?.style.setProperty(
+      "transform",
+      `translate(${s.x * 120 - 60}px, ${s.y * 80 - 40}px)`
+    );
+    // Orb 2
+    orbRefs.current[1]?.style.setProperty(
+      "transform",
+      `translate(${s.x * -80 + 40}px, ${s.y * -60 + 30}px)`
+    );
+    // Orb 3
+    orbRefs.current[2]?.style.setProperty(
+      "transform",
+      `translate(${s.x * 160 - 80}px, ${s.y * 120 - 60}px)`
+    );
+
+    // Title parallax
+    titleRefs.current[0]?.style.setProperty(
+      "transform",
+      `translate(${f.x * 12 - 6}px, ${f.y * 10 - 5}px)`
+    );
+    titleRefs.current[1]?.style.setProperty(
+      "transform",
+      `translate(${f.x * 28 - 14}px, ${f.y * 20 - 10}px)`
+    );
+
+    // jika delta cukup kecil = berhenti animasinya
+    const dx = Math.abs(mouseNorm.current.x - smoothed.current.x);
+    const dy = Math.abs(mouseNorm.current.y - smoothed.current.y);
+    if (dx > 0.001 || dy > 0.001) {
+      rafRef.current = requestAnimationFrame(animateOrbsRef.current);
+    } else {
+      isAnimating.current = false;
+    }
+  }, []);
+
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    const el = containerRef.current;
+    if (!el || noAnim) return;
+    const rect = el.getBoundingClientRect();
+    mouseNorm.current = {
+      x: (e.clientX - rect.left - rect.width / 2) / rect.width,
+      y: (e.clientY - rect.top - rect.height / 2) / rect.height,
+    };
+    if (!isAnimating.current) {
+      isAnimating.current = true;
+      animateOrbs();
+    }
+  }, [noAnim, animateOrbs]);
 
   useEffect(() => {
-    if (isMobile) {
-      mouseX.set(0);
-      mouseY.set(0);
-      return;
-    }
-
+    animateOrbsRef.current = animateOrbs;
+    if (noAnim) return;
     const el = containerRef.current;
     if (!el) return;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = el.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-
-      mouseX.set((e.clientX - centerX) / rect.width);
-      mouseY.set((e.clientY - centerY) / rect.height);
+    el.addEventListener("mousemove", handleMouseMove, { passive: true });
+    return () => {
+      el.removeEventListener("mousemove", handleMouseMove);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      isAnimating.current = false;
     };
+  }, [handleMouseMove, noAnim, animateOrbs]);
 
-    el.addEventListener("mousemove", handleMouseMove);
-    return () => el.removeEventListener("mousemove", handleMouseMove);
-  }, [mouseX, mouseY, isMobile]);
-
-  const orb1X = useTransform(smoothX, [-0.5, 0.5], isMobile ? [0, 0] : [-60, 60]);
-  const orb1Y = useTransform(smoothY, [-0.5, 0.5], isMobile ? [0, 0] : [-40, 40]);
-  const orb2X = useTransform(smoothX, [-0.5, 0.5], isMobile ? [0, 0] : [40, -40]);
-  const orb2Y = useTransform(smoothY, [-0.5, 0.5], isMobile ? [0, 0] : [30, -30]);
-  const orb3X = useTransform(smoothX, [-0.5, 0.5], isMobile ? [0, 0] : [-80, 80]);
-  const orb3Y = useTransform(smoothY, [-0.5, 0.5], isMobile ? [0, 0] : [-60, 60]);
-
-  const tiltX = useTransform(fastY, [-0.5, 0.5], isMobile ? [0, 0] : [4, -4]);
-  const tiltY = useTransform(fastX, [-0.5, 0.5], isMobile ? [0, 0] : [-6, 6]);
-
-  // const badgeX  = useTransform(fastX, [-0.5, 0.5], [-10, 10]);
-  // const badgeY  = useTransform(fastY, [-0.5, 0.5], [-8, 8]);
-  const title1X = useTransform(fastX, [-0.5, 0.5], isMobile ? [0, 0] : [-6, 6]);
-  const title1Y = useTransform(fastY, [-0.5, 0.5], isMobile ? [0, 0] : [-5, 5]);
-  const title2X = useTransform(fastX, [-0.5, 0.5], isMobile ? [0, 0] : [-14, 14]);
-  const title2Y = useTransform(fastY, [-0.5, 0.5], isMobile ? [0, 0] : [-10, 10]);
+  const visibleParticles = noAnim
+    ? []
+    : PARTICLES.slice(0, 12);
 
   return (
     <>
@@ -77,6 +120,7 @@ export default function Hero() {
         <meta name="description" content="Selamat datang di Zetech (Zetra Tech), platform inovasi digital resmi HMSE Telkom University Purwokerto di bawah naungan Kabinet Zenith." />
         <link rel="canonical" href="https://zetech.vercel.app/" />
       </Helmet>
+
       <section
         ref={containerRef}
         id="home"
@@ -90,11 +134,10 @@ export default function Hero() {
           style={{ background: "radial-gradient(ellipse at center, transparent 40%, #000d1f 100%)" }}
         />
 
-        <m.div
-          style={{ x: orb1X, y: orb1Y }}
+        <div
+          ref={el => { orbRefs.current[0] = el; }}
           className="absolute pointer-events-none z-10"
-          animate={isMobile ? {} : { scale: [1, 1.15, 0.95, 1], opacity: [0.25, 0.4, 0.2, 0.25] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+          style={{ top: "50vh", left: "50vw" }}
         >
           <div style={{
             width: isMobile ? 380 : 700,
@@ -103,18 +146,16 @@ export default function Hero() {
             background: "radial-gradient(circle, rgba(33,138,187,0.35) 0%, transparent 70%)",
             filter: `blur(${isMobile ? 40 : 80}px)`,
             transform: "translate(-50%, -50%)",
-            position: "absolute", top: "50vh", left: "50vw",
-            contain: "strict",
+            willChange: noAnim ? "auto" : "transform",
             aspectRatio: "1 / 1",
             pointerEvents: "none",
           }} />
-        </m.div>
+        </div>
 
-        <m.div
-          style={{ x: orb2X, y: orb2Y }}
+        <div
+          ref={el => { orbRefs.current[1] = el; }}
           className="absolute bottom-0 left-0 pointer-events-none z-10"
-          animate={{ scale: [0.9, 1.2, 1, 0.9], rotate: [0, 60, 120, 180] }}
-          transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+          style={{ willChange: noAnim ? "auto" : "transform" }}
         >
           <div style={{
             width: isMobile ? 280 : 550,
@@ -122,17 +163,15 @@ export default function Hero() {
             borderRadius: "50%",
             background: "radial-gradient(circle, rgba(20,80,160,0.4) 0%, transparent 70%)",
             filter: `blur(${isMobile ? 50 : 100}px)`,
-            contain: "strict",
-            pointerEvents: "none",
             aspectRatio: "1 / 1",
+            pointerEvents: "none",
           }} />
-        </m.div>
+        </div>
 
-        <m.div
-          style={{ x: orb3X, y: orb3Y }}
+        <div
+          ref={el => { orbRefs.current[2] = el; }}
           className="absolute top-0 right-0 pointer-events-none z-10"
-          animate={{ scale: [1, 0.85, 1.1, 1], opacity: [0.15, 0.3, 0.1, 0.15] }}
-          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut", delay: 5 }}
+          style={{ willChange: noAnim ? "auto" : "transform" }}
         >
           <div style={{
             width: isMobile ? 280 : 600,
@@ -140,49 +179,46 @@ export default function Hero() {
             borderRadius: "50%",
             background: "radial-gradient(circle, rgba(50,180,220,0.25) 0%, transparent 70%)",
             filter: `blur(${isMobile ? 60 : 120}px)`,
-            contain: "strict",
-            pointerEvents: "none",
+            opacity: 0.2,
             aspectRatio: "1 / 1",
+            pointerEvents: "none",
           }} />
-        </m.div>
+        </div>
 
-        {PARTICLES.map((p, idx) => (
+        {visibleParticles.map((p, idx) => (
           <Particle key={idx} {...p} />
         ))}
 
-        {!isMobile && (
+        {!noAnim && (
           <>
-            <m.div
+            <div
               className="absolute pointer-events-none z-10"
               style={{
                 width: 500, height: 500, borderRadius: "50%",
                 border: "1px solid rgba(33,138,187,0.12)",
-                top: "50%", left: "50%", transform: "translate(-50%, -50%)",
+                top: "50%", left: "50%",
+                transform: "translate(-50%, -50%)",
+                animation: "heroPulse1 6s ease-in-out infinite",
               }}
-              animate={{ scale: [1, 1.05, 1], opacity: [0.3, 0.6, 0.3] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             />
-            <m.div
+            <div
               className="absolute pointer-events-none z-10"
               style={{
                 width: 750, height: 750, borderRadius: "50%",
                 border: "1px solid rgba(33,138,187,0.06)",
-                top: "50%", left: "50%", transform: "translate(-50%, -50%)",
+                top: "50%", left: "50%",
+                transform: "translate(-50%, -50%)",
+                animation: "heroPulse2 9s ease-in-out infinite 1.5s",
               }}
-              animate={{ scale: [1, 1.03, 1], opacity: [0.2, 0.4, 0.2] }}
-              transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
             />
           </>
         )}
 
         <div className="container mx-auto px-6 text-center relative z-20 flex flex-col items-center">
 
-          <m.div
-            style={{
-              x: title1X,
-              y: title1Y,
-              ...(isMobile ? {} : { rotateX: tiltX, rotateY: tiltY, perspective: 1200 }),
-            }}
+          <div
+            ref={el => { titleRefs.current[0] = el; }}
+            style={{ willChange: noAnim ? "auto" : "transform" }}
           >
             <div style={{ overflow: "hidden" }}>
               {["Building", "Advanced"].map((word, i) => (
@@ -205,15 +241,12 @@ export default function Hero() {
                 </m.span>
               ))}
             </div>
-          </m.div>
+          </div>
 
-          <m.div
-            style={{
-              x: title2X,
-              y: title2Y,
-              ...(isMobile ? {} : { rotateX: tiltX, rotateY: tiltY, perspective: 1200 }),
-            }}
+          <div
+            ref={el => { titleRefs.current[1] = el; }}
             className="mb-10"
+            style={{ willChange: noAnim ? "auto" : "transform" }}
           >
             <div style={{ overflow: "hidden" }}>
               {["Digital", "Technology"].map((word, i) => (
@@ -236,23 +269,7 @@ export default function Hero() {
                 </m.span>
               ))}
             </div>
-          </m.div>
-
-          {/* <m.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 1.05, ease: "easeOut" }}
-          style={{
-            color: "rgba(160,200,230,0.6)",
-            fontSize: "clamp(0.95rem, 1.8vw, 1.15rem)",
-            maxWidth: "460px",
-            marginBottom: "2.5rem",
-            lineHeight: 1.75,
-            letterSpacing: "0.01em",
-          }}
-        >
-          We craft cutting-edge digital experiences that push the boundaries of what&apos;s possible.
-        </m.p> */}
+          </div>
 
           <m.div
             initial={{ opacity: 0, scale: 0.85 }}
@@ -261,68 +278,40 @@ export default function Hero() {
             className="flex justify-center mb-16"
           >
             <div className="relative group">
-              <m.div
-                animate={{ opacity: [0.3, 0.65, 0.3], scale: [1, 1.06, 1] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                style={{
-                  position: "absolute", inset: "-4px", borderRadius: "100px",
-                  background: "linear-gradient(135deg, #218ABB, #1a5f8a, #218ABB)",
-                  filter: "blur(14px)", opacity: 0.4,
-                }}
-              />
+              {!noAnim && (
+                <div
+                  style={{
+                    position: "absolute", inset: "-4px", borderRadius: "100px",
+                    background: "linear-gradient(135deg, #218ABB, #1a5f8a, #218ABB)",
+                    filter: "blur(14px)",
+                    animation: "heroGlow 3s ease-in-out infinite",
+                  }}
+                />
+              )}
               <Button classAdd="hover:scale-105 relative" text="Start your project" href="#products" />
             </div>
           </m.div>
-
-          {/* <m.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.5, duration: 0.8, ease: "easeOut" }}
-          style={{ display: "flex", justifyContent: "center", gap: "4rem" }}
-        >
-          {STATS.map((stat) => (
-            <m.div
-              key={stat.label}
-              whileHover={{ scale: 1.08, y: -4 }}
-              transition={{ type: "spring", stiffness: 320, damping: 18 }}
-              style={{ textAlign: "center", cursor: "default" }}
-            >
-              <div style={{
-                fontSize: "1.7rem", fontWeight: 800, color: "#218ABB",
-                letterSpacing: "-0.02em",
-                textShadow: "0 0 30px rgba(33,138,187,0.6)",
-              }}>
-                {stat.num}
-              </div>
-              <div style={{
-                fontSize: "0.7rem", color: "rgba(150,200,230,0.45)",
-                letterSpacing: "0.14em", textTransform: "uppercase",
-                marginTop: "3px", fontWeight: 500,
-              }}>
-                {stat.label}
-              </div>
-            </m.div>
-          ))}
-        </m.div> */}
         </div>
 
         <div
           style={{
             position: "absolute", bottom: "2.5rem",
-            left: 0, right: 0,
-            zIndex: 30,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+            left: 0, right: 0, zIndex: 30,
+            display: "flex", justifyContent: "center", alignItems: "center",
             pointerEvents: "none",
           }}
         >
-          <m.div
-            animate={{ y: [0, 12, 0], opacity: [0.3, 0.7, 0.3] }}
-            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-            style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}
+          <div
+            style={{
+              display: "flex", flexDirection: "column",
+              alignItems: "center", gap: "8px",
+              animation: "heroScrollBounce 2.5s ease-in-out infinite",
+            }}
           >
-            <span style={{ fontSize: "9px", color: "rgba(150,200,230,0.35)", letterSpacing: "0.5em", textTransform: "uppercase" }}>
+            <span style={{
+              fontSize: "9px", color: "rgba(150,200,230,0.35)",
+              letterSpacing: "0.5em", textTransform: "uppercase",
+            }}>
               Scroll
             </span>
             <div style={{
@@ -330,14 +319,42 @@ export default function Hero() {
               border: "1.5px solid rgba(33,138,187,0.35)",
               display: "flex", justifyContent: "center", paddingTop: "6px",
             }}>
-              <m.div
-                animate={{ y: [0, 10, 0], opacity: [1, 0, 1] }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                style={{ width: 4, height: 8, borderRadius: "2px", background: "rgba(33,138,187,0.8)" }}
+              <div
+                style={{
+                  width: 4, height: 8, borderRadius: "2px",
+                  background: "rgba(33,138,187,0.8)",
+                  animation: "heroScrollDot 2.5s ease-in-out infinite",
+                }}
               />
             </div>
-          </m.div>
+          </div>
         </div>
+
+        <style>{`
+          @keyframes heroPulse1 {
+            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+            50%       { opacity: 0.6; transform: translate(-50%, -50%) scale(1.05); }
+          }
+          @keyframes heroPulse2 {
+            0%, 100% { opacity: 0.2; transform: translate(-50%, -50%) scale(1); }
+            50%       { opacity: 0.4; transform: translate(-50%, -50%) scale(1.03); }
+          }
+          @keyframes heroGlow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50%       { opacity: 0.65; transform: scale(1.06); }
+          }
+          @keyframes heroScrollBounce {
+            0%, 100% { transform: translateY(0);  opacity: 0.3; }
+            50%       { transform: translateY(12px); opacity: 0.7; }
+          }
+          @keyframes heroScrollDot {
+            0%, 100% { transform: translateY(0);  opacity: 1; }
+            50%       { transform: translateY(10px); opacity: 0; }
+          }
+          @media (prefers-reduced-motion: reduce) {
+            * { animation-play-state: paused !important; }
+          }
+        `}</style>
       </section>
     </>
   );
