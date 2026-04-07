@@ -1,10 +1,19 @@
-import { m, type Variants, useMotionValue, useSpring, useTransform, useReducedMotion } from "framer-motion";
-import { useRef } from "react";
+"use client";
+
+import { m, type Variants, useReducedMotion } from "framer-motion";
+import { useRef, useEffect, useState, useCallback } from "react";
 import Button from "../../../components/ui/Button";
 import aboutImage from "../../../assets/about-image.webp";
 
 function useIsMobile() {
-  return typeof window !== "undefined" && window.innerWidth < 768;
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check, { passive: true });
+    return () => window.removeEventListener("resize", check);
+  }, []);
+  return isMobile;
 }
 
 const contentVariants: Variants = {
@@ -49,21 +58,45 @@ export default function About() {
   const noAnim = isMobile || !!prefersReduced;
 
   const cardRef = useRef<HTMLDivElement>(null);
-  const mx = useMotionValue(0);
-  const my = useMotionValue(0);
-  const sx = useSpring(mx, { stiffness: 80, damping: 20 });
-  const sy = useSpring(my, { stiffness: 80, damping: 20 });
-  const rotateY = useTransform(sx, [-0.5, 0.5], [-8, 8]);
-  const rotateX = useTransform(sy, [-0.5, 0.5], [6, -6]);
+  const tiltRef = useRef({ rx: 0, ry: 0 });
+  const rafRef = useRef<number | null>(null);
 
-  const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (noAnim) return; // skip di mobile
+  const onMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (noAnim) return;
     const el = cardRef.current;
     if (!el) return;
     const r = el.getBoundingClientRect();
-    mx.set((e.clientX - r.left - r.width / 2) / r.width);
-    my.set((e.clientY - r.top - r.height / 2) / r.height);
-  };
+    const nx = (e.clientX - r.left - r.width / 2) / r.width;
+    const ny = (e.clientY - r.top - r.height / 2) / r.height;
+    const targetRx = ny * -6;
+    const targetRy = nx * 8;
+
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    rafRef.current = requestAnimationFrame(() => {
+      tiltRef.current.rx += (targetRx - tiltRef.current.rx) * 0.15;
+      tiltRef.current.ry += (targetRy - tiltRef.current.ry) * 0.15;
+      if (el) {
+        el.style.transform = `perspective(1000px) rotateX(${tiltRef.current.rx}deg) rotateY(${tiltRef.current.ry}deg)`;
+      }
+    });
+  }, [noAnim]);
+
+  const onLeave = useCallback(() => {
+    if (noAnim) return;
+    const el = cardRef.current;
+    if (!el) return;
+    el.style.transition = "transform 0.5s ease";
+    el.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg)";
+    setTimeout(() => {
+      if (el) el.style.transition = "";
+    }, 500);
+  }, [noAnim]);
+
+  useEffect(() => {
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
 
   return (
     <section
@@ -73,39 +106,30 @@ export default function About() {
     >
       <div
         className="absolute inset-0 pointer-events-none select-none"
-        style={{ opacity: noAnim ? 0.3 : 0.55 }}
-      >
-        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="ab-dots" width="28" height="28" patternUnits="userSpaceOnUse">
-              <circle cx="1.5" cy="1.5" r="1.5" fill="rgba(33,138,187,0.14)" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#ab-dots)" />
-        </svg>
-      </div>
+        style={{
+          opacity: noAnim ? 0.3 : 0.55,
+          backgroundImage: "radial-gradient(circle, rgba(33,138,187,0.14) 1.5px, transparent 1.5px)",
+          backgroundSize: "28px 28px",
+        }}
+      />
 
       {!noAnim && (
         <>
-          <m.div
-            animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
-            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          <div
             className="absolute pointer-events-none z-0"
             style={{
               left: "-10%", top: "0%",
               width: 500, height: 500, borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(33,138,187,0.1) 0%, transparent 70%)",
+              background: "radial-gradient(circle, rgba(33,138,187,0.12) 0%, transparent 70%)",
               filter: "blur(70px)",
             }}
           />
-          <m.div
-            animate={{ scale: [1, 1.08, 1], opacity: [0.4, 0.7, 0.4] }}
-            transition={{ duration: 14, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+          <div
             className="absolute pointer-events-none z-0"
             style={{
               right: "-8%", bottom: "-5%",
               width: 450, height: 450, borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(4,8,80,0.07) 0%, transparent 70%)",
+              background: "radial-gradient(circle, rgba(4,8,80,0.08) 0%, transparent 70%)",
               filter: "blur(60px)",
             }}
           />
@@ -208,13 +232,12 @@ export default function About() {
           <div className="hidden lg:block">
             <div className="relative inline-block">
               {!noAnim && (
-                <m.div
-                  animate={{ opacity: [0.2, 0.45, 0.2], scale: [1, 1.04, 1] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                <div
                   style={{
                     position: "absolute", inset: "-4px", borderRadius: "100px",
                     background: "linear-gradient(135deg, #218ABB, #1a5f8a)",
                     filter: "blur(12px)", opacity: 0.3,
+                    animation: "aboutBtnGlow 3s ease-in-out infinite",
                   }}
                 />
               )}
@@ -257,69 +280,43 @@ export default function About() {
           <div
             ref={cardRef}
             onMouseMove={onMove}
-            onMouseLeave={() => { if (!noAnim) { mx.set(0); my.set(0); } }}
-            style={{ perspective: noAnim ? "none" : 1000 }}
+            onMouseLeave={onLeave}
+            style={{ willChange: noAnim ? "auto" : "transform" }}
           >
-            <m.div
+            <div
+              className="bg-white relative overflow-hidden"
               style={{
-                rotateX: noAnim ? 0 : rotateX,
-                rotateY: noAnim ? 0 : rotateY,
-                transformStyle: noAnim ? "flat" : "preserve-3d",
+                borderRadius: 28,
+                padding: "16px",
+                border: "1.5px solid rgba(33,138,187,0.1)",
+                boxShadow: noAnim
+                  ? "0 8px 24px rgba(0,0,0,0.06)"
+                  : "0 20px 50px rgba(0,0,0,0.08), 0 4px 12px rgba(33,138,187,0.06)",
+                position: "relative",
+                transition: "box-shadow 0.3s ease",
               }}
             >
-              {!noAnim && (
-                <m.div
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                  style={{
-                    position: "absolute", inset: -3, borderRadius: 32, zIndex: 0,
-                    background: "linear-gradient(135deg, rgba(33,138,187,0.2), rgba(4,8,80,0.08))",
-                    filter: "blur(14px)",
-                  }}
-                />
-              )}
+              <div style={{
+                position: "absolute", top: 0, left: 0, right: 0, height: 1,
+                background: "linear-gradient(90deg, transparent 10%, rgba(33,138,187,0.35) 50%, transparent 90%)",
+              }} />
 
-              <div
-                className="bg-white relative overflow-hidden group transition-shadow duration-500"
+              <img
+                src={aboutImage}
+                loading="lazy"
+                decoding="async"
+                fetchPriority="low"
+                alt="About Zetech"
+                className="w-full h-auto object-contain relative z-10"
                 style={{
-                  borderRadius: 28,
-                  padding: "16px",
-                  border: "1.5px solid rgba(33,138,187,0.1)",
-                  boxShadow: noAnim
-                    ? "0 8px 24px rgba(0,0,0,0.06)"
-                    : "0 20px 50px rgba(0,0,0,0.08), 0 4px 12px rgba(33,138,187,0.06)",
-                  position: "relative", zIndex: 1,
+                  borderRadius: 14,
+                  transition: noAnim ? "none" : "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)",
+                  willChange: noAnim ? "auto" : "transform",
                 }}
-              >
-                <div style={{
-                  position: "absolute", top: 0, left: 0, right: 0, height: 1,
-                  background: "linear-gradient(90deg, transparent 10%, rgba(33,138,187,0.35) 50%, transparent 90%)",
-                }} />
-
-                {!noAnim && (
-                  <div style={{
-                    position: "absolute", top: -20, left: "50%", transform: "translateX(-50%)",
-                    width: 260, height: 120,
-                    background: "radial-gradient(ellipse, rgba(33,138,187,0.06) 0%, transparent 70%)",
-                    filter: "blur(16px)", pointerEvents: "none",
-                  }} />
-                )}
-
-                <img
-                  src={aboutImage}
-                  loading="lazy"
-                  alt="About Zetech"
-                  className="w-full h-auto object-contain relative z-10"
-                  style={{
-                    borderRadius: 14,
-                    transition: noAnim ? "none" : "transform 0.7s ease",
-                  }}
-                  onMouseEnter={e => { if (!noAnim) e.currentTarget.style.transform = "scale(1.05)"; }}
-                  onMouseLeave={e => { if (!noAnim) e.currentTarget.style.transform = "scale(1)"; }}
-                />
-              </div>
-            </m.div>
+                onMouseEnter={e => { if (!noAnim) (e.currentTarget as HTMLImageElement).style.transform = "scale(1.05)"; }}
+                onMouseLeave={e => { if (!noAnim) (e.currentTarget as HTMLImageElement).style.transform = "scale(1)"; }}
+              />
+            </div>
           </div>
         </m.div>
 
@@ -328,6 +325,13 @@ export default function About() {
           <Button text="Explore More" classAdd="px-10 py-4" href="/about" />
         </div>
       </div>
+
+      <style>{`
+        @keyframes aboutBtnGlow {
+          0%, 100% { opacity: 0.2; transform: scale(1); }
+          50%       { opacity: 0.45; transform: scale(1.04); }
+        }
+      `}</style>
     </section>
   );
 }
