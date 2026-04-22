@@ -1,10 +1,13 @@
 import { m, useReducedMotion } from "framer-motion";
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import type { StudentProject } from "../../types/studentProjects";
 
 function useIsMobile() {
-  if (typeof window === "undefined") return false;
-  return window.innerWidth < 768;
+  return useMemo(() => {
+    if (typeof window === "undefined") return false;
+    return window.innerWidth < 768;
+  }, []);
 }
 
 interface ProjectCardProps {
@@ -47,51 +50,47 @@ export default function ProjectCard({ project, noAnim = false }: ProjectCardProp
 
   return (
     <div style={{ width: "100%" }}>
-
       <Link to={`/projects/${project.id}`} aria-label={`Lihat detail proyek ${project.title}`} style={{ textDecoration: "none", display: "block" }}>
         <m.div
-          whileHover={_noAnim ? undefined : { y: -4 }}
-          transition={{ type: "spring", stiffness: 300, damping: 24 }}
-          className="relative overflow-hidden group aspect-video"
+          whileHover={_noAnim ? undefined : { y: -3 }}
+          transition={{ type: "spring", stiffness: 280, damping: 26 }}
+          className="relative overflow-hidden group"
           style={{
             borderRadius: 12,
             aspectRatio: "4/3",
             background: `linear-gradient(135deg, ${catColor}20, rgba(4,8,80,0.06))`,
-            boxShadow: _noAnim
-              ? "0 2px 16px rgba(4,8,80,0.08)"
-              : "0 4px 20px rgba(4,8,80,0.1)",
-            transition: "box-shadow 0.3s",
+            boxShadow: "0 4px 18px rgba(4,8,80,0.09)",
+            transition: "box-shadow 0.25s",
+            willChange: _noAnim ? "auto" : "transform",
           }}
           onMouseEnter={_noAnim ? undefined : e => {
-            e.currentTarget.style.boxShadow = "0 12px 40px rgba(4,8,80,0.18)";
+            e.currentTarget.style.boxShadow = "0 10px 36px rgba(4,8,80,0.16)";
           }}
           onMouseLeave={_noAnim ? undefined : e => {
-            e.currentTarget.style.boxShadow = "0 4px 20px rgba(4,8,80,0.1)";
+            e.currentTarget.style.boxShadow = "0 4px 18px rgba(4,8,80,0.09)";
           }}
         >
           <img
             src={project.thumbnail}
             alt={project.title}
+            loading="lazy"
             style={{
               width: "100%", height: "100%",
               objectFit: "cover", display: "block",
-              transition: _noAnim ? "none" : "transform 0.5s cubic-bezier(0.22,1,0.36,1)",
+              transition: _noAnim ? "none" : "opacity 0.3s",
             }}
-            onError={e => {
-              e.currentTarget.style.display = "none";
-            }}
+            onError={e => { e.currentTarget.style.display = "none"; }}
           />
 
           {!_noAnim && (
             <m.div
               initial={{ opacity: 0 }}
               whileHover={{ opacity: 1 }}
-              transition={{ duration: 0.25 }}
+              transition={{ duration: 0.2 }}
               style={{
                 position: "absolute", inset: 0,
-                background: "rgba(0,0,0,0.18)",
+                background: "rgba(0,0,0,0.16)",
                 display: "flex", alignItems: "center", justifyContent: "center",
-                gap: 10,
               }}
             >
               <div style={{ display: "flex", gap: 8 }}>
@@ -107,10 +106,10 @@ export default function ProjectCard({ project, noAnim = false }: ProjectCardProp
                       color: "#040850", fontSize: "0.78rem", fontWeight: 700,
                       textDecoration: "none",
                       display: "flex", alignItems: "center", gap: 5,
-                      boxShadow: "0 4px 16px rgba(0,0,0,0.2)",
+                      boxShadow: "0 4px 14px rgba(0,0,0,0.18)",
                       transition: "transform 0.15s",
                     }}
-                    onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.05)"; }}
+                    onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.04)"; }}
                     onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; }}
                   >
                     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -132,10 +131,10 @@ export default function ProjectCard({ project, noAnim = false }: ProjectCardProp
                       color: "#040850", fontSize: "0.78rem", fontWeight: 700,
                       textDecoration: "none",
                       display: "flex", alignItems: "center", gap: 5,
-                      boxShadow: "0 4px 16px rgba(0,0,0,0.2)",
+                      boxShadow: "0 4px 14px rgba(0,0,0,0.18)",
                       transition: "transform 0.15s",
                     }}
-                    onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.05)"; }}
+                    onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.04)"; }}
                     onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; }}
                   >
                     <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
@@ -151,7 +150,6 @@ export default function ProjectCard({ project, noAnim = false }: ProjectCardProp
       </Link>
 
       <div style={{ marginTop: 10, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
-
         <div style={{ display: "flex", alignItems: "center", gap: 8, minWidth: 0 }}>
           <div style={{
             width: 28, height: 28, borderRadius: "50%", flexShrink: 0,
