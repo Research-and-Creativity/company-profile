@@ -1,4 +1,5 @@
 import { m, AnimatePresence, type Variants, useReducedMotion } from "framer-motion";
+import { useMemo } from "react";
 import Pagination from "../../../components/ui/Pagination";
 import ProductCard from "../../../components/ui/ProductCard";
 import SearchBar from "../../../components/ui/SearchForm";
@@ -6,32 +7,26 @@ import { useSearch } from "../../../hooks/useSearch";
 import { Link } from "react-router-dom";
 
 function useIsMobile() {
-  if (typeof window === "undefined") return false;
-  return window.innerWidth < 768;
+  return useMemo(() => {
+    if (typeof window === "undefined") return false;
+    return window.innerWidth < 768;
+  }, []);
 }
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.5, delayChildren: 0.1 },
-  },
-};
-
-const containerVariantsMobile: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.05 },
+    transition: { staggerChildren: 0.12, delayChildren: 0.05 },
   },
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
@@ -39,7 +34,7 @@ const itemVariantsMobile: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { duration: 0.45, ease: "easeOut" },
+    transition: { duration: 0.3, ease: "easeOut" },
   },
 };
 
@@ -57,40 +52,40 @@ export default function OurProducts() {
   return (
     <div className="relative overflow-hidden">
 
-      <div className="absolute inset-0 pointer-events-none select-none" style={{ opacity: noAnim ? 0.3 : 0.55 }}>
-        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="prod-dots" width="28" height="28" patternUnits="userSpaceOnUse">
-              <circle cx="1.5" cy="1.5" r="1.5" fill="rgba(33,138,187,0.14)" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#prod-dots)" />
-        </svg>
-      </div>
+      <div className="absolute inset-0 pointer-events-none select-none" style={{
+        backgroundImage: "radial-gradient(circle, rgba(33,138,187,0.14) 1.5px, transparent 1.5px)",
+        backgroundSize: "28px 28px",
+        opacity: noAnim ? 0.3 : 0.55,
+      }} />
 
-      {!noAnim && (
+      {!noAnim ? (
         <>
-          <m.div className="absolute pointer-events-none"
-            animate={{ scale: [1, 1.12, 1], opacity: [0.45, 0.75, 0.45] }}
-            transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
-            style={{ left: "-8%", top: "-5%", width: 520, height: 520, borderRadius: "50%", background: "radial-gradient(circle, rgba(33,138,187,0.1) 0%, transparent 70%)", filter: "blur(70px)" }}
-          />
-          <m.div className="absolute pointer-events-none"
-            animate={{ scale: [1, 1.08, 1], opacity: [0.35, 0.6, 0.35] }}
-            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 4 }}
-            style={{ right: "-6%", bottom: "-5%", width: 420, height: 420, borderRadius: "50%", background: "radial-gradient(circle, rgba(4,8,80,0.06) 0%, transparent 70%)", filter: "blur(60px)" }}
-          />
+          <div className="absolute pointer-events-none" style={{
+            left: "-8%", top: "-5%", width: 400, height: 400, borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(33,138,187,0.08) 0%, transparent 70%)",
+            filter: "blur(60px)", opacity: 0.6,
+          }} />
+          <div className="absolute pointer-events-none" style={{
+            right: "-6%", bottom: "-5%", width: 320, height: 320, borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(4,8,80,0.05) 0%, transparent 70%)",
+            filter: "blur(50px)", opacity: 0.5,
+          }} />
         </>
+      ) : (
+        <div className="absolute pointer-events-none" style={{
+          left: "-8%", top: "-5%", width: 240, height: 240, borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(33,138,187,0.05) 0%, transparent 70%)",
+        }} />
       )}
 
-      {noAnim && (
-        <div className="absolute pointer-events-none"
-          style={{ left: "-8%", top: "-5%", width: 300, height: 300, borderRadius: "50%", background: "radial-gradient(circle, rgba(33,138,187,0.05) 0%, transparent 70%)" }}
-        />
-      )}
-
-      <div className="absolute pointer-events-none" style={{ right: "4%", top: "8%", width: 280, height: 280, borderRadius: "50%", border: "1px solid rgba(33,138,187,0.1)" }} />
-      <div className="absolute pointer-events-none" style={{ right: "8%", top: "12%", width: 180, height: 180, borderRadius: "50%", border: "1px solid rgba(33,138,187,0.07)" }} />
+      <div className="absolute pointer-events-none" style={{
+        right: "4%", top: "8%", width: 240, height: 240, borderRadius: "50%",
+        border: "1px solid rgba(33,138,187,0.1)",
+      }} />
+      <div className="absolute pointer-events-none" style={{
+        right: "8%", top: "12%", width: 150, height: 150, borderRadius: "50%",
+        border: "1px solid rgba(33,138,187,0.07)",
+      }} />
 
       <div className="absolute top-0 inset-x-0 h-px pointer-events-none"
         style={{ background: "linear-gradient(90deg, transparent, rgba(33,138,187,0.2), transparent)" }} />
@@ -100,10 +95,10 @@ export default function OurProducts() {
       <div className="container mx-auto px-6 md:px-20 py-20 relative z-10">
 
         <m.div
-          initial={noAnim ? { opacity: 0 } : { opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: noAnim ? 0 : 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: noAnim ? 0.5 : 0.8, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: noAnim ? 0.4 : 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="mb-10"
         >
           <div className="flex items-center gap-3 mb-4">
@@ -111,7 +106,7 @@ export default function OurProducts() {
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: noAnim ? 0.4 : 0.9, ease: [0.22, 1, 0.36, 1], delay: noAnim ? 0.15 : 0.3 }}
+              transition={{ duration: noAnim ? 0.35 : 0.7, ease: [0.22, 1, 0.36, 1], delay: noAnim ? 0.1 : 0.25 }}
               style={{ transformOrigin: "left", height: 1, width: 36, background: "linear-gradient(90deg, #218ABB, transparent)" }}
             />
             <span style={{ color: "#218ABB", fontSize: "10.5px", fontWeight: 700, letterSpacing: "0.26em", textTransform: "uppercase" }}>
@@ -122,7 +117,7 @@ export default function OurProducts() {
           <h2 className="uppercase font-bold mb-3"
             style={{ fontSize: "clamp(2.2rem, 4.5vw, 3.5rem)", fontWeight: 900, letterSpacing: "-0.035em", lineHeight: 1.05, color: "#040850" }}>
             Our{" "}
-            <span style={{ color: "#218ABB", textShadow: noAnim ? "none" : "0 0 30px rgba(33,138,187,0.2)" }}>
+            <span style={{ color: "#218ABB", textShadow: noAnim ? "none" : "0 0 24px rgba(33,138,187,0.18)" }}>
               Product
             </span>
           </h2>
@@ -131,7 +126,7 @@ export default function OurProducts() {
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: noAnim ? 0.4 : 1, ease: [0.22, 1, 0.36, 1], delay: noAnim ? 0.2 : 0.4 }}
+            transition={{ duration: noAnim ? 0.35 : 0.8, ease: [0.22, 1, 0.36, 1], delay: noAnim ? 0.15 : 0.35 }}
             style={{ transformOrigin: "left", height: 1, width: 72, marginBottom: 16, background: "linear-gradient(90deg, #218ABB, rgba(33,138,187,0.1))" }}
           />
 
@@ -148,10 +143,9 @@ export default function OurProducts() {
             <m.div
               key={currentPage + query}
               initial="hidden"
-              whileInView="visible"
-              exit="hidden"
+              animate="visible" 
+              exit={{ opacity: 0, transition: { duration: 0.15 } }}
               variants={noAnim ? containerVariantsMobile : containerVariants}
-              viewport={{ once: true, amount: 0.1 }}
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {currentItems.map((product) => (
@@ -161,7 +155,7 @@ export default function OurProducts() {
                   >
                     {product.link ? (
                       <Link to={product.link} target="_blank" rel="noopener noreferrer"
-                        className="block h-full transition-transform duration-300 hover:-translate-y-2">
+                        className="block h-full transition-transform duration-300 hover:-translate-y-1">
                         <ProductCard {...product} noAnim={noAnim} />
                       </Link>
                     ) : (
@@ -176,7 +170,7 @@ export default function OurProducts() {
               <m.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: noAnim ? 0.1 : 0.5 }}
+                transition={{ delay: noAnim ? 0.05 : 0.3 }}
               >
                 <Pagination
                   currentPage={currentPage}
@@ -188,8 +182,11 @@ export default function OurProducts() {
             </m.div>
           ) : (
             <m.div
+              key="empty"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
               className="text-center py-20"
             >
               <div style={{
@@ -197,8 +194,7 @@ export default function OurProducts() {
                 padding: "32px 48px", borderRadius: 20,
                 border: "1px solid rgba(33,138,187,0.15)",
                 background: "rgba(255,255,255,0.7)",
-                backdropFilter: noAnim ? "none" : "blur(12px)",
-                boxShadow: noAnim ? "0 4px 16px rgba(4,8,80,0.04)" : "0 8px 32px rgba(4,8,80,0.06)",
+                boxShadow: "0 4px 16px rgba(4,8,80,0.06)",
               }}>
                 <div style={{
                   width: 48, height: 48, borderRadius: 14,
@@ -223,3 +219,11 @@ export default function OurProducts() {
     </div>
   );
 }
+
+const containerVariantsMobile: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.08, delayChildren: 0.02 },
+  },
+};
