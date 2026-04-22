@@ -2,14 +2,12 @@ import React, { Suspense } from "react";
 import Hero from "./section/Hero";
 import About from "./section/About";
 
-// Lazy Load Section yang berat
 const OurServices = React.lazy(() => import("./section/OurServices"));
 const OurProducts = React.lazy(() => import("./section/OurProducts"));
 const TechStack = React.lazy(() => import("./section/TechStack"));
 const StudentProjects = React.lazy(() => import("./section/StudentProjects"));
 const Contact = React.lazy(() => import("./section/Contact"));
 
-// Komponen Fallback Sederhana agar Layout tidak loncat (CLS Fix)
 const SectionLoader = ({ height = "h-96", bg = "bg-transparent" }) => (
     <div className={`w-full ${height} ${bg} animate-pulse flex items-center justify-center`}>
         <div className="w-10 h-10 border-4 border-blue-500/20 border-t-blue-500 rounded-full animate-spin" />

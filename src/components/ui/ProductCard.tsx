@@ -9,48 +9,34 @@ export default function ProductCard({ title, category, description, image, noAni
   return (
     <m.div
       variants={{
-        hidden: { opacity: 0, y: noAnim ? 0 : 20 },
+        hidden: { opacity: 0, y: noAnim ? 0 : 16 },
         visible: { opacity: 1, y: 0 },
       }}
-      {...(!noAnim ? { whileHover: { y: -8 } as TargetAndTransition } : {})}
-      transition={{ type: "spring", stiffness: 260, damping: 22 }}
+      {...(!noAnim ? { whileHover: { y: -5 } as TargetAndTransition } : {})}
+      transition={{ type: "spring", stiffness: 240, damping: 24 }}
       className="group relative h-full"
       style={{
         borderRadius: 20,
         background: "white",
         border: "1.5px solid rgba(33,138,187,0.1)",
-        boxShadow: noAnim
-          ? "0 2px 12px rgba(4,8,80,0.05)"
-          : "0 4px 24px rgba(4,8,80,0.07), 0 1px 4px rgba(4,8,80,0.04)",
+        boxShadow: "0 4px 20px rgba(4,8,80,0.07)",
         overflow: "hidden",
-        transition: "border-color 0.3s, box-shadow 0.3s",
+        transition: "border-color 0.25s, box-shadow 0.25s",
+        willChange: noAnim ? "auto" : "transform",
       }}
       onMouseEnter={noAnim ? undefined : e => {
         e.currentTarget.style.borderColor = "rgba(33,138,187,0.35)";
-        e.currentTarget.style.boxShadow = "0 16px 48px rgba(4,8,80,0.12), 0 0 0 1px rgba(33,138,187,0.1)";
+        e.currentTarget.style.boxShadow = "0 12px 40px rgba(4,8,80,0.11), 0 0 0 1px rgba(33,138,187,0.1)";
       }}
       onMouseLeave={noAnim ? undefined : e => {
         e.currentTarget.style.borderColor = "rgba(33,138,187,0.1)";
-        e.currentTarget.style.boxShadow = "0 4px 24px rgba(4,8,80,0.07), 0 1px 4px rgba(4,8,80,0.04)";
+        e.currentTarget.style.boxShadow = "0 4px 20px rgba(4,8,80,0.07)";
       }}
     >
       <div style={{
         position: "absolute", top: 0, left: 0, right: 0, height: 1,
         background: "linear-gradient(90deg, transparent 10%, rgba(33,138,187,0.3) 50%, transparent 90%)",
       }} />
-
-      {!noAnim && (
-        <m.div
-          initial={{ opacity: 0 }}
-          whileHover={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-          style={{
-            position: "absolute", inset: -2, borderRadius: 22, zIndex: 0,
-            background: "linear-gradient(135deg, rgba(33,138,187,0.12), rgba(4,8,80,0.04))",
-            filter: "blur(10px)",
-          }}
-        />
-      )}
 
       <div className="p-6 relative z-10">
         <div className="flex items-start gap-3 mb-4">
@@ -93,15 +79,16 @@ export default function ProductCard({ title, category, description, image, noAni
         <div className="relative aspect-video w-full overflow-hidden"
           style={{ borderRadius: 12, border: "1px solid rgba(33,138,187,0.08)" }}>
           <m.img
-            {...(!noAnim ? { whileHover: { scale: 1.07 } } : {})}
-            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            {...(!noAnim ? { whileHover: { scale: 1.05 } } : {})}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
             src={image}
             alt={title}
+            loading="lazy"
             className="w-full h-full object-cover"
           />
           <div style={{
             position: "absolute", inset: 0,
-            background: "linear-gradient(to top, rgba(4,8,80,0.06) 0%, transparent 60%)",
+            background: "linear-gradient(to top, rgba(4,8,80,0.05) 0%, transparent 60%)",
             pointerEvents: "none",
           }} />
         </div>

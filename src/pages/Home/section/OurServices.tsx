@@ -1,37 +1,38 @@
 import { m, type Variants, type TargetAndTransition, useInView, useReducedMotion } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 import Button from "../../../components/ui/Button";
 import webImage from "../../../assets/web-development.webp";
 import mobileImage from "../../../assets/mobile-development.webp";
 
 function useIsMobile() {
-  if (typeof window === "undefined") return false;
-  return window.innerWidth < 768;
+  return useMemo(() => {
+    if (typeof window === "undefined") return false;
+    return window.innerWidth < 768;
+  }, []);
 }
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.3, delayChildren: 0.5 },
+    transition: { staggerChildren: 0.2, delayChildren: 0.3 },
   },
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: "easeOut", delay: 0.8 },
+    transition: { duration: 0.5, ease: "easeOut", delay: 0.4 },
   },
 };
 
 const itemVariantsMobile: Variants = {
-  hidden: { opacity: 0, y: 16 },
+  hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeOut" },
+    transition: { duration: 0.35, ease: "easeOut" },
   },
 };
 
@@ -55,31 +56,34 @@ function ServiceCard({
   noAnim = false,
 }: ServiceCardProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const inView = useInView(ref, { once: true, margin: "-40px" });
 
   return (
     <m.div
       ref={ref}
-      initial={noAnim ? { opacity: 0 } : { opacity: 0, y: 64, scale: 0.94 }}
-      animate={inView ? (noAnim ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }) : {}}
-      transition={{ duration: noAnim ? 0.5 : 0.9, ease: [0.22, 1, 0.36, 1], delay: noAnim ? delay * 0.5 : delay }}
-      {...(!noAnim ? { whileHover: { y: -10 } as TargetAndTransition } : {})}
-      className="group relative rounded-3xl overflow-hidden border"
+      initial={{ opacity: 0, y: noAnim ? 12 : 40 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{
+        duration: noAnim ? 0.4 : 0.7,
+        ease: [0.22, 1, 0.36, 1],
+        delay: noAnim ? delay * 0.3 : delay,
+      }}
+      {...(!noAnim ? { whileHover: { y: -6 } as TargetAndTransition } : {})}
+      className="group relative rounded-3xl overflow-hidden"
       style={{
         background: gradient,
         border: "1px solid rgba(255,255,255,0.08)",
-        boxShadow: noAnim
-          ? "0 8px 24px rgba(0,0,0,0.3)"
-          : "0 24px 64px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.05)",
-        transition: "border-color 0.4s, box-shadow 0.4s",
+        boxShadow: "0 16px 48px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.05)",
+        transition: "border-color 0.3s, box-shadow 0.3s, transform 0.3s",
+        willChange: noAnim ? "auto" : "transform", 
       }}
       onMouseEnter={noAnim ? undefined : e => {
         e.currentTarget.style.borderColor = "rgba(33,138,187,0.5)";
-        e.currentTarget.style.boxShadow = "0 32px 80px rgba(0,0,0,0.5), 0 0 40px rgba(33,138,187,0.1), inset 0 1px 0 rgba(255,255,255,0.06)";
+        e.currentTarget.style.boxShadow = "0 24px 64px rgba(0,0,0,0.45), 0 0 30px rgba(33,138,187,0.08), inset 0 1px 0 rgba(255,255,255,0.06)";
       }}
       onMouseLeave={noAnim ? undefined : e => {
         e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
-        e.currentTarget.style.boxShadow = "0 24px 64px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.05)";
+        e.currentTarget.style.boxShadow = "0 16px 48px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.05)";
       }}
     >
       <div style={{
@@ -90,10 +94,10 @@ function ServiceCard({
       {!noAnim && (
         <div style={{
           position: "absolute",
-          ...(blobPos === "top-right" ? { top: -20, right: -20 } : { bottom: -20, left: -20 }),
-          width: 160, height: 160, borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(33,138,187,0.14) 0%, transparent 70%)",
-          filter: "blur(22px)", pointerEvents: "none",
+          ...(blobPos === "top-right" ? { top: -10, right: -10 } : { bottom: -10, left: -10 }),
+          width: 120, height: 120, borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(33,138,187,0.12) 0%, transparent 70%)",
+          filter: "blur(16px)", pointerEvents: "none",
         }} />
       )}
 
@@ -117,24 +121,24 @@ function ServiceCard({
 
       <div className="relative h-72 overflow-hidden">
         <m.img
-          {...(!noAnim ? { whileHover: { scale: 1.1 } } : {})}
-          transition={{ duration: 0.6 }}
+          {...(!noAnim ? { whileHover: { scale: 1.06 } } : {})}
+          transition={{ duration: 0.5 }}
           src={image}
           loading="lazy"
           alt={imageAlt}
-          className="w-full h-full object-cover transition-all"
+          className="w-full h-full object-cover"
           style={{ filter: "saturate(0.85) brightness(0.88)" }}
         />
         <div className="absolute inset-0"
-          style={{ background: "linear-gradient(to top, #020049 0%, rgba(2,0,73,0.35) 55%, transparent 100%)", opacity: 0.7 }}
+          style={{ background: "linear-gradient(to top, #020049 0%, rgba(2,0,73,0.3) 55%, transparent 100%)", opacity: 0.7 }}
         />
         {!noAnim && (
           <m.div
             initial={{ opacity: 0 }}
             whileHover={{ opacity: 1 }}
-            transition={{ duration: 0.35 }}
+            transition={{ duration: 0.3 }}
             className="absolute inset-0"
-            style={{ background: "linear-gradient(to top, rgba(33,138,187,0.18) 0%, transparent 65%)" }}
+            style={{ background: "linear-gradient(to top, rgba(33,138,187,0.15) 0%, transparent 65%)" }}
           />
         )}
       </div>
@@ -150,51 +154,32 @@ export default function OurServices() {
   return (
     <section className="relative py-28 text-white overflow-hidden" style={{ background: "#020049" }}>
 
-      <div className="absolute inset-0 pointer-events-none select-none">
-        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="svc-grid" width="72" height="72" patternUnits="userSpaceOnUse">
-              <path d="M 72 0 L 0 0 0 72" fill="none" stroke="rgba(33,138,187,0.05)" strokeWidth="1" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#svc-grid)" />
-        </svg>
-      </div>
+      <div className="absolute inset-0 pointer-events-none select-none" style={{
+        backgroundImage: "linear-gradient(rgba(33,138,187,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(33,138,187,0.05) 1px, transparent 1px)",
+        backgroundSize: "72px 72px",
+      }} />
 
-      {!noAnim && (
+      {!noAnim ? (
         <>
-          <m.div className="absolute pointer-events-none"
-            animate={{ scale: [1, 1.18, 1], opacity: [0.4, 0.75, 0.4] }}
-            transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
-            style={{ left: "-12%", top: "5%", width: 650, height: 650, borderRadius: "50%", background: "radial-gradient(circle, rgba(33,138,187,0.14) 0%, transparent 65%)", filter: "blur(70px)" }}
-          />
-          <m.div className="absolute pointer-events-none"
-            animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.55, 0.3] }}
-            transition={{ duration: 17, repeat: Infinity, ease: "easeInOut", delay: 5 }}
-            style={{ right: "-8%", bottom: "-5%", width: 550, height: 550, borderRadius: "50%", background: "radial-gradient(circle, rgba(33,138,187,0.09) 0%, transparent 70%)", filter: "blur(80px)" }}
-          />
+          <div className="absolute pointer-events-none" style={{
+            left: "-12%", top: "5%", width: 500, height: 500, borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(33,138,187,0.1) 0%, transparent 65%)",
+            filter: "blur(60px)",
+            opacity: 0.6,
+          }} />
+          <div className="absolute pointer-events-none" style={{
+            right: "-8%", bottom: "-5%", width: 420, height: 420, borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(33,138,187,0.07) 0%, transparent 70%)",
+            filter: "blur(70px)",
+            opacity: 0.5,
+          }} />
         </>
+      ) : (
+        <div className="absolute pointer-events-none" style={{
+          left: "-12%", top: "5%", width: 280, height: 280, borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(33,138,187,0.06) 0%, transparent 65%)",
+        }} />
       )}
-
-      {noAnim && (
-        <div className="absolute pointer-events-none"
-          style={{ left: "-12%", top: "5%", width: 350, height: 350, borderRadius: "50%", background: "radial-gradient(circle, rgba(33,138,187,0.06) 0%, transparent 65%)" }}
-        />
-      )}
-
-      {!noAnim && ([
-        { x: "8%",  y: "15%", size: 3, delay: 0,   dur: 5.2 },
-        { x: "88%", y: "10%", size: 2, delay: 1.2, dur: 6.5 },
-        { x: "80%", y: "60%", size: 3, delay: 0.7, dur: 5.8 },
-        { x: "12%", y: "80%", size: 2, delay: 2.0, dur: 7.0 },
-        { x: "55%", y: "8%",  size: 2, delay: 3.0, dur: 6.1 },
-      ] as const).map((p, i) => (
-        <m.div key={i} className="absolute pointer-events-none rounded-full"
-          style={{ left: p.x, top: p.y, width: p.size, height: p.size, background: "#218ABB", boxShadow: "0 0 6px rgba(33,138,187,0.8)" }}
-          animate={{ y: [0, -22, 0], opacity: [0.25, 0.75, 0.25] }}
-          transition={{ duration: p.dur, repeat: Infinity, ease: "easeInOut", delay: p.delay }}
-        />
-      ))}
 
       <div className="absolute top-0 inset-x-0 h-px pointer-events-none"
         style={{ background: "linear-gradient(90deg, transparent, rgba(33,138,187,0.35), transparent)" }} />
@@ -206,7 +191,7 @@ export default function OurServices() {
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={{ once: true, margin: "-80px" }}
       >
         <m.div variants={noAnim ? itemVariantsMobile : itemVariants} className="mb-16 max-w-3xl">
           <div className="flex items-center gap-3 mb-4">
@@ -214,7 +199,7 @@ export default function OurServices() {
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: noAnim ? 0.5 : 0.9, ease: [0.22, 1, 0.36, 1], delay: noAnim ? 0.3 : 0.9 }}
+              transition={{ duration: noAnim ? 0.4 : 0.7, ease: [0.22, 1, 0.36, 1], delay: noAnim ? 0.2 : 0.7 }}
               style={{ transformOrigin: "left", height: 1, width: 36, background: "linear-gradient(90deg, #218ABB, transparent)" }}
             />
             <span style={{ color: "#218ABB", fontSize: "10.5px", fontWeight: 700, letterSpacing: "0.26em", textTransform: "uppercase" }}>
@@ -225,7 +210,7 @@ export default function OurServices() {
           <h2 className="font-bold mb-3 tracking-tight"
             style={{ fontSize: "clamp(2.2rem, 4.5vw, 3.5rem)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 1.05 }}>
             Our{" "}
-            <span style={{ color: "#218ABB", textShadow: noAnim ? "none" : "0 0 50px rgba(33,138,187,0.55)" }}>
+            <span style={{ color: "#218ABB", textShadow: noAnim ? "none" : "0 0 40px rgba(33,138,187,0.45)" }}>
               Services
             </span>
           </h2>
@@ -234,7 +219,7 @@ export default function OurServices() {
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: noAnim ? 0.5 : 1, ease: [0.22, 1, 0.36, 1], delay: noAnim ? 0.35 : 1 }}
+            transition={{ duration: noAnim ? 0.4 : 0.8, ease: [0.22, 1, 0.36, 1], delay: noAnim ? 0.25 : 0.8 }}
             style={{ transformOrigin: "left", height: 1, width: 72, marginBottom: 20, background: "linear-gradient(90deg, #218ABB, rgba(33,138,187,0.1))" }}
           />
 
@@ -255,7 +240,7 @@ export default function OurServices() {
             description="Pembuatan website profesional yang responsif, cepat, dan ramah SEO."
             image={webImage} imageAlt="Website Development" noAnim={noAnim}
           />
-          <ServiceCard delay={0.25}
+          <ServiceCard delay={0.2}
             gradient="linear-gradient(140deg, rgba(2,0,73,0.55) 0%, rgba(33,138,187,0.09) 100%)"
             blobPos="bottom-left" shimmerOpacity="rgba(33,138,187,0.5)"
             label="Mobile Solution"
@@ -266,16 +251,8 @@ export default function OurServices() {
           />
         </div>
 
-        <m.div variants={noAnim ? itemVariantsMobile : itemVariants} className="flex justify-start lg:justify-center mt-20">
-          <div className="relative group">
-            {!noAnim && (
-              <m.div
-                animate={{ opacity: [0.25, 0.55, 0.25], scale: [1, 1.04, 1] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -inset-1 rounded-full blur"
-                style={{ background: "#218ABB" }}
-              />
-            )}
+        <m.div variants={noAnim ? itemVariantsMobile : itemVariants} className="flex justify-center mt-20">
+          <div className="relative">
             <Button classAdd="hover:scale-105 px-10 py-4" text="Consult now" href="#contact" />
           </div>
         </m.div>
