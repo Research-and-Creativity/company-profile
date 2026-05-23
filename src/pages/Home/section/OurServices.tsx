@@ -75,7 +75,7 @@ function ServiceCard({
         border: "1px solid rgba(255,255,255,0.08)",
         boxShadow: "0 16px 48px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.05)",
         transition: "border-color 0.3s, box-shadow 0.3s, transform 0.3s",
-        willChange: noAnim ? "auto" : "transform", 
+        willChange: noAnim ? "auto" : "transform",
       }}
       onMouseEnter={noAnim ? undefined : e => {
         e.currentTarget.style.borderColor = "rgba(33,138,187,0.5)";
@@ -124,6 +124,7 @@ function ServiceCard({
           {...(!noAnim ? { whileHover: { scale: 1.06 } } : {})}
           transition={{ duration: 0.5 }}
           src={image}
+          sizes="(max-width: 768px) 100vw, 50vw"
           loading="lazy"
           alt={imageAlt}
           className="w-full h-full object-cover"

@@ -11,21 +11,21 @@ function useIsMobile() {
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const CATEGORY_COLOR: Record<string, string> = {
-  Web:                "#218ABB",
-  Mobile:             "#22c55e",
-  Desktop:            "#f59e0b",
-  "AI/ML":            "#a855f7",
+  Web: "#218ABB",
+  Mobile: "#22c55e",
+  Desktop: "#f59e0b",
+  "AI/ML": "#a855f7",
   "Game Development": "#ef4444",
-  "UI/UX Design":     "#ec4899",
+  "UI/UX Design": "#ec4899",
 };
 
 const CATEGORY_LABEL: Record<string, string> = {
-  Web:                "Web",
-  Mobile:             "Mobile",
-  Desktop:            "Desktop",
-  "AI/ML":            "AI/ML",
+  Web: "Web",
+  Mobile: "Mobile",
+  Desktop: "Desktop",
+  "AI/ML": "AI/ML",
   "Game Development": "Game Dev",
-  "UI/UX Design":     "UI/UX",
+  "UI/UX Design": "UI/UX",
 };
 
 export default function DetailProject() {
@@ -131,35 +131,35 @@ export default function DetailProject() {
           </div>
 
           <div className="container mx-auto px-6 md:px-20 pb-10"><div style={{ maxWidth: 1000, margin: "0 auto" }}>
-          <m.div
-            initial={noAnim ? { opacity: 0 } : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: noAnim ? 0.4 : 0.8, ease: EASE }}
-            className="relative w-full"
-          >
-            <div style={{
-              aspectRatio: "16/9", borderRadius: 14, overflow: "hidden",
-              boxShadow: "0 8px 40px rgba(0,0,0,0.35)",
-              background: `linear-gradient(135deg, ${catColor}25, #0a0f1e)`,
-              position: "relative",
-            }}>
-              <img
-                src={project.thumbnail}
-                alt={project.title}
-                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-                onError={e => { e.currentTarget.style.display = "none"; }}
-              />
+            <m.div
+              initial={noAnim ? { opacity: 0 } : { opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: noAnim ? 0.4 : 0.8, ease: EASE }}
+              className="relative w-full"
+            >
               <div style={{
-                position: "absolute", top: 16, left: 16,
-                padding: "5px 12px", borderRadius: 100,
-                background: `${catColor}dd`,
-                fontSize: "10px", fontWeight: 800,
-                color: "white", letterSpacing: "0.12em", textTransform: "uppercase",
+                aspectRatio: "16/9", borderRadius: 14, overflow: "hidden",
+                boxShadow: "0 8px 40px rgba(0,0,0,0.35)",
+                background: `linear-gradient(135deg, ${catColor}25, #0a0f1e)`,
+                position: "relative",
               }}>
-                {catLabel}
+                <img
+                  src={project.thumbnail}
+                  alt={project.title}
+                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  onError={e => { e.currentTarget.style.display = "none"; }}
+                />
+                <div style={{
+                  position: "absolute", top: 16, left: 16,
+                  padding: "5px 12px", borderRadius: 100,
+                  background: `${catColor}dd`,
+                  fontSize: "10px", fontWeight: 800,
+                  color: "white", letterSpacing: "0.12em", textTransform: "uppercase",
+                }}>
+                  {catLabel}
+                </div>
               </div>
-            </div>
-          </m.div>
+            </m.div>
           </div></div>
 
           <div style={{ marginTop: 40, marginBottom: -2 }}>
@@ -192,7 +192,7 @@ export default function DetailProject() {
                 }} />
 
                 <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                  <p style={{ color: "rgba(50,70,100,0.75)", lineHeight: 1.85, fontSize: "1rem" }}>
+                  <p style={{ color: "rgba(50,70,100,0.75)", lineHeight: 1.85, fontSize: "1rem" }} className="whitespace-pre-line">
                     {project.description}
                   </p>
                   <p style={{ color: "rgba(50,70,100,0.55)", lineHeight: 1.85, fontSize: "0.95rem" }}>
@@ -302,8 +302,8 @@ export default function DetailProject() {
                       onMouseLeave={e => { e.currentTarget.style.opacity = "1"; }}
                     >
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                        <polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/>
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                        <polyline points="15 3 21 3 21 9" /><line x1="10" x2="21" y1="14" y2="3" />
                       </svg>
                       Lihat Demo
                     </a>
@@ -331,7 +331,7 @@ export default function DetailProject() {
                       }}
                     >
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
                       </svg>
                       GitHub Repository
                     </a>
@@ -389,7 +389,7 @@ export default function DetailProject() {
                           background: `linear-gradient(135deg, ${CATEGORY_COLOR[rel.category] ?? "#218ABB"}20, rgba(4,8,80,0.06))`,
                         }}>
                           <img
-                            src={rel.thumbnail}
+                            src={rel.thumbnail || "https://images.unsplash.com/photo-1618477388954-7852f32655ec?q=80&w=800&auto=format&fit=crop"}
                             alt={rel.title}
                             style={{
                               width: "100%", height: "100%", objectFit: "cover", display: "block",
@@ -397,7 +397,10 @@ export default function DetailProject() {
                             }}
                             onMouseEnter={e => { if (!noAnim) e.currentTarget.style.transform = "scale(1.05)"; }}
                             onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; }}
-                            onError={e => { e.currentTarget.style.display = "none"; }}
+                            onError={(e) => {
+                              e.currentTarget.onerror = null;
+                              e.currentTarget.src = "https://images.unsplash.com/photo-1618477388954-7852f32655ec?q=80&w=800&auto=format&fit=crop";
+                            }}
                           />
                         </div>
                         <div style={{ padding: "12px 14px", background: "white" }}>

@@ -71,15 +71,20 @@ export default function ProjectCard({ project, noAnim = false }: ProjectCardProp
           }}
         >
           <img
-            src={project.thumbnail}
+            src={project.thumbnail || "https://images.unsplash.com/photo-1618477388954-7852f32655ec?q=80&w=800&auto=format&fit=crop"}
             alt={project.title}
             loading="lazy"
             style={{
-              width: "100%", height: "100%",
-              objectFit: "cover", display: "block",
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              display: "block",
               transition: _noAnim ? "none" : "opacity 0.3s",
             }}
-            onError={e => { e.currentTarget.style.display = "none"; }}
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = "https://images.unsplash.com/photo-1618477388954-7852f32655ec?q=80&w=800&auto=format&fit=crop";
+            }}
           />
 
           {!_noAnim && (
