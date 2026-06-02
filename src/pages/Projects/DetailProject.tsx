@@ -2,6 +2,7 @@ import { m, useReducedMotion } from "framer-motion";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { STUDENT_PROJECTS } from "../../constants/studentProjects";
+import { useEffect } from "react";
 
 function useIsMobile() {
   if (typeof window === "undefined") return false;
@@ -37,30 +38,44 @@ export default function DetailProject() {
 
   const project = STUDENT_PROJECTS.find(p => p.id === id);
 
+  useEffect(() => {
+    if (project) {
+      document.title = `${project.title} | Zetech Projects`;
+    } else {
+      document.title = "Project Not Found | Zetech";
+    }
+  }, [project]);
+
   if (!project) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center" style={{ background: "#f0f4f8" }}>
-        <div style={{ textAlign: "center", padding: "48px 24px" }}>
-          <p style={{ fontSize: "5rem", marginBottom: 16 }}>🔍</p>
-          <h1 style={{ fontSize: "1.8rem", fontWeight: 900, color: "#040850", marginBottom: 8 }}>
-            Project tidak ditemukan
-          </h1>
-          <p style={{ color: "rgba(50,70,100,0.6)", marginBottom: 32 }}>
-            Project dengan ID <code style={{ background: "rgba(33,138,187,0.1)", padding: "2px 6px", borderRadius: 4 }}>{id}</code> tidak ada.
-          </p>
-          <Link to="/projects"
-            style={{
-              display: "inline-flex", alignItems: "center", gap: 8,
-              padding: "12px 24px", borderRadius: 100,
-              background: "linear-gradient(135deg, #218ABB, #1a6e96)",
-              color: "white", fontWeight: 700, fontSize: "0.9rem",
-              textDecoration: "none",
-            }}
-          >
-            ← Kembali ke Projects
-          </Link>
+      <>
+        <Helmet>
+          <title>Project Not Found | Zetech</title>
+          <meta name="description" content="Explore our student projects..." />
+        </Helmet>
+        <div className="min-h-screen flex flex-col items-center justify-center" style={{ background: "#f0f4f8" }}>
+          <div style={{ textAlign: "center", padding: "48px 24px" }}>
+            <p style={{ fontSize: "5rem", marginBottom: 16 }}>🔍</p>
+            <h1 style={{ fontSize: "1.8rem", fontWeight: 900, color: "#040850", marginBottom: 8 }}>
+              Project tidak ditemukan
+            </h1>
+            <p style={{ color: "rgba(50,70,100,0.6)", marginBottom: 32 }}>
+              Project dengan ID <code style={{ background: "rgba(33,138,187,0.1)", padding: "2px 6px", borderRadius: 4 }}>{id}</code> tidak ada.
+            </p>
+            <Link to="/projects"
+              style={{
+                display: "inline-flex", alignItems: "center", gap: 8,
+                padding: "12px 24px", borderRadius: 100,
+                background: "linear-gradient(135deg, #218ABB, #1a6e96)",
+                color: "white", fontWeight: 700, fontSize: "0.9rem",
+                textDecoration: "none",
+              }}
+            >
+              ← Kembali ke Projects
+            </Link>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
@@ -76,7 +91,7 @@ export default function DetailProject() {
       <Helmet>
         <title>{project.title} | Zetech Projects</title>
         <meta name="description" content={project.description} />
-        <link rel="canonical" href={`https://zetech.vercel.app/projects/${project.id}`} />
+        <link rel="canonical" href={`https://zetech.id/projects/${project.id}`} />
       </Helmet>
 
       <div className="min-h-screen" style={{ background: "#f0f4f8" }}>
