@@ -17,7 +17,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(400).json({ message: "Format email tidak valid." });
   }
 
-  const LOGO_URL = `${process.env.SITE_URL ?? "https://zetech.vercel.app"}/logo_white.svg`;
+  const LOGO_URL = `${process.env.SITE_URL ?? "https://zetech.id"}/logo_white.svg`;
 
   const now = new Date().toLocaleDateString("id-ID", {
     weekday: "long",
@@ -126,7 +126,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   <tr>
     <td style="background:#f1f5f9;border-radius:0 0 16px 16px;padding:18px 40px;text-align:center;border-top:1px solid #e2e8f0;">
       <p style="color:#94a3b8;font-size:12px;margin:0 0 4px;">
-        Dikirim otomatis via <a href="${process.env.SITE_URL ?? "https://zetech.vercel.app"}" style="color:#218ABB;text-decoration:none;font-weight:600;">zetech.vercel.app</a>
+        Dikirim otomatis via <a href="${process.env.SITE_URL ?? "https://zetech.id"}" style="color:#218ABB;text-decoration:none;font-weight:600;">zetech.id</a>
       </p>
       <p style="color:#cbd5e1;font-size:11px;margin:0;">© ${year} Zetech · HMSE Telkom University Purwokerto</p>
     </td>
@@ -208,8 +208,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         <tr>
           <td style="background:#f9fafb;border-radius:12px;padding:16px 22px;text-align:center;">
             <p style="color:#9ca3af;font-size:12px;margin:0 0 8px;">Ikuti perkembangan Zetech</p>
-            <a href="${process.env.SITE_URL ?? "https://zetech.vercel.app"}" style="color:#218ABB;text-decoration:none;font-size:13.5px;font-weight:600;">
-              &nbsp;zetech.vercel.app
+            <a href="${process.env.SITE_URL ?? "https://zetech.id"}" style="color:#218ABB;text-decoration:none;font-size:13.5px;font-weight:600;">
+              &nbsp;zetech.id
             </a>
           </td>
         </tr>

@@ -33,7 +33,7 @@ export default function IndexAbout() {
             <Helmet>
                 <title>About Zetech | Mengenal Zetra Tech & Kabinet Zenith</title>
                 <meta name="description" content="Pelajari lebih dalam tentang visi Zetech dan kontribusi Kabinet Zenith HMSE Telkom University Purwokerto dalam dunia rekayasa perangkat lunak." />
-                <link rel="canonical" href="https://zetech.vercel.app/about" />
+                <link rel="canonical" href="https://zetech.id/about" />
             </Helmet>
 
             <div className="flex flex-col w-full">
@@ -72,7 +72,7 @@ export default function IndexAbout() {
                     )}
 
                     {!noAnim && [
-                        { x: "12%", y: "25%", size: 3, delay: 0,   dur: 5.2 },
+                        { x: "12%", y: "25%", size: 3, delay: 0, dur: 5.2 },
                         { x: "85%", y: "18%", size: 4, delay: 1.2, dur: 6.5 },
                         { x: "75%", y: "60%", size: 2, delay: 0.7, dur: 5.8 },
                         { x: "30%", y: "80%", size: 3, delay: 2.0, dur: 7.0 },

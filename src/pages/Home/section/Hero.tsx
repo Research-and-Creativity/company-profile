@@ -118,7 +118,7 @@ export default function Hero() {
       <Helmet>
         <title>Zetech | Elevating Innovations - Kabinet Zenith HMSE</title>
         <meta name="description" content="Selamat datang di Zetech (Zetra Tech), platform inovasi digital resmi HMSE Telkom University Purwokerto di bawah naungan Kabinet Zenith." />
-        <link rel="canonical" href="https://zetech.vercel.app/" />
+        <link rel="canonical" href="https://zetech.id/" />
       </Helmet>
 
       <section
