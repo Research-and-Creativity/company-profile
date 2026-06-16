@@ -8,6 +8,34 @@ import Hitoong from "../assets/projects/hitoong.webp";
 import EbiiGreen from "../assets/projects/ebii-green.webp";
 import LadangGo from "../assets/projects/ladanggo.webp";
 import Guestify from "../assets/projects/guestify.webp";
+// New Hydra
+import NewHydraAdmin from "../assets/projects/new-hydra-admin.webp";
+import NewHydraGuru from "../assets/projects/new-hydra-guru.webp";
+import NewHydraSiswa from "../assets/projects/new-hydra-siswa.webp";
+// LadangGo
+import LadangGoAdmin from "../assets/projects/ladanggo-admin.webp";
+import LadangGoFarmer from "../assets/projects/ladanggo-farmer.webp";
+import LadangGoHoreka from "../assets/projects/ladanggo-horeka.webp";
+// DistribuPlan
+import DistribuPlanAdmin from "../assets/projects/distribuplan.webp";
+// Sivia Coop
+import SiviaCoopDashboard from "../assets/projects/SiviaCoop-Dashboard.webp";
+import SiviaCoopLandingPage from "../assets/projects/SiviaCoop-LandingPage.webp";
+// Sivia Finance
+import SiviaFinanceDashboard from "../assets/projects/SiviaFinance-Dashboard.webp";
+import SiviaFinanceLandingPage from "../assets/projects/SiviaFinance-LandingPage.webp";
+// Sivia HR
+import SiviaHRDashboard from "../assets/projects/SiviaHR-Dashboard.webp";
+import SiviaHRLandingPage from "../assets/projects/SiviaHR-LandingPage.webp";
+// Sivia Invitation
+import SiviaInvitationDashboard from "../assets/projects/SiviaInvitation-Dashboard.webp";
+import SiviaInvitationLandingPage from "../assets/projects/SiviaInvitation-LandingPage.webp";
+// Sivia POS
+import SiviaPOSDashboard from "../assets/projects/SiviaPOS-Dashboard.webp";
+import SiviaPOSLandingPage from "../assets/projects/SiviaPOS-LandingPage.webp";
+// Sivia Vanue
+import SiviaVanueDashboard from "../assets/projects/SiviaVanue-Dashboard.webp";
+import SiviaVanueLandingPage from "../assets/projects/SiviaVanue-LandingPage.webp";
 
 export const STUDENT_PROJECTS: StudentProject[] = [
   {
@@ -51,8 +79,8 @@ export const STUDENT_PROJECTS: StudentProject[] = [
     title: "LadangGo: AI-Powered Smart Farming & Supply Management",
     description:
       "LadangGo adalah platform AgriTech yang menghadirkan asisten AI Chatbot via WhatsApp untuk mendukung aktivitas harian petani secara instan. Fitur utamanya meliputi prediksi cuaca berbasis lokasi lahan, peringatan risiko hama, rekomendasi pemupukan, dan deteksi penyakit tanaman. Selain itu, LadangGo memiliki dasbor manajemen rantai pasok (Supply Chain) terintegrasi untuk menghubungkan hasil panen ke bisnis HORECA (Hotel, Restoran, Kafe) secara real-time dengan harga yang transparan.",
-    thumbnail: LadangGo,
-    authors: [],
+    thumbnail: [LadangGo, LadangGoAdmin, LadangGoFarmer, LadangGoHoreka],
+    authors: ["Yudha Islami Yulistia"],
     year: 2026,
     techStack: [
       "Next.js",
@@ -101,7 +129,7 @@ export const STUDENT_PROJECTS: StudentProject[] = [
     description:
       "EBII Green System adalah platform monitoring cerdas berbasis IoT dan AI (Sustainable Smart Aquaculture Technology) yang dirancang untuk memantau kualitas air tambak secara real-time, mengoptimalkan aerasi, dan mewujudkan tambak ramah lingkungan. Sistem ini mengintegrasikan sensor IoT untuk memantau 8 parameter air, model AI untuk prediksi dan peramalan (forecast), serta kontrol aerator otomatis untuk menghemat energi dan mengurangi emisi karbon.",
     thumbnail: EbiiGreen,
-    authors: [],
+    authors: ["Yudha Islami Yulistia"],
     year: 2026,
     techStack: ["Next.js", "Tailwind CSS", "NestJS", "FastAPI", "Python"],
     demoUrl: "https://ebii.sivia.id/",
@@ -137,23 +165,18 @@ export const STUDENT_PROJECTS: StudentProject[] = [
   {
     id: "sp-006",
     title: "New Hydra Zeta",
-    description:
-      "LadangGo adalah platform AgriTech yang menghadirkan asisten AI Chatbot via WhatsApp untuk mendukung aktivitas harian petani secara instan. Fitur utamanya meliputi prediksi cuaca berbasis lokasi lahan, peringatan risiko hama, rekomendasi pemupukan, dan deteksi penyakit tanaman. Selain itu, LadangGo memiliki dasbor manajemen rantai pasok (Supply Chain) terintegrasi untuk menghubungkan hasil panen ke bisnis HORECA (Hotel, Restoran, Kafe) secara real-time dengan harga yang transparan.",
-    thumbnail: "",
-    authors: [],
+    description: `New Hydra Zeta adalah platform pemantauan hidrasi dan edukasi keseimbangan cairan tubuh yang komprehensif. Sistem ini dirancang dengan arsitektur multi-role yang mengintegrasikan Siswa, Orang Tua, Guru, dan Administrator.
+      
+      Siswa memiliki akses ke antarmuka responsif untuk mencatat target minum harian, menonton video edukasi kesehatan, dan bersaing di papan peringkat. Sementara itu, Orang Tua dan Guru dapat memantau status hidrasi anak secara real-time menggunakan kode akses unik. Pada level tertinggi, dasbor Administrator menyajikan analitik data hidrasi harian, kalkulasi rumus kebutuhan cairan (FBB, FG, FA), serta manajemen kuis dan materi edukasi secara terpusat.`,
+    thumbnail: [NewHydraAdmin, NewHydraSiswa, NewHydraGuru],
+    authors: ["Yudha Islami Sulistya"],
     year: 2026,
-    techStack: [
-      "Next.js",
-      "Tailwind CSS",
-      "WhatsApp Cloud API",
-      "Python",
-      "FastAPI",
-      "Google Sheets API",
-    ],
+    techStack: ["Next.js", "Tailwind CSS", "TypeScript", "Recharts", "Node.js"],
     demoUrl: "https://new-hydra-zeta.id/",
     githubUrl: "",
-    category: "AI/ML",
+    category: "Web",
     featured: true,
+    creatorType: "Dosen",
   },
   {
     id: "sp-007",
@@ -182,24 +205,19 @@ export const STUDENT_PROJECTS: StudentProject[] = [
   },
   {
     id: "sp-008",
-    title: "DistribuPlan",
-    description:
-      "LadangGo adalah platform AgriTech yang menghadirkan asisten AI Chatbot via WhatsApp untuk mendukung aktivitas harian petani secara instan. Fitur utamanya meliputi prediksi cuaca berbasis lokasi lahan, peringatan risiko hama, rekomendasi pemupukan, dan deteksi penyakit tanaman. Selain itu, LadangGo memiliki dasbor manajemen rantai pasok (Supply Chain) terintegrasi untuk menghubungkan hasil panen ke bisnis HORECA (Hotel, Restoran, Kafe) secara real-time dengan harga yang transparan.",
-    thumbnail: "",
-    authors: [],
+    title: "DistribuPlan: Sistem Monitoring Distribusi Terpadu",
+    description: `DistribuPlan adalah platform sistem informasi berdesain mobile-first yang dirancang khusus untuk memonitoring proses distribusi logistik secara real-time. Melalui dasbor Super Admin yang interaktif, sistem ini memungkinkan pemantauan progres distribusi di berbagai segmen secara akurat.
+      
+      Fitur utamanya mencakup pelacakan status operasional secara mendetail pada setiap tahap—mulai dari Non-Available, Available, Loading, Delivery, Onsite, hingga Unloading. Selain itu, DistribuPlan terintegrasi dengan manajemen entitas esensial seperti pendataan Armada, Vendor, dan Bentang area kerja. Didukung dengan fitur analitik grafik distribusi harian dan filter data yang komprehensif, platform ini bertujuan untuk mengoptimalkan efisiensi rantai pasok (supply chain) dan memastikan seluruh proses operasional berjalan sesuai target.`,
+    thumbnail: [DistribuPlanAdmin],
+    authors: ["Yudha Islami Sulistya"],
     year: 2026,
-    techStack: [
-      "Next.js",
-      "Tailwind CSS",
-      "WhatsApp Cloud API",
-      "Python",
-      "FastAPI",
-      "Google Sheets API",
-    ],
+    techStack: ["React", "Tailwind CSS", "TypeScript", "PWA", "Vite"],
     demoUrl: "https://distribu-plan.sivia.id/",
     githubUrl: "",
-    category: "AI/ML",
+    category: "Mobile",
     featured: true,
+    creatorType: "Dosen",
   },
   {
     id: "sp-009",
@@ -219,24 +237,25 @@ export const STUDENT_PROJECTS: StudentProject[] = [
   },
   {
     id: "sp-010",
-    title: "Site Track Project",
-    description:
-      "LadangGo adalah platform AgriTech yang menghadirkan asisten AI Chatbot via WhatsApp untuk mendukung aktivitas harian petani secara instan. Fitur utamanya meliputi prediksi cuaca berbasis lokasi lahan, peringatan risiko hama, rekomendasi pemupukan, dan deteksi penyakit tanaman. Selain itu, LadangGo memiliki dasbor manajemen rantai pasok (Supply Chain) terintegrasi untuk menghubungkan hasil panen ke bisnis HORECA (Hotel, Restoran, Kafe) secara real-time dengan harga yang transparan.",
-    thumbnail: "",
-    authors: [],
+    title: "Sivia Coop: Platform Manajemen Koperasi Digital Terintegrasi",
+    description: `Sivia Coop adalah sistem manajemen koperasi modern berkonsep Software as a Service (SaaS) yang dirancang khusus untuk mendigitalisasi berbagai jenis koperasi di Indonesia, mulai dari Koperasi Simpan Pinjam, Karyawan, hingga Sekolah. Platform ini dibangun dengan logika finansial atomik dan menghasilkan catatan yang siap diaudit (audit-ready) tanpa memerlukan instalasi rumit.
+      
+      Sistem ini sangat komprehensif dengan menawarkan 14+ modul terintegrasi yang mencakup manajemen Anggota, Simpanan (Pokok, Sukarela, Wajib), Pinjaman, Angsuran, Jurnal Kas, hingga perhitungan SHU (Sisa Hasil Usaha). Melalui dasbor analitik yang interaktif, pengelola dapat memantau arus kas bulanan, distribusi status pinjaman, serta menyajikan 7 jenis laporan real-time secara transparan dengan keamanan berlapis melalui 45 permission granular.`,
+    thumbnail: [SiviaCoopLandingPage, SiviaCoopDashboard],
+    authors: ["Yudha Islami Yulistia"],
     year: 2026,
     techStack: [
       "Next.js",
       "Tailwind CSS",
-      "WhatsApp Cloud API",
-      "Python",
-      "FastAPI",
-      "Google Sheets API",
+      "TypeScript",
+      "PostgreSQL",
+      "SaaS Architecture",
     ],
-    demoUrl: "https://site-track-project.sivia.id/",
+    demoUrl: "",
     githubUrl: "",
-    category: "AI/ML",
+    category: "Web",
     featured: false,
+    creatorType: "Dosen",
   },
   {
     id: "sp-011",
@@ -286,6 +305,116 @@ export const STUDENT_PROJECTS: StudentProject[] = [
     githubUrl: "",
     category: "Web",
     featured: false,
+  },
+  {
+    id: "sp-013",
+    title: "Sivia Finance Lite: Platform Manajemen Keuangan Bisnis & Personal",
+    description: `Sivia Finance Lite adalah platform manajemen keuangan berbasis SaaS yang dirancang untuk mengelola dua aspek sekaligus: keuangan bisnis (UMKM, agensi, freelancer) dan keuangan personal dalam satu ekosistem terintegrasi. Platform ini hadir dengan fitur cerdas seperti pemindaian struk/invoice menggunakan kecerdasan buatan (AI Scan), kalkulasi Pajak Indonesia otomatis (Indonesian taxes built-in), dan kapabilitas ekspor laporan ke format PDF maupun Excel.
+      
+      Sistem ini menawarkan modul yang sangat komprehensif. Pada sisi bisnis, pengguna dapat mengelola Customers, Quotations, Invoices, Payments, hingga Cashbook harian. Menariknya, pada sisi Personal Finance, platform ini dilengkapi fitur pelacakan Budgets, Savings & Goals, pemantauan Net Worth, Kalkulator Zakat, hingga pengukuran Financial Health Score. Dengan analitik dasbor yang interaktif, pengguna dapat memantau Net Cashflow, status invoice (Overdue/Lunas), dan grafik performa keuangan secara real-time.`,
+    thumbnail: [SiviaFinanceLandingPage, SiviaFinanceDashboard],
+    authors: ["Yudha Islami Yulistia"],
+    year: 2026,
+    techStack: [
+      "Next.js",
+      "Tailwind CSS",
+      "TypeScript",
+      "AI Vision",
+      "SaaS Architecture",
+    ],
+    demoUrl: "",
+    githubUrl: "",
+    category: "Web",
+    featured: true,
+    creatorType: "Dosen",
+  },
+  {
+    id: "sp-014",
+    title: "Sivia HR Lite: Platform Manajemen SDM & HRIS Berbasis AI",
+    description: `Sivia HR Lite adalah platform Human Resource Information System (HRIS) berkonsep SaaS yang dirancang untuk membebaskan UMKM, startup, klinik, dan agensi dari pengelolaan data manual berbasis spreadsheet. Mengusung kapabilitas HR berbasis AI untuk tim modern, platform ini menyatukan seluruh siklus hidup karyawan dalam satu ekosistem digital yang terpusat dan terotomatisasi.
+      
+      Sistem ini menawarkan kelengkapan modul tingkat enterprise yang mencakup operasional Utama (Absensi, Cuti, Lembur, Shift), manajemen Organisasi (Departemen, Posisi, Lokasi Kerja, Org Chart), serta portal Layanan Mandiri (Employee Self-Service) di mana karyawan dapat melakukan absensi secara mandiri, mengunduh dokumen, dan mengisi survei. Melalui dasbor HR yang komprehensif, manajemen dapat memantau KPI secara real-time, seperti tingkat kehadiran, keterlambatan, tren absensi bulanan, hingga rasio perputaran karyawan (attrition rate).`,
+    thumbnail: [SiviaHRLandingPage, SiviaHRDashboard],
+    authors: ["Yudha Islami Yulistia"],
+    year: 2026,
+    techStack: [
+      "Next.js",
+      "Tailwind CSS",
+      "TypeScript",
+      "HRIS",
+      "SaaS Architecture",
+    ],
+    demoUrl: "",
+    githubUrl: "",
+    category: "Web",
+    featured: true,
+    creatorType: "Dosen",
+  },
+  {
+    id: "sp-015",
+    title: "Sivia Invitation: Platform Undangan Digital & Manajemen Tamu",
+    description: `Sivia Invitation adalah platform pembuatan dan manajemen undangan digital berkonsep SaaS yang mempermudah publikasi berbagai jenis acara. Menargetkan efisiensi dan kesan elegan, platform ini menawarkan lebih dari 500 pilihan tema, integrasi 600+ musik latar, QR check-in, hingga fitur amplop digital dalam satu tautan interaktif yang dapat dikirim secara masal via WhatsApp hanya dengan satu klik.
+      
+      Lebih dari sekadar pembuat undangan (Builder), sistem ini dilengkapi dasbor manajemen tamu tingkat lanjut. Pengguna dapat mengelola Daftar dan Grup Tamu, melacak respons RSVP, mengelola Buku Tamu, hingga memoderasi pesan masuk. Modul Konten Acara (cerita, galeri, video) dan manajemen Rekening Hadiah dipisahkan secara rapi. Melalui fitur analitik, penyelenggara acara dapat memantau distribusi status kehadiran dan metrik klik (RSVP, Maps, Hadiah) secara real-time.`,
+    thumbnail: [SiviaInvitationLandingPage, SiviaInvitationDashboard],
+    authors: ["Yudha Islami Yulistia"],
+    year: 2026,
+    techStack: [
+      "Next.js",
+      "Tailwind CSS",
+      "TypeScript",
+      "PostgREST",
+      "SaaS Architecture",
+    ],
+    demoUrl: "",
+    githubUrl: "",
+    category: "Web",
+    featured: true,
+    creatorType: "Dosen",
+  },
+  {
+    id: "sp-016",
+    title: "Sivia POS: Platform Point of Sale & Inventaris Bisnis Berbasis AI",
+    description: `Sivia POS adalah platform Point of Sale (POS) modern berbasis cloud yang dirancang untuk membuat operasional bisnis menjadi lebih cerdas dan efisien. Berkonsep SaaS dengan 35+ fitur terintegrasi, platform ini memungkinkan pengelolaan penjualan, inventaris multi-outlet, loyalitas pelanggan, hingga pembukuan keuangan dalam satu ekosistem yang dapat diakses 24/7 dari mana saja. Sivia POS juga terintegrasi penuh dengan sistem pembayaran QRIS dan e-wallet melalui Xendit.
+      
+      Platform ini menawarkan kelengkapan modul tingkat lanjut yang melebihi aplikasi kasir standar. Pada manajemen inventaris, pengguna dapat melakukan Stok Opname, Transfer Stok antar outlet, hingga Cetak Label. Untuk operasional sehari-hari, tersedia kontrol Shift Kasir, manajemen Pemasok, serta modul khusus Restoran (Pesanan Meja). Keunggulan inovatif dari Sivia POS adalah kehadiran 'Sivia AI', asisten cerdas yang secara otomatis mendeteksi anomali operasional dan memberikan insight penjualan harian langsung di dasbor pengguna.`,
+    thumbnail: [SiviaPOSLandingPage, SiviaPOSDashboard],
+    authors: ["Yudha Islami Yulistia"],
+    year: 2026,
+    techStack: [
+      "Next.js",
+      "Tailwind CSS",
+      "TypeScript",
+      "Xendit API",
+      "SaaS Architecture",
+    ],
+    demoUrl: "",
+    githubUrl: "",
+    category: "Web",
+    featured: true,
+    creatorType: "Dosen",
+  },
+  {
+    id: "sp-017",
+    title: "Sivia Vanue: Smart Booking Management & Venue Rental SaaS",
+    description: `Sivia Vanue adalah platform SaaS penyewaan dan manajemen tempat cerdas (Smart Booking Management) yang dirancang khusus untuk pemilik venue seperti lapangan olahraga, studio musik, hingga ruang serbaguna. Platform ini menyatukan pengelolaan jadwal booking, pelanggan, pembayaran, hingga laporan bisnis dalam satu ekosistem terpadu, lengkap dengan fitur halaman pemesanan publik (Public Booking Page) gratis untuk memudahkan pelanggan.
+      
+      Sistem ini menawarkan kapabilitas tingkat enterprise dengan modul yang sangat komprehensif. Pada Venue Management, pengelola dapat mengatur Operating Hours, Availability Rules, Blocked Slots, hingga Amenities (fasilitas tambahan). Modul Pricing juga sangat fleksibel karena mendukung Pricing Rules dinamis, Packages, Promotions, dan Memberships. Melalui dasbor analitik, pemilik venue dapat memantau matriks krusial seperti tingkat Okupansi Harian, Tren Booking, rasio Revenue vs Paid, hingga tagihan Outstanding secara real-time.`,
+    thumbnail: [SiviaVanueLandingPage, SiviaVanueDashboard],
+    authors: ["Yudha Islami Yulistia"],
+    year: 2026,
+    techStack: [
+      "Next.js",
+      "Tailwind CSS",
+      "TypeScript",
+      "Calendar Integration",
+      "SaaS Architecture",
+    ],
+    demoUrl: "",
+    githubUrl: "",
+    category: "Web",
+    featured: false,
+    creatorType: "Dosen",
   },
 ];
 

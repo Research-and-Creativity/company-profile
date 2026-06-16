@@ -1,8 +1,8 @@
-import { m, useReducedMotion } from "framer-motion";
+import { AnimatePresence, m, useReducedMotion } from "framer-motion";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { STUDENT_PROJECTS } from "../../constants/studentProjects";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function useIsMobile() {
   if (typeof window === "undefined") return false;
@@ -35,6 +35,8 @@ export default function DetailProject() {
   const isMobile = useIsMobile();
   const prefersReduced = useReducedMotion();
   const noAnim = isMobile || !!prefersReduced;
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const project = STUDENT_PROJECTS.find(p => p.id === id);
 
@@ -85,6 +87,13 @@ export default function DetailProject() {
   const related = STUDENT_PROJECTS
     .filter(p => p.id !== project.id && p.category === project.category)
     .slice(0, 3);
+
+  const images = Array.isArray(project.thumbnail)
+    ? project.thumbnail
+    : [project.thumbnail].filter(Boolean);
+
+  const nextImage = () => setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  const prevImage = () => setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
 
   return (
     <>
@@ -145,37 +154,94 @@ export default function DetailProject() {
             </m.div>
           </div>
 
-          <div className="container mx-auto px-6 md:px-20 pb-10"><div style={{ maxWidth: 1000, margin: "0 auto" }}>
-            <m.div
-              initial={noAnim ? { opacity: 0 } : { opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: noAnim ? 0.4 : 0.8, ease: EASE }}
-              className="relative w-full"
-            >
-              <div style={{
-                aspectRatio: "16/9", borderRadius: 14, overflow: "hidden",
-                boxShadow: "0 8px 40px rgba(0,0,0,0.35)",
-                background: `linear-gradient(135deg, ${catColor}25, #0a0f1e)`,
-                position: "relative",
-              }}>
-                <img
-                  src={project.thumbnail}
-                  alt={project.title}
-                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-                  onError={e => { e.currentTarget.style.display = "none"; }}
-                />
+          <div className="container mx-auto px-6 md:px-20 pb-10 pt-24">
+            <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+              <m.div
+                initial={noAnim ? { opacity: 0 } : { opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: noAnim ? 0.4 : 0.8, ease: EASE }}
+                className="relative w-full group" // Tambah class 'group' untuk efek hover tombol
+              >
+                {/* CONTAINER GAMBAR HERO */}
                 <div style={{
-                  position: "absolute", top: 16, left: 16,
-                  padding: "5px 12px", borderRadius: 100,
-                  background: `${catColor}dd`,
-                  fontSize: "10px", fontWeight: 800,
-                  color: "white", letterSpacing: "0.12em", textTransform: "uppercase",
+                  aspectRatio: "16/9", borderRadius: 14, overflow: "hidden",
+                  boxShadow: "0 8px 40px rgba(0,0,0,0.35)",
+                  background: `linear-gradient(135deg, ${catColor}25, #0a0f1e)`,
+                  position: "relative",
                 }}>
-                  {catLabel}
+
+                  {images.length > 0 ? (
+                    <AnimatePresence mode="wait">
+                      <m.img
+                        key={currentImageIndex}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        src={images[currentImageIndex]}
+                        alt={`${project.title} - ${currentImageIndex + 1}`}
+                        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                      />
+                    </AnimatePresence>
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-white/50">
+                      No Image Available
+                    </div>
+                  )}
+
+                  {/* LABEL KATEGORI */}
+                  <div style={{
+                    position: "absolute", top: 16, left: 16,
+                    padding: "5px 12px", borderRadius: 100,
+                    background: `${catColor}dd`, fontSize: "10px", fontWeight: 800,
+                    color: "white", letterSpacing: "0.12em", textTransform: "uppercase",
+                  }}>
+                    {catLabel}
+                  </div>
+
+                  {/* TOMBOL KONTROL SLIDER (Hanya muncul jika gambar > 1) */}
+                  {images.length > 1 && (
+                    <>
+                      {/* Tombol Kiri (Prev) */}
+                      <button
+                        onClick={prevImage}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/60 cursor-pointer"
+                      >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="m15 18-6-6 6-6" /></svg>
+                      </button>
+
+                      {/* Tombol Kanan (Next) */}
+                      <button
+                        onClick={nextImage}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/60 cursor-pointer"
+                      >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="m9 18 6-6-6-6" /></svg>
+                      </button>
+
+                      {/* Titik-titik Navigasi (Dots) */}
+                      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-black/30 px-3 py-2 rounded-full backdrop-blur-md border border-white/10">
+                        {images.map((_, idx) => (
+                          <button
+                            key={idx}
+                            onClick={() => setCurrentImageIndex(idx)}
+                            style={{
+                              width: idx === currentImageIndex ? 24 : 8,
+                              height: 8,
+                              borderRadius: 100,
+                              background: idx === currentImageIndex ? catColor : "rgba(255,255,255,0.4)",
+                              transition: "all 0.3s ease",
+                              cursor: "pointer",
+                              border: "none"
+                            }}
+                          />
+                        ))}
+                      </div>
+                    </>
+                  )}
                 </div>
-              </div>
-            </m.div>
-          </div></div>
+              </m.div>
+            </div>
+          </div>
 
           <div style={{ marginTop: 40, marginBottom: -2 }}>
             <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style={{ width: "100%", height: 60, display: "block" }}>
@@ -211,10 +277,14 @@ export default function DetailProject() {
                     {project.description}
                   </p>
                   <p style={{ color: "rgba(50,70,100,0.55)", lineHeight: 1.85, fontSize: "0.95rem" }}>
-                    Project ini dikerjakan oleh mahasiswa Rekayasa Perangkat Lunak Telkom University
-                    Purwokerto sebagai bagian dari program Project Tingkat yang bertujuan menghasilkan
-                    karya nyata siap pakai. Proses pengembangan meliputi riset kebutuhan pengguna,
-                    perancangan sistem, implementasi, hingga pengujian dan deployment.
+                    {project.creatorType === "Dosen"
+                      ? (
+                        "Project ini merupakan hasil karya penelitian dan pengembangan inovatif oleh Dosen Rekayasa Perangkat Lunak Telkom University Purwokerto. Sistem ini dirancang sebagai solusi nyata berbasis teknologi untuk menjawab tantangan di masyarakat, yang telah melalui tahap riset mendalam, perancangan arsitektur sistem terukur, hingga implementasi berskala produksi."
+                      )
+                      : (
+                        "Project ini dikerjakan oleh mahasiswa Rekayasa Perangkat Lunak Telkom University Purwokerto sebagai bagian dari program Project Tingkat yang bertujuan menghasilkan karya nyata siap pakai. Proses pengembangan meliputi riset kebutuhan pengguna, perancangan sistem, implementasi, hingga pengujian dan deployment."
+                      )
+                    }
                   </p>
                 </div>
               </m.div>
@@ -404,8 +474,7 @@ export default function DetailProject() {
                           background: `linear-gradient(135deg, ${CATEGORY_COLOR[rel.category] ?? "#218ABB"}20, rgba(4,8,80,0.06))`,
                         }}>
                           <img
-                            src={rel.thumbnail || "https://images.unsplash.com/photo-1618477388954-7852f32655ec?q=80&w=800&auto=format&fit=crop"}
-                            alt={rel.title}
+                            src={(Array.isArray(rel.thumbnail) ? rel.thumbnail[0] : rel.thumbnail) || "https://images.unsplash.com/photo-1618477388954-7852f32655ec?q=80&w=800&auto=format&fit=crop"}
                             style={{
                               width: "100%", height: "100%", objectFit: "cover", display: "block",
                               transition: noAnim ? "none" : "transform 0.5s ease",

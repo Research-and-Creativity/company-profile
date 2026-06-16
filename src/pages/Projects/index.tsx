@@ -19,11 +19,9 @@ const CATEGORY_LABELS: Record<CategoryValue | "All", string> = {
     "Mobile":           "Mobile",
     "Desktop":          "Desktop",
     "AI/ML":            "AI/ML",
-    "Game Development": "Game Dev",
-    "UI/UX Design":     "UI/UX",
 };
 
-const CATEGORIES = ["All", "Web", "Mobile", "Desktop", "AI/ML", "Game Development", "UI/UX Design"] as const;
+const CATEGORIES = ["All", "Web", "Mobile", "Desktop", "AI/ML"] as const;
 
 const ITEMS_PER_PAGE = 12;
 

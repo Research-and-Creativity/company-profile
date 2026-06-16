@@ -6,21 +6,22 @@ import { FEATURED_PROJECTS } from "../../../constants/studentProjects";
 
 const CARDS_PER_PAGE = 4;
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
-const AUTO_INTERVAL = 4000;
+const AUTO_INTERVAL = 2000;
 
 const totalPages = Math.ceil(FEATURED_PROJECTS.length / CARDS_PER_PAGE);
 
 export default function StudentProjects() {
   const prefersReduced = useReducedMotion();
 
-  const [page, setPage]           = useState(0);
+  const [page, setPage] = useState(0);
   const [direction, setDirection] = useState(1);
   const [isHovered, setIsHovered] = useState(false);
 
-  const isPausedRef    = useRef(false);
-  const intervalRef    = useRef<ReturnType<typeof setInterval> | null>(null);
+  const isPausedRef = useRef(false);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const prefersReducedRef = useRef(prefersReduced);
-  const isHoveredRef      = useRef(isHovered);
+  const isHoveredRef = useRef(isHovered);
+  const visibleSinceRef = useRef<number>(0);
 
   useEffect(() => { prefersReducedRef.current = prefersReduced; }, [prefersReduced]);
   useEffect(() => { isHoveredRef.current = isHovered; }, [isHovered]);
@@ -53,27 +54,52 @@ export default function StudentProjects() {
     return stopInterval;
   }, [startInterval, stopInterval, prefersReduced]);
 
-  const handleMouseEnter = useCallback(() => {
-    isPausedRef.current = true;
-    setIsHovered(true);
-    stopInterval();
-  }, [stopInterval]);
-
-  const handleMouseLeave = useCallback(() => {
-    isPausedRef.current = false;
-    setIsHovered(false);
-    startInterval();
-  }, [startInterval]);
-
   const handleManualNav = useCallback((next: number, currentPage: number) => {
     if (next === currentPage) return;
     setDirection(next > currentPage ? 1 : -1);
     setPage(next);
     startInterval();
-  }, [startInterval]);
+  }, [startInterval]);  
+
+  const sectionRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          visibleSinceRef.current = Date.now();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+
+    const onEnter = () => {
+      if (Date.now() - visibleSinceRef.current < 600) return;
+      isPausedRef.current = true;
+      setIsHovered(true);
+      stopInterval();
+    };
+    const onLeave = () => {
+      isPausedRef.current = false;
+      setIsHovered(false);
+      startInterval();
+    };
+
+    el.addEventListener("mouseenter", onEnter);
+    el.addEventListener("mouseleave", onLeave);
+
+    return () => {
+      observer.disconnect();
+      el.removeEventListener("mouseenter", onEnter);
+      el.removeEventListener("mouseleave", onLeave);
+    };
+  }, [stopInterval, startInterval]);
 
   const pageVariants = useMemo(() => ({
-    enter:  (dir: number) => ({
+    enter: (dir: number) => ({
       opacity: 0,
       x: prefersReduced ? 0 : dir * 48,
     }),
@@ -90,7 +116,7 @@ export default function StudentProjects() {
   }), [prefersReduced]);
 
   const gridVariants = useMemo(() => ({
-    hidden:  {},
+    hidden: {},
     visible: {
       transition: {
         staggerChildren: prefersReduced ? 0 : 0.06,
@@ -100,7 +126,7 @@ export default function StudentProjects() {
   }), [prefersReduced]);
 
   const cardVariants = useMemo(() => ({
-    hidden:  { opacity: 0, y: prefersReduced ? 0 : 18 },
+    hidden: { opacity: 0, y: prefersReduced ? 0 : 18 },
     visible: {
       opacity: 1,
       y: 0,
@@ -120,8 +146,6 @@ export default function StudentProjects() {
     <section
       className="relative overflow-hidden"
       style={{ background: "#eef3f8" }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
     >
       <div
         aria-hidden="true"
@@ -252,7 +276,7 @@ export default function StudentProjects() {
           </div>
         </m.div>
 
-        <div style={{ position: "relative", overflow: "hidden", minHeight: 260 }}>
+        <div ref={sectionRef} style={{ position: "relative", overflow: "hidden", minHeight: 260 }}>
           <AnimatePresence mode="wait" custom={direction}>
             <m.div
               key={page}
