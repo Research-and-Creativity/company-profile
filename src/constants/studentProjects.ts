@@ -80,7 +80,7 @@ export const STUDENT_PROJECTS: StudentProject[] = [
     description:
       "LadangGo adalah platform AgriTech yang menghadirkan asisten AI Chatbot via WhatsApp untuk mendukung aktivitas harian petani secara instan. Fitur utamanya meliputi prediksi cuaca berbasis lokasi lahan, peringatan risiko hama, rekomendasi pemupukan, dan deteksi penyakit tanaman. Selain itu, LadangGo memiliki dasbor manajemen rantai pasok (Supply Chain) terintegrasi untuk menghubungkan hasil panen ke bisnis HORECA (Hotel, Restoran, Kafe) secara real-time dengan harga yang transparan.",
     thumbnail: [LadangGo, LadangGoAdmin, LadangGoFarmer, LadangGoHoreka],
-    authors: ["Yudha Islami Yulistia"],
+    authors: ["Yudha Islami Sulistya"],
     year: 2026,
     techStack: [
       "Next.js",
@@ -129,7 +129,7 @@ export const STUDENT_PROJECTS: StudentProject[] = [
     description:
       "EBII Green System adalah platform monitoring cerdas berbasis IoT dan AI (Sustainable Smart Aquaculture Technology) yang dirancang untuk memantau kualitas air tambak secara real-time, mengoptimalkan aerasi, dan mewujudkan tambak ramah lingkungan. Sistem ini mengintegrasikan sensor IoT untuk memantau 8 parameter air, model AI untuk prediksi dan peramalan (forecast), serta kontrol aerator otomatis untuk menghemat energi dan mengurangi emisi karbon.",
     thumbnail: EbiiGreen,
-    authors: ["Yudha Islami Yulistia"],
+    authors: ["Yudha Islami Sulistya"],
     year: 2026,
     techStack: ["Next.js", "Tailwind CSS", "NestJS", "FastAPI", "Python"],
     demoUrl: "https://ebii.sivia.id/",
@@ -242,7 +242,7 @@ export const STUDENT_PROJECTS: StudentProject[] = [
       
       Sistem ini sangat komprehensif dengan menawarkan 14+ modul terintegrasi yang mencakup manajemen Anggota, Simpanan (Pokok, Sukarela, Wajib), Pinjaman, Angsuran, Jurnal Kas, hingga perhitungan SHU (Sisa Hasil Usaha). Melalui dasbor analitik yang interaktif, pengelola dapat memantau arus kas bulanan, distribusi status pinjaman, serta menyajikan 7 jenis laporan real-time secara transparan dengan keamanan berlapis melalui 45 permission granular.`,
     thumbnail: [SiviaCoopLandingPage, SiviaCoopDashboard],
-    authors: ["Yudha Islami Yulistia"],
+    authors: ["Yudha Islami Sulistya"],
     year: 2026,
     techStack: [
       "Next.js",
@@ -313,7 +313,7 @@ export const STUDENT_PROJECTS: StudentProject[] = [
       
       Sistem ini menawarkan modul yang sangat komprehensif. Pada sisi bisnis, pengguna dapat mengelola Customers, Quotations, Invoices, Payments, hingga Cashbook harian. Menariknya, pada sisi Personal Finance, platform ini dilengkapi fitur pelacakan Budgets, Savings & Goals, pemantauan Net Worth, Kalkulator Zakat, hingga pengukuran Financial Health Score. Dengan analitik dasbor yang interaktif, pengguna dapat memantau Net Cashflow, status invoice (Overdue/Lunas), dan grafik performa keuangan secara real-time.`,
     thumbnail: [SiviaFinanceLandingPage, SiviaFinanceDashboard],
-    authors: ["Yudha Islami Yulistia"],
+    authors: ["Yudha Islami Sulistya"],
     year: 2026,
     techStack: [
       "Next.js",
@@ -335,7 +335,7 @@ export const STUDENT_PROJECTS: StudentProject[] = [
       
       Sistem ini menawarkan kelengkapan modul tingkat enterprise yang mencakup operasional Utama (Absensi, Cuti, Lembur, Shift), manajemen Organisasi (Departemen, Posisi, Lokasi Kerja, Org Chart), serta portal Layanan Mandiri (Employee Self-Service) di mana karyawan dapat melakukan absensi secara mandiri, mengunduh dokumen, dan mengisi survei. Melalui dasbor HR yang komprehensif, manajemen dapat memantau KPI secara real-time, seperti tingkat kehadiran, keterlambatan, tren absensi bulanan, hingga rasio perputaran karyawan (attrition rate).`,
     thumbnail: [SiviaHRLandingPage, SiviaHRDashboard],
-    authors: ["Yudha Islami Yulistia"],
+    authors: ["Yudha Islami Sulistya"],
     year: 2026,
     techStack: [
       "Next.js",
@@ -357,7 +357,7 @@ export const STUDENT_PROJECTS: StudentProject[] = [
       
       Lebih dari sekadar pembuat undangan (Builder), sistem ini dilengkapi dasbor manajemen tamu tingkat lanjut. Pengguna dapat mengelola Daftar dan Grup Tamu, melacak respons RSVP, mengelola Buku Tamu, hingga memoderasi pesan masuk. Modul Konten Acara (cerita, galeri, video) dan manajemen Rekening Hadiah dipisahkan secara rapi. Melalui fitur analitik, penyelenggara acara dapat memantau distribusi status kehadiran dan metrik klik (RSVP, Maps, Hadiah) secara real-time.`,
     thumbnail: [SiviaInvitationLandingPage, SiviaInvitationDashboard],
-    authors: ["Yudha Islami Yulistia"],
+    authors: ["Yudha Islami Sulistya"],
     year: 2026,
     techStack: [
       "Next.js",
@@ -379,7 +379,7 @@ export const STUDENT_PROJECTS: StudentProject[] = [
       
       Platform ini menawarkan kelengkapan modul tingkat lanjut yang melebihi aplikasi kasir standar. Pada manajemen inventaris, pengguna dapat melakukan Stok Opname, Transfer Stok antar outlet, hingga Cetak Label. Untuk operasional sehari-hari, tersedia kontrol Shift Kasir, manajemen Pemasok, serta modul khusus Restoran (Pesanan Meja). Keunggulan inovatif dari Sivia POS adalah kehadiran 'Sivia AI', asisten cerdas yang secara otomatis mendeteksi anomali operasional dan memberikan insight penjualan harian langsung di dasbor pengguna.`,
     thumbnail: [SiviaPOSLandingPage, SiviaPOSDashboard],
-    authors: ["Yudha Islami Yulistia"],
+    authors: ["Yudha Islami Sulistya"],
     year: 2026,
     techStack: [
       "Next.js",
@@ -401,7 +401,7 @@ export const STUDENT_PROJECTS: StudentProject[] = [
       
       Sistem ini menawarkan kapabilitas tingkat enterprise dengan modul yang sangat komprehensif. Pada Venue Management, pengelola dapat mengatur Operating Hours, Availability Rules, Blocked Slots, hingga Amenities (fasilitas tambahan). Modul Pricing juga sangat fleksibel karena mendukung Pricing Rules dinamis, Packages, Promotions, dan Memberships. Melalui dasbor analitik, pemilik venue dapat memantau matriks krusial seperti tingkat Okupansi Harian, Tren Booking, rasio Revenue vs Paid, hingga tagihan Outstanding secara real-time.`,
     thumbnail: [SiviaVanueLandingPage, SiviaVanueDashboard],
-    authors: ["Yudha Islami Yulistia"],
+    authors: ["Yudha Islami Sulistya"],
     year: 2026,
     techStack: [
       "Next.js",
