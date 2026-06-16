@@ -19,11 +19,9 @@ const CATEGORY_LABELS: Record<CategoryValue | "All", string> = {
     "Mobile":           "Mobile",
     "Desktop":          "Desktop",
     "AI/ML":            "AI/ML",
-    "Game Development": "Game Dev",
-    "UI/UX Design":     "UI/UX",
 };
 
-const CATEGORIES = ["All", "Web", "Mobile", "Desktop", "AI/ML", "Game Development", "UI/UX Design"] as const;
+const CATEGORIES = ["All", "Web", "Mobile", "Desktop", "AI/ML"] as const;
 
 const ITEMS_PER_PAGE = 12;
 
@@ -65,7 +63,7 @@ export default function IndexProjects() {
             <Helmet>
                 <title>Projects | Zetech</title>
                 <meta name="description" content="Explore our student projects and see the innovative work being done by our talented individuals." />
-                <link rel="canonical" href="https://zetech.vercel.app/projects" />
+                <link rel="canonical" href="https://zetech.id/projects" />
             </Helmet>
 
             <div className="min-h-screen" style={{ background: "#f0f4f8" }}>
@@ -158,7 +156,7 @@ export default function IndexProjects() {
                         </div>
                     </div>
 
-                    <div className="absolute bottom-0 inset-x-0 pointer-events-none" style={{ height: 50 }}>
+                    <div className="absolute -bottom-1 inset-x-0 pointer-events-none" style={{ height: 50 }}>
                         <svg viewBox="0 0 1440 50" preserveAspectRatio="none" style={{ width: "100%", height: "100%", display: "block" }}>
                             <path d="M0,25 C360,50 1080,0 1440,25 L1440,50 L0,50 Z" fill="#f0f4f8" />
                         </svg>

@@ -9,7 +9,7 @@ export const Products: Product[] = [
     description:
       "Layanan pembuatan undangan digital modern dan responsif untuk berbagai acara.",
     image: digitalInvitation,
-    link: "https://zecth-invitation.vercel.app/",
+    link: "https://zecth-invitation.id/",
   },
   {
     id: 2,
