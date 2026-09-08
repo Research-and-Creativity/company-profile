@@ -25,8 +25,8 @@ export default function IndexAbout() {
     const prefersReduced = useReducedMotion();
     const noAnim = isMobile || !!prefersReduced;
 
-    const row1 = Teams.slice(0, 3);
-    const row2 = Teams.slice(3, 7);
+    const row1 = Teams.slice(0, 4);
+    const row2 = Teams.slice(4, 8);
 
     return (
         <>
