@@ -6,6 +6,7 @@ import gusImage from "../assets/team/gus.webp";
 import farelImage from "../assets/team/farel.webp";
 import lungImage from "../assets/team/lung.webp";
 import putImage from "../assets/team/put.webp";
+import martaImage from "../assets/team/marta.webp";
 
 export const Teams: TeamsType[] = [
   {
@@ -35,7 +36,7 @@ export const Teams: TeamsType[] = [
   {
     id: 3,
     name: "Haryanto Wifakul Azmi",
-    role: "Designer Specialist",
+    role: "Chief Technology Officer",
     image: yantoImage,
     alt: "Tim Pengembang Zetra Tech HMSE Telkom University Purwokerto",
     socials: {
@@ -46,6 +47,18 @@ export const Teams: TeamsType[] = [
   },
   {
     id: 4,
+    name: "Marta Safitri",
+    role: "Chief Marketing Officer",
+    image: martaImage,
+    alt: "Tim Pengembang Zetra Tech HMSE Telkom University Purwokerto",
+    socials: {
+      instagram: "https://www.instagram.com/__me.iam/",
+      linkedin: "https://www.linkedin.com/in/marta-safitri-6b1889327/",
+      github: "https://github.com/Marta817",
+    },
+  },
+  {
+    id: 5,
     name: "Geusan Edurais Aria Daffa",
     role: "Developer Specialist",
     image: gusImage,
@@ -57,7 +70,7 @@ export const Teams: TeamsType[] = [
     },
   },
   {
-    id: 5,
+    id: 6,
     name: "Muhammad Farel Alghazali",
     role: "Developer Specialist",
     image: farelImage,
@@ -69,7 +82,7 @@ export const Teams: TeamsType[] = [
     },
   },
   {
-    id: 6,
+    id: 7,
     name: "Ulung Putra Sadewo",
     role: "Developer Specialist",
     image: lungImage,
@@ -81,7 +94,7 @@ export const Teams: TeamsType[] = [
     },
   },
   {
-    id: 7,
+    id: 8,
     name: "Putra Anugrah Pamungkas",
     role: "System Analyst Specialist",
     image: putImage,
